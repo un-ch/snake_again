@@ -48,3 +48,15 @@ clear_screen()
 	clear();
 	refresh();
 }
+
+int
+string_length(const char *str)
+{
+	const char *temp_str;
+	temp_str = str;
+
+	while(*temp_str)
+		temp_str++;
+
+	return (temp_str - str);
+}
