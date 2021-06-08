@@ -42,7 +42,7 @@ struct game_level_settings {
 	int max_barrier_amount;
 };
 
-static void
+void
 clear_screen()
 {
 	clear();
@@ -59,4 +59,23 @@ string_length(const char *str)
 		temp_str++;
 
 	return (temp_str - str);
+}
+
+int
+strings_are_equal(const char *str_1, const char *str_2)
+{
+	const char *temp_str_1, *temp_str_2;
+	int result = TRUE;
+
+	if(string_length(str_1) == string_length(str_2)) {
+		temp_str_1 = str_1;
+		temp_str_2 = str_2;
+		for(; *temp_str_1; temp_str_1++, temp_str_2++) {
+			if(*temp_str_1 != *temp_str_2)
+				return FALSE;
+		}
+	}
+	else
+		result = FALSE;
+	return result;
 }
