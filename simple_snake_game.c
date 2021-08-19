@@ -259,6 +259,23 @@ contact_with_barrier(const struct coordinate snk_head,
 	return result;
 }
 
+static int
+contact_with_target(const struct coordinate snk_head,
+						struct coordinate_doubly_list *trg)
+{
+	struct coordinate_doubly_list *temp;
+	int result;
+	result = FALSE;
+
+	for(temp = trg; temp; temp = temp->next) {
+		if(is_equal_coordinate(snk_head, temp->coord)) {
+			result = TRUE;
+			break;
+		}
+	}
+	return result;
+}
+
 static void
 move_object(struct coordinate_deque *snk, struct coordinate direction)
 {
@@ -357,8 +374,8 @@ set_settings_initial_round(struct game_level_settings *st)
 {
 	st->round_num = 1;
 	st->current_snake_length = 1;
-	st->snake_speed = 120;
-	st->max_barrier_amount = 5;
+	st->snake_speed = 100;
+	st->max_barrier_amount = 150;
 }
 
 static void
@@ -469,20 +486,31 @@ int main()
 
 	while((direction_signal = getch()) != key_escape) {
 		handle_direction_signal(direction_signal, &coordin, &snake);
+
 		if(contact_with_borders(snake.first->coord) ||
 			(contact_with_barrier(snake.first->coord, barrier.first))) {
-			game_settings_decrease(&sett);
+			/*game_settings_decrease(&sett);*/
 			print_message("crash");
+			end_program("crash_end");
+		}
+		if(contact_with_target(snake.first->coord, target.first)) {
+			update_after_contact_with_target(&sett, &snake, snake.first->coord);
+		}
+		/*
+
 			if(sett.round_num < 1) {
+
 				if(affirmative_answer_to_continue_game_request) {
 					set_settings_initial_round(&sett);
 					direction_signal = key_spacebar;
 				}
 				else
 					end_program("crash_end");
+
 			}
-			/*set_objects_another_round*/
+			set_objects_another_round
 		}
+		*/
 	}
 	
 	clear_screen();
