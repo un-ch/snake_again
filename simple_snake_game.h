@@ -13,7 +13,7 @@ enum { key_yes = 121 };
 enum { key_no = 110 };
 
 enum { max_snake_length = 5 };
-enum { max_target_amount = 4 };
+enum { max_target_amount = 20 };
 enum { max_round_num = 5 };
 
 enum { snake_speed = 120 };
