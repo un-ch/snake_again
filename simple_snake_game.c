@@ -69,7 +69,7 @@ end_program(const char *str)
 		print_message("request_end");	
 
 	if(strings_are_equal(str, "crash_end"))
-		print_message("bye!");
+		print_message("crash!");
 
 	if(strings_are_equal(str, "win"))
 		print_message("win!");
@@ -143,7 +143,6 @@ get_random_coordinate(int max_generated_num)
 	/*
 	result = 1 + (int)(12.0 * rand() / (RAND_MAX + 1.0));	
 	*/
-
 	result = rand() % (max_generated_num + 1);
 	return result;
 }
@@ -169,27 +168,9 @@ is_equal_coordinate(const struct coordinate c, const struct coordinate d)
 }
 
 struct coordinate_doubly_list *
-fill_in_coordinate_random(const int max_iterator,
-							const struct coordinate snk)
-{
-	struct coordinate_doubly_list *first = NULL, *temp;
-	int i;
-
-	for(i = 0; i < max_iterator; i++) {
-		temp = malloc(sizeof(struct coordinate_doubly_list));
-		do {
-			set_random_coordinate(&temp->coord);
-		} while (is_equal_coordinate(temp->coord, snk));
-		temp->next = first;
-		first = temp;
-	}
-	return first;
-}
-
-struct coordinate_doubly_list *
 fill_in_coordinate_manual(const int max_iterator, const struct coordinate snk)
 {
-	struct coordinate_doubly_list *first = NULL, *temp;	
+	struct coordinate_doubly_list *first = NULL, *temp;
 	int i;
 
 	for(i = 0; i < max_iterator; i++) {
@@ -202,7 +183,25 @@ fill_in_coordinate_manual(const int max_iterator, const struct coordinate snk)
 		temp->next = first;
 		first = temp;
 	}
-	return first;	
+	return first;
+}
+
+struct coordinate_list *
+fill_in_coordinate_random(const int max_iterator,
+							const struct coordinate snk)
+{
+	struct coordinate_list *first = NULL, *temp;
+	int i;
+
+	for(i = 0; i < max_iterator; i++) {
+		temp = malloc(sizeof(struct coordinate_list));
+		do {
+			set_random_coordinate(&temp->coord);
+		} while (is_equal_coordinate(temp->coord, snk));
+		temp->next = first;
+		first = temp;
+	}
+	return first;
 }
 
 static void
@@ -233,10 +232,10 @@ contact_with_borders(const struct coordinate snk_head)
 }
 
 static void
-show_coordinate_doubly_list(const struct coordinate_doubly_list *p,
+display_coordinate_list(const struct coordinate_list *p,
 								const char *object_type)
 {
-	const struct coordinate_doubly_list *temp;
+	const struct coordinate_list *temp;
 	for(temp = p; temp; temp = temp->next) {
 		show_object(temp->coord, object_type);	
 	}
@@ -244,9 +243,9 @@ show_coordinate_doubly_list(const struct coordinate_doubly_list *p,
 
 static int
 contact_with_barrier(const struct coordinate snk_head,
-						struct coordinate_doubly_list *brr)
+						struct coordinate_list *brr)
 {
-	struct coordinate_doubly_list *temp;
+	struct coordinate_list *temp;
 	int result;
 	result = FALSE;
 
@@ -261,12 +260,12 @@ contact_with_barrier(const struct coordinate snk_head,
 
 static int
 contact_with_target(const struct coordinate snk_head,
-						struct coordinate_deque *trg)
+						struct coordinate_list *trg)
 {
-	struct coordinate_doubly_list *temp;
+	struct coordinate_list *temp;
 	int result;
 	result = FALSE;
-	for(temp = trg->first; temp; temp = temp->next) {
+	for(temp = trg; temp; temp = temp->next) {
 		if(is_equal_coordinate(snk_head, temp->coord)) {
 			/*
 			if(temp->prev)
@@ -344,28 +343,24 @@ print_object_in_fog_of_war(struct coordinate snk_head,
 }
 */
 
-
 static void
 set_objects_another_round(struct coordinate_deque *snk,
-							struct coordinate_deque *trg,
-							struct coordinate_deque *brr,
+							struct coordinate_list **trg,
+							struct coordinate_list **brr,
 							struct game_level_settings st)
 {
 	struct coordinate snk_head;
 	snk->first = NULL;
 	snk->last = NULL;
-	trg->first = NULL;
-	trg->last = NULL;
-	brr->first = NULL;
-	brr->last = NULL;
+	*brr = NULL;
+	*trg = NULL;
 
 	set_random_coordinate(&snk_head);
 	add_new_snake_element(snk, snk_head);
-
-	trg->first = fill_in_coordinate_random(max_target_amount, snk_head);
-	brr->first = fill_in_coordinate_random(st.max_barrier_amount, snk_head);
-	show_coordinate_doubly_list(trg->first, "target");
-	show_coordinate_doubly_list(brr->first, "barrier");
+	*brr = fill_in_coordinate_random(st.max_barrier_amount, snk_head);
+	*trg = fill_in_coordinate_random(max_target_amount, snk_head);
+	display_coordinate_list(*trg, "target");
+	display_coordinate_list(*brr, "barrier");
 }
 
 static void
@@ -474,7 +469,8 @@ affirmative_answer_to_continue_game_request()
 
 int main()
 {
-	struct coordinate_deque snake, target, barrier;
+	struct coordinate_deque snake;
+	struct coordinate_list *target, *barrier;
 	struct coordinate coordin;
 	struct game_level_settings sett;
 	int direction_signal;
@@ -499,37 +495,20 @@ int main()
 		handle_direction_signal(direction_signal, &coordin, &snake);
 
 		if(contact_with_borders(snake.first->coord) ||
-			(contact_with_barrier(snake.first->coord, barrier.first))) {
-			/*game_settings_decrease(&sett);*/
-			print_message("crash");
+			(contact_with_barrier(snake.first->coord, barrier))) {
 			end_program("crash_end");
 		}
-		if(contact_with_target(snake.first->coord, &target)) {
+		
+		if(contact_with_target(snake.first->coord, target)) {
 			update_after_contact_with_target(&sett, &snake, snake.first->coord);
 			if(sett.current_snake_length > max_snake_length) {
 				end_program("win");
 			}
 		}
-		/*
-
-			if(sett.round_num < 1) {
-
-				if(affirmative_answer_to_continue_game_request) {
-					set_settings_initial_round(&sett);
-					direction_signal = key_spacebar;
-				}
-				else
-					end_program("crash_end");
-
-			}
-			set_objects_another_round
-		}
-		*/
 	}
-	
+
 	clear_screen();
 	endwin();
-
 	return 0;
 }
 

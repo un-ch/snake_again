@@ -32,6 +32,11 @@ struct coordinate {
 	int x,y;
 };
 
+struct coordinate_list {
+	struct coordinate coord;
+	struct coordinate_list *next;
+};
+
 struct coordinate_doubly_list {
 	struct coordinate coord;
 	struct coordinate_doubly_list *next, *prev;
