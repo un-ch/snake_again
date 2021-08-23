@@ -58,34 +58,22 @@ print_message(const char *str)
 	attrset(COLOR_PAIR(4));
 	addstr(str);
 	refresh();
-	sleep(1);
+	sleep(2);
 	clear_screen();
 }
 
 static void
 end_program(const char *str)
 {
-	if(strings_are_equal(str, "request_end"))
-		print_message("request_end");	
-
-	if(strings_are_equal(str, "crash_end"))
-		print_message("crash!");
-
-	if(strings_are_equal(str, "win"))
-		print_message("win!");
-
-/*
-	
-	if(str == "request_end") {
-			
+	if(strings_are_equal(str, "request_end")) {
+		print_message("request_end");
 	}
-	if(str == "crash_end") {
-		print_message("bye!");
-	}
-	if(str == "win_end") {
+	if(strings_are_equal(str, "win")) {
 		print_message("win!");
 	}
-	*/
+	if(strings_are_equal(str, "crash_end")) {
+		print_message("game end!");
+	}
 	clear();
 	endwin();
 	exit(0);
@@ -131,10 +119,9 @@ static void
 print_round_number(const int num)
 {
 	static const char *msg;
-	msg = "Round";
+	msg = "New Round";
 	print_message(msg);
 }
-
 
 static int
 get_random_coordinate(int max_generated_num)
@@ -204,6 +191,7 @@ fill_in_coordinate_random(const int max_iterator,
 	return first;
 }
 
+/*
 static void
 print_list_value(const struct coordinate_doubly_list*p)
 {
@@ -213,6 +201,7 @@ print_list_value(const struct coordinate_doubly_list*p)
 		sleep(1);
 	}
 }
+*/
 
 static int
 contact_with_borders(const struct coordinate snk_head)
@@ -382,7 +371,7 @@ set_settings_initial_round(struct game_level_settings *st)
 	st->round_num = 1;
 	st->current_snake_length = 1;
 	st->snake_speed = 100;
-	st->max_barrier_amount = 150;
+	st->max_barrier_amount = 50;
 }
 
 static void
@@ -390,8 +379,8 @@ game_settings_increase(struct game_level_settings *st)
 {
 	st->round_num += 1;
 	st->current_snake_length = 1;
-	st->snake_speed -= 1;
-	st->max_barrier_amount += 10;
+	st->snake_speed -= 5;
+	st->max_barrier_amount += 150;
 }
 
 static void
@@ -400,7 +389,7 @@ game_settings_decrease(struct game_level_settings *st)
 	st->round_num -= 1;
 	st->current_snake_length = 1;
 	st->snake_speed -= 1;
-	st->max_barrier_amount -= 10;
+	st->max_barrier_amount -= 150;
 }
 
 static void
@@ -481,8 +470,8 @@ int main()
 	keypad(stdscr, 1);
 	noecho();
 	curs_set(0);
-	clear_screen();
 
+	clear_screen();
 	print_message(greeting_message);
 	set_settings_initial_round(&sett);
 	timeout(sett.snake_speed);
@@ -496,17 +485,32 @@ int main()
 
 		if(contact_with_borders(snake.first->coord) ||
 			(contact_with_barrier(snake.first->coord, barrier))) {
-			end_program("crash_end");
+			game_settings_decrease(&sett);
+			if(sett.round_num < 1) {
+				end_program("crash_end");
+			}
+			print_message("crash!");
+			print_round_number(sett.round_num);
+			coordin.x = 0;
+			coordin.y = 0;
+			set_objects_another_round(&snake, &target, &barrier, sett);
 		}
 		
 		if(contact_with_target(snake.first->coord, target)) {
 			update_after_contact_with_target(&sett, &snake, snake.first->coord);
 			if(sett.current_snake_length > max_snake_length) {
-				end_program("win");
+				game_settings_increase(&sett);
+				if(sett.round_num > max_round_num) {
+					end_program("win");
+				}
+				clear_screen();
+				print_round_number(sett.round_num);
+				coordin.x = 0;
+				coordin.y = 0;
+				set_objects_another_round(&snake, &target, &barrier, sett);
 			}
 		}
 	}
-
 	clear_screen();
 	endwin();
 	return 0;
