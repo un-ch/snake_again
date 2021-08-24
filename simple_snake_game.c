@@ -470,18 +470,14 @@ int main()
 
 	srand(time(NULL));
 	initscr();
-	cbreak();
-	keypad(stdscr, 1);
-	noecho();
+	cbreak(); /* enable ctrl-c, ctrl-d */
+	keypad(stdscr, 1); /* enable escape-sequences */
+	noecho(); /* disable automatic input symbols on the screen */
 	curs_set(0);
 
-	clear_screen();
 	print_message(greeting_message);
 	set_settings_initial_round(&sett);
 	timeout(sett.snake_speed);
-	coordin.x = 0;
-	coordin.y = 0;
-
 	set_objects_another_round(&snake, &target, &barrier, sett, &coordin);
 
 	while((direction_signal = getch()) != key_escape) {
