@@ -16,8 +16,6 @@ enum { max_snake_length = 5 };
 enum { max_target_amount = 20 };
 enum { max_round_num = 5 };
 
-enum { snake_speed = 120 };
-
 static const char greeting_message[] = "Simple Snake Game";
 static const char question_on_game_continue[] = "would you like to continue the game?";
 static const char str_name_target[] = "target";

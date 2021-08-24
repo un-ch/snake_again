@@ -219,7 +219,7 @@ contact_with_borders(const struct coordinate snk_head)
 
 	return result;
 }
-
+/*
 static void
 display_coordinate_list(const struct coordinate_list *p,
 								const char *object_type)
@@ -229,7 +229,7 @@ display_coordinate_list(const struct coordinate_list *p,
 		show_object(temp->coord, object_type);	
 	}
 }
-
+*/
 static int
 contact_with_barrier(const struct coordinate snk_head,
 						struct coordinate_list *brr)
@@ -312,25 +312,27 @@ add_new_snake_element(struct coordinate_deque *snk, struct coordinate c)
 	snk->last = temp;
 }
 
-/*
 static void
 print_object_in_fog_of_war(struct coordinate snk_head,
-							struct coordinate_doubly_list *obj,
+							struct coordinate_list *obj,
 							const char *object_type)
 {
-	struct coordinate_doubly_list *temp_obj;
+	struct coordinate_list *temp_obj;
 	int x_max, x_min, y_max, y_min;
 
 	x_max = snk_head.x + 5;
 	x_min = snk_head.x - 5;
 	y_max = snk_head.y + 5;
-	y_max = snk_head.y - 5;
+	y_min = snk_head.y - 5;
 	for(temp_obj = obj; temp_obj; temp_obj = temp_obj->next) {
-		
+		if((temp_obj->coord.x < x_max) &&
+			(temp_obj->coord.y < y_max) &&
+			(temp_obj->coord.x > x_min) &&
+			(temp_obj->coord.y > y_min)) {
+				show_object(temp_obj->coord, object_type);
+			}
 	}
-
 }
-*/
 
 static void
 set_objects_another_round(struct coordinate_deque *snk,
@@ -352,8 +354,6 @@ set_objects_another_round(struct coordinate_deque *snk,
 	add_new_snake_element(snk, snk_head);
 	*brr = fill_in_coordinate_random(st.max_barrier_amount, snk_head);
 	*trg = fill_in_coordinate_random(max_target_amount, snk_head);
-	display_coordinate_list(*trg, "target");
-	display_coordinate_list(*brr, "barrier");
 }
 
 static void
@@ -374,8 +374,8 @@ set_settings_initial_round(struct game_level_settings *st)
 {
 	st->round_num = 1;
 	st->current_snake_length = 1;
-	st->snake_speed = 100;
-	st->max_barrier_amount = 50;
+	st->snake_speed = 180;
+	st->max_barrier_amount = 150;
 }
 
 static void
@@ -383,7 +383,7 @@ game_settings_increase(struct game_level_settings *st)
 {
 	st->round_num += 1;
 	st->current_snake_length = 1;
-	st->snake_speed -= 5;
+	st->snake_speed -= 20;
 	st->max_barrier_amount += 150;
 }
 
@@ -392,7 +392,7 @@ game_settings_decrease(struct game_level_settings *st)
 {
 	st->round_num -= 1;
 	st->current_snake_length = 1;
-	st->snake_speed -= 1;
+	st->snake_speed -= 5;
 	st->max_barrier_amount -= 150;
 }
 
@@ -486,6 +486,8 @@ int main()
 
 	while((direction_signal = getch()) != key_escape) {
 		handle_direction_signal(direction_signal, &coordin, &snake);
+		print_object_in_fog_of_war(snake.first->coord, target, "target");
+		print_object_in_fog_of_war(snake.first->coord, barrier, "barrier");
 
 		if(contact_with_borders(snake.first->coord) ||
 			(contact_with_barrier(snake.first->coord, barrier))) {
@@ -496,7 +498,6 @@ int main()
 			print_message("crash!");
 			set_objects_another_round(&snake, &target, &barrier, sett, &coordin);
 		}
-		
 		if(contact_with_target(snake.first->coord, target)) {
 			update_after_contact_with_target(&sett, &snake, snake.first->coord);
 			if(sett.current_snake_length > max_snake_length) {
@@ -504,7 +505,6 @@ int main()
 				if(sett.round_num > max_round_num) {
 					end_program("win");
 				}
-				clear_screen();
 				set_objects_another_round(&snake, &target, &barrier, sett, &coordin);
 			}
 		}
