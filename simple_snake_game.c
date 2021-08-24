@@ -336,17 +336,21 @@ static void
 set_objects_another_round(struct coordinate_deque *snk,
 							struct coordinate_list **trg,
 							struct coordinate_list **brr,
-							const int max_barrier_amount)
+							const struct game_level_settings st,
+							struct coordinate *coord)
 {
 	struct coordinate snk_head;
 	snk->first = NULL;
 	snk->last = NULL;
 	*brr = NULL;
 	*trg = NULL;
+	coord->x = 0;
+	coord->y = 0;
+	print_round_number(st.round_num);
 
 	set_random_coordinate(&snk_head);
 	add_new_snake_element(snk, snk_head);
-	*brr = fill_in_coordinate_random(max_barrier_amount, snk_head);
+	*brr = fill_in_coordinate_random(st.max_barrier_amount, snk_head);
 	*trg = fill_in_coordinate_random(max_target_amount, snk_head);
 	display_coordinate_list(*trg, "target");
 	display_coordinate_list(*brr, "barrier");
@@ -478,7 +482,7 @@ int main()
 	coordin.x = 0;
 	coordin.y = 0;
 
-	set_objects_another_round(&snake, &target, &barrier, sett.max_barrier_amount);
+	set_objects_another_round(&snake, &target, &barrier, sett, &coordin);
 
 	while((direction_signal = getch()) != key_escape) {
 		handle_direction_signal(direction_signal, &coordin, &snake);
@@ -490,10 +494,7 @@ int main()
 				end_program("crash_end");
 			}
 			print_message("crash!");
-			print_round_number(sett.round_num);
-			coordin.x = 0;
-			coordin.y = 0;
-			set_objects_another_round(&snake, &target, &barrier, sett.max_barrier_amount);
+			set_objects_another_round(&snake, &target, &barrier, sett, &coordin);
 		}
 		
 		if(contact_with_target(snake.first->coord, target)) {
@@ -504,10 +505,7 @@ int main()
 					end_program("win");
 				}
 				clear_screen();
-				print_round_number(sett.round_num);
-				coordin.x = 0;
-				coordin.y = 0;
-				set_objects_another_round(&snake, &target, &barrier, sett.max_barrier_amount);
+				set_objects_another_round(&snake, &target, &barrier, sett, &coordin);
 			}
 		}
 	}
