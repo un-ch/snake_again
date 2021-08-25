@@ -432,14 +432,14 @@ handle_direction_signal(int signal, struct coordinate *c,
 		break;
 	}
 }
-/*
+
 int
 affirmative_answer_to_continue_game_request()
 {
 	int result, ch;
-	result = FALSE;
 	int max_screen_value_y, max_screen_value_x;
 	int str_len;
+	result = FALSE;
 
 	clear_screen();
 	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
@@ -455,16 +455,21 @@ affirmative_answer_to_continue_game_request()
 	move((max_screen_value_y / 2) + 2, (max_screen_value_x - str_len - 1) / 2);
 	addstr("[y] [n]");
 	refresh();
-	while((ch = getch()) != key_escape ||
-			(ch = getch()) != key_yes ||
-			(ch = getch()) != key_no)
-		{}
-	if(ch == key_yes)
-		result = TRUE;
 
+	while((ch = getch())) {
+		switch(ch) {
+			case key_yes:
+				result = TRUE;
+				goto quit_while_loop;
+			case key_no:
+				goto quit_while_loop;
+			case key_escape:
+				goto quit_while_loop;
+		}
+	}
+	quit_while_loop:
 	return result;
 }
-*/
 
 int main()
 {
@@ -493,11 +498,16 @@ int main()
 
 		if(contact_with_borders(snake.first->coord) ||
 			(contact_with_barrier(snake.first->coord, barrier))) {
+			print_message("crash!");
 			game_settings_decrease(&sett);
 			if(sett.round_num < 1) {
-				end_program("crash_end");
+				if(affirmative_answer_to_continue_game_request()) {
+					set_settings_initial_round(&sett);
+					set_objects_another_round(&snake, &target, &barrier, sett, &coordin);
+					continue;
+				} else
+					end_program("crash_end");
 			}
-			print_message("crash!");
 			set_objects_another_round(&snake, &target, &barrier, sett, &coordin);
 		}
 		if(contact_with_target(snake.first->coord, target)) {
