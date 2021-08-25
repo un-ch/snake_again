@@ -264,27 +264,20 @@ static int
 contact_with_target(const struct coordinate snk_head,
 						struct coordinate_list *trg)
 {
-	struct coordinate_list *temp;
+
+	struct coordinate_list **pp;
 	int result;
 	result = FALSE;
-	for(temp = trg; temp; temp = temp->next) {
-		if(is_equal_coordinate(snk_head, temp->coord)) {
-			/*
-			if(temp->prev)
-				temp->prev->next = temp->next;
-			else
-				trg->first = temp->next;
-			if(temp->next)
-				temp->next->prev = temp->prev;
-			else
-				trg->last = temp->prev;
+	pp = &trg;
+	while(*pp) {
+		if(is_equal_coordinate(snk_head, (*pp)->coord)) {
+			struct coordinate_list *temp = *pp;
+			*pp = (*pp)->next;
 			free(temp);
-			*/
-			temp->coord.x = 0;
-			temp->coord.y = 0;
 			result = TRUE;
 			break;
 		}
+		pp = &(*pp)->next;
 	}
 	return result;
 }
