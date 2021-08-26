@@ -13,15 +13,15 @@ clear_screen()
 }
 
 static int
-string_length(const char *str)
+string_length(const char *string)
 {
-	const char *temp_str;
-	temp_str = str;
+	const char *temp_string;
+	temp_string = string;
 
-	while(*temp_str)
-		temp_str++;
+	while(*temp_string)
+		temp_string++;
 
-	return (temp_str - str);
+	return (temp_string - string);
 }
 
 static int
@@ -44,34 +44,34 @@ strings_are_equal(const char *string, const char *pattern)
 }
 
 static void
-print_message(const char *str)
+print_message(const char *string)
 {
 	int max_screen_value_y, max_screen_value_x;
-	int str_len;
+	int string_len;
 
 	clear_screen();
 	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
-	str_len = string_length(str);
-	move(max_screen_value_y / 2, (max_screen_value_x - str_len - 1) / 2);
+	string_len = string_length(string);
+	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
 	start_color();
 	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
 	attrset(COLOR_PAIR(4));
-	addstr(str);
+	addstr(string);
 	refresh();
 	sleep(2);
 	clear_screen();
 }
 
 static void
-end_program(const char *str)
+end_program(const char *string)
 {
-	if(strings_are_equal(str, "request_end")) {
+	if(strings_are_equal(string, "request_end")) {
 		print_message("request_end");
 	}
-	if(strings_are_equal(str, "win")) {
+	if(strings_are_equal(string, "win")) {
 		print_message("win!");
 	}
-	if(strings_are_equal(str, "crash_end")) {
+	if(strings_are_equal(string, "crash_end")) {
 		print_message("game end!");
 	}
 	clear();
@@ -116,28 +116,28 @@ hide_object(const struct coordinate coord)
 }
 
 static void
-print_round_number(const int num)
+print_round_number(const int number)
 {
-	static const char *msg;
+	static const char *message;
 	int max_screen_value_y, max_screen_value_x;
-	int str_len;
+	int string_len;
 
-	msg = "Round";
+	message = "Round";
 	clear_screen();
 	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
-	str_len = string_length(msg);
-	move(max_screen_value_y / 2, (max_screen_value_x - str_len - 1) / 2);
+	string_len = string_length(message);
+	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
 	start_color();
 	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
 	attrset(COLOR_PAIR(4));
-	printw("%s %d", msg, num);
+	printw("%s %d", message, number);
 	refresh();
 	sleep(2);
 	clear_screen();
 }
 
 static int
-get_random_coordinate(int max_generated_num)
+get_random_coordinate(const int max_generated_num)
 {
 	int result;
 	/*
@@ -157,18 +157,20 @@ set_random_coordinate(struct coordinate *coord)
 }
 
 static int
-is_equal_coordinate(const struct coordinate c, const struct coordinate d)
+is_equal_coordinate(const struct coordinate coord,
+					const struct coordinate pattern)
 {
 	int result;
 	result = TRUE;
 
-	if(c.x != d.x || c.y != d.y)
+	if(coord.x != pattern.x || coord.y != pattern.y)
 		result = FALSE;
 	return result;
 }
 
 struct coordinate_doubly_list *
-fill_in_coordinate_manual(const int max_iterator, const struct coordinate snk)
+fill_in_coordinate_manual(const int max_iterator,
+		const struct coordinate snake_head_coordinate)
 {
 	struct coordinate_doubly_list *first = NULL, *temp;
 	int i;
@@ -178,7 +180,7 @@ fill_in_coordinate_manual(const int max_iterator, const struct coordinate snk)
 		do {
 			scanf("%d", &temp->coord.x);
 			scanf("%d", &temp->coord.y);
-		} while (is_equal_coordinate(temp->coord, snk));
+		} while (is_equal_coordinate(temp->coord, snake_head_coordinate));
 
 		temp->next = first;
 		first = temp;
@@ -188,7 +190,7 @@ fill_in_coordinate_manual(const int max_iterator, const struct coordinate snk)
 
 struct coordinate_list *
 fill_in_coordinate_random(const int max_iterator,
-							const struct coordinate snk)
+		const struct coordinate snake_head_coordinate)
 {
 	struct coordinate_list *first = NULL, *temp;
 	int i;
@@ -197,37 +199,25 @@ fill_in_coordinate_random(const int max_iterator,
 		temp = malloc(sizeof(struct coordinate_list));
 		do {
 			set_random_coordinate(&temp->coord);
-		} while (is_equal_coordinate(temp->coord, snk));
+		} while (is_equal_coordinate(temp->coord, snake_head_coordinate));
 		temp->next = first;
 		first = temp;
 	}
 	return first;
 }
 
-/*
-static void
-print_list_value(const struct coordinate_doubly_list*p)
-{
-	const struct coordinate_doubly_list *temp;
-	for(temp = p; temp; temp = temp->next) {
-		printf("%d, %d\n", temp->coord.x, temp->coord.y);
-		sleep(1);
-	}
-}
-*/
-
 static int
-contact_with_borders(const struct coordinate snk_head)
+contact_with_borders(const struct coordinate snake_head_coordinate)
 {
 	int result, max_x, max_y;
 
 	getmaxyx(stdscr, max_y, max_x);
 	result = FALSE;
 
-	if((snk_head.x < 0) ||
-		(snk_head.x > max_x) ||
-		(snk_head.y) < 0 ||
-		(snk_head.y > max_y))
+	if((snake_head_coordinate.x < 0) ||
+		(snake_head_coordinate.x > max_x) ||
+		(snake_head_coordinate.y) < 0 ||
+		(snake_head_coordinate.y > max_y))
 		result = TRUE;
 
 	return result;
@@ -244,15 +234,15 @@ display_coordinate_list(const struct coordinate_list *p,
 }
 */
 static int
-contact_with_barrier(const struct coordinate snk_head,
-						struct coordinate_list *brr)
+contact_with_barrier(const struct coordinate snake_head_coordinate,
+									struct coordinate_list *barrier)
 {
 	struct coordinate_list *temp;
 	int result;
 	result = FALSE;
 
-	for(temp = brr; temp; temp = temp->next) {
-		if(is_equal_coordinate(snk_head, temp->coord)) {
+	for(temp = barrier; temp; temp = temp->next) {
+		if(is_equal_coordinate(snake_head_coordinate, temp->coord)) {
 			result = TRUE;
 			break;
 		}
@@ -261,16 +251,15 @@ contact_with_barrier(const struct coordinate snk_head,
 }
 
 static int
-contact_with_target(const struct coordinate snk_head,
-						struct coordinate_list *trg)
+contact_with_target(const struct coordinate snake_head_coordinate,
+									struct coordinate_list *target)
 {
 
 	struct coordinate_list **pp;
-	int result;
-	result = FALSE;
-	pp = &trg;
+	int result = FALSE;
+	pp = &target;
 	while(*pp) {
-		if(is_equal_coordinate(snk_head, (*pp)->coord)) {
+		if(is_equal_coordinate(snake_head_coordinate, (*pp)->coord)) {
 			struct coordinate_list *temp = *pp;
 			*pp = (*pp)->next;
 			free(temp);
@@ -283,152 +272,156 @@ contact_with_target(const struct coordinate snk_head,
 }
 
 static void
-move_object(struct coordinate_deque *snk, struct coordinate direction)
+move_object(struct coordinate_deque *snake_head_coordinate,
+								struct coordinate direction)
 {
 	struct coordinate_doubly_list *temp;
 
-	for(temp = snk->first; temp; temp = temp->next)
+	for(temp = snake_head_coordinate->first; temp; temp = temp->next)
 		hide_object(temp->coord);
 
-	for(temp = snk->last; temp->prev; temp = temp->prev) {
+	for(temp = snake_head_coordinate->last; temp->prev; temp = temp->prev) {
 		temp->coord.x = temp->prev->coord.x;	
 		temp->coord.y = temp->prev->coord.y;	
 	}
-	snk->first->coord.x += direction.x; 
-	snk->first->coord.y += direction.y; 
+	snake_head_coordinate->first->coord.x += direction.x; 
+	snake_head_coordinate->first->coord.y += direction.y; 
 
-	for(temp = snk->first; temp; temp = temp->next)
+	for(temp = snake_head_coordinate->first; temp; temp = temp->next)
 		show_object(temp->coord, "snake");	
 }
 
 static void
-add_new_snake_element(struct coordinate_deque *snk, struct coordinate c)
+add_new_snake_element(struct coordinate_deque *snake_head_coordinate,
+												struct coordinate c)
 {
 	struct coordinate_doubly_list *temp;
 
 	temp = malloc(sizeof(struct coordinate_doubly_list));
 	temp->coord.x = c.x;
 	temp->coord.y = c.y;
-	temp->prev = snk->last;
+	temp->prev = snake_head_coordinate->last;
 	temp->next = NULL;
-	if(snk->last == NULL)
-		snk->first = temp;
+	if(snake_head_coordinate->last == NULL)
+		snake_head_coordinate->first = temp;
 	else
-		snk->last->next = temp;
-	snk->last = temp;
+		snake_head_coordinate->last->next = temp;
+	snake_head_coordinate->last = temp;
 }
 
 static void
-print_object_in_fog_of_war(struct coordinate snk_head,
-							struct coordinate_list *obj,
-							const char *object_type)
+print_object_in_fog_of_war(struct coordinate snake_head_coordinate,
+										struct coordinate_list *obj,
+										const char *object_type)
 {
-	struct coordinate_list *temp_obj;
+	struct coordinate_list *temp;
 	int x_max, x_min, y_max, y_min;
 
-	x_max = snk_head.x + 5;
-	x_min = snk_head.x - 5;
-	y_max = snk_head.y + 5;
-	y_min = snk_head.y - 5;
-	for(temp_obj = obj; temp_obj; temp_obj = temp_obj->next) {
-		if((temp_obj->coord.x < x_max) &&
-			(temp_obj->coord.y < y_max) &&
-			(temp_obj->coord.x > x_min) &&
-			(temp_obj->coord.y > y_min)) {
-				show_object(temp_obj->coord, object_type);
+	x_max = snake_head_coordinate.x + 5;
+	x_min = snake_head_coordinate.x - 5;
+	y_max = snake_head_coordinate.y + 5;
+	y_min = snake_head_coordinate.y - 5;
+	for(temp = obj; temp; temp = temp->next) {
+		if((temp->coord.x < x_max) &&
+			(temp->coord.y < y_max) &&
+			(temp->coord.x > x_min) &&
+			(temp->coord.y > y_min)) {
+				show_object(temp->coord, object_type);
 			}
 	}
 }
 
 static void
-set_objects_another_round(struct coordinate_deque *snk,
-							struct coordinate_list **trg,
-							struct coordinate_list **brr,
+set_objects_another_round(struct coordinate_deque *snake,
+							struct coordinate_list **target,
+							struct coordinate_list **barrier,
 							const struct game_level_settings st,
 							struct coordinate *coord)
 {
-	struct coordinate snk_head;
-	snk->first = NULL;
-	snk->last = NULL;
-	*brr = NULL;
-	*trg = NULL;
+	struct coordinate snake_head_coordinate;
+	snake->first = NULL;
+	snake->last = NULL;
+	*barrier = NULL;
+	*target = NULL;
 	coord->x = 0;
 	coord->y = 0;
 	print_round_number(st.round_num);
 
-	set_random_coordinate(&snk_head);
-	add_new_snake_element(snk, snk_head);
-	*brr = fill_in_coordinate_random(st.max_barrier_amount, snk_head);
-	*trg = fill_in_coordinate_random(max_target_amount, snk_head);
+	set_random_coordinate(&snake_head_coordinate);
+	add_new_snake_element(snake, snake_head_coordinate);
+	*barrier = fill_in_coordinate_random(st.max_barrier_amount,
+										snake_head_coordinate);
+	*target = fill_in_coordinate_random(max_target_amount,
+									snake_head_coordinate);
 }
 
 static void
-update_after_contact_with_target(struct game_level_settings *st,
-									struct coordinate_deque *snk,
-									struct coordinate c)
+update_after_contact_with_target(struct game_level_settings *settings,
+										struct coordinate_deque *snake,
+										struct coordinate c)
 {
 	struct coordinate temp;
-	temp.x = snk->last->coord.x - c.x;
-	temp.y = snk->last->coord.y - c.y;
+	temp.x = snake->last->coord.x - c.x;
+	temp.y = snake->last->coord.y - c.y;
 
-	st->current_snake_length += 1;
-	add_new_snake_element(snk, temp);
+	settings->current_snake_length += 1;
+	add_new_snake_element(snake, temp);
 }
 
 static void
-set_settings_initial_round(struct game_level_settings *st)
+set_settings_initial_round(struct game_level_settings *settings)
 {
-	st->round_num = 1;
-	st->current_snake_length = 1;
-	st->snake_speed = 180;
-	st->max_barrier_amount = 150;
+	settings->round_num = 1;
+	settings->current_snake_length = 1;
+	settings->snake_speed = 180;
+	settings->max_barrier_amount = 150;
 }
 
 static void
-game_settings_increase(struct game_level_settings *st)
+game_settings_increase(struct game_level_settings *settings)
 {
-	st->round_num += 1;
-	st->current_snake_length = 1;
-	st->snake_speed -= 20;
-	st->max_barrier_amount += 150;
+	settings->round_num += 1;
+	settings->current_snake_length = 1;
+	settings->snake_speed -= 20;
+	settings->max_barrier_amount += 150;
 }
 
 static void
-game_settings_decrease(struct game_level_settings *st)
+game_settings_decrease(struct game_level_settings *settings)
 {
-	st->round_num -= 1;
-	st->current_snake_length = 1;
-	st->snake_speed -= 5;
-	st->max_barrier_amount -= 150;
+	settings->round_num -= 1;
+	settings->current_snake_length = 1;
+	settings->snake_speed -= 5;
+	settings->max_barrier_amount -= 150;
 }
 
 static void
-handle_direction_signal(int signal, struct coordinate *c,
-						struct coordinate_deque *snk)
+handle_direction_signal(int signal, struct coordinate *coord,
+						struct coordinate_deque *snake)
 {
 	switch(signal) {
 	case key_spacebar:
-		c->x = 0;
-		c->y = 0;
+		coord->x = 0;
+		coord->y = 0;
 		break;
 	case KEY_UP:
-		c->x = 0;
-		c->y = -1;
+		coord->x = 0;
+		coord->y = -1;
 		break;
 	case KEY_DOWN:
-		c->x = 0;
-		c->y = 1;
+		coord->x = 0;
+		coord->y = 1;
 		break;
 	case KEY_LEFT:
-		c->x = -1;
-		c->y = 0;
+		coord->x = -1;
+		coord->y = 0;
 		break;
 	case KEY_RIGHT:
-		c->x = 1;
-		c->y = 0;
+		coord->x = 1;
+		coord->y = 0;
 		break;
 	case ERR:
-		move_object(snk, *c);
+		move_object(snake, *coord);
 		break;
 	}
 }
@@ -438,21 +431,21 @@ affirmative_answer_to_continue_game_request()
 {
 	int result, ch;
 	int max_screen_value_y, max_screen_value_x;
-	int str_len;
+	int string_len;
 	result = FALSE;
 
 	clear_screen();
 	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
-	str_len = string_length(question_on_game_continue);
+	string_len = string_length(question_on_game_continue);
 
-	move(max_screen_value_y / 2, (max_screen_value_x - str_len - 1) / 2);
+	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
 	start_color();
 	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
 	attrset(COLOR_PAIR(4));
 	addstr(question_on_game_continue);
 
-	str_len = string_length("[y] [n]");
-	move((max_screen_value_y / 2) + 2, (max_screen_value_x - str_len - 1) / 2);
+	string_len = string_length("[y] [n]");
+	move((max_screen_value_y / 2) + 2, (max_screen_value_x - string_len - 1) / 2);
 	addstr("[y] [n]");
 	refresh();
 
@@ -503,7 +496,11 @@ int main()
 			if(sett.round_num < 1) {
 				if(affirmative_answer_to_continue_game_request()) {
 					set_settings_initial_round(&sett);
-					set_objects_another_round(&snake, &target, &barrier, sett, &coordin);
+					set_objects_another_round(&snake,
+												&target,
+												&barrier,
+												sett,
+												&coordin);
 					continue;
 				} else
 					end_program("crash_end");
@@ -517,7 +514,11 @@ int main()
 				if(sett.round_num > max_round_num) {
 					end_program("win");
 				}
-				set_objects_another_round(&snake, &target, &barrier, sett, &coordin);
+				set_objects_another_round(&snake,
+											&target,
+											&barrier,
+											sett,
+											&coordin);
 			}
 		}
 	}
