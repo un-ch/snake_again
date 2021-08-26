@@ -12,7 +12,7 @@ clear_screen()
 	refresh();
 }
 
-int
+static int
 string_length(const char *str)
 {
 	const char *temp_str;
@@ -24,18 +24,18 @@ string_length(const char *str)
 	return (temp_str - str);
 }
 
-int
-strings_are_equal(const char *str_1, const char *str_2)
+static int
+strings_are_equal(const char *string, const char *pattern)
 {
-	const char *temp_str_1, *temp_str_2;
 	int result = TRUE;
-
-	if(string_length(str_1) == string_length(str_2)) {
-		temp_str_1 = str_1;
-		temp_str_2 = str_2;
-		for(; *temp_str_1; temp_str_1++, temp_str_2++) {
-			if(*temp_str_1 != *temp_str_2)
+	if(string_length(string) == string_length(pattern)) {
+		const char *temp_string = string;
+		const char *temp_pattern = pattern;
+		while(*temp_string) {
+			if(*temp_string != *temp_pattern)
 				return FALSE;
+			temp_string++;
+			temp_pattern++;
 		}
 	}
 	else
