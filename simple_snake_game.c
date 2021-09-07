@@ -276,6 +276,11 @@ move_object(struct coordinate_deque *snake_head_coordinate,
 								struct coordinate direction)
 {
 	struct coordinate_doubly_list *temp;
+	if(direction.x == 0 && direction.y == 0) {
+		for(temp = snake_head_coordinate->first; temp; temp = temp->next)
+			show_object(temp->coord, "snake");
+		return;
+	}
 
 	for(temp = snake_head_coordinate->first; temp; temp = temp->next)
 		hide_object(temp->coord);
