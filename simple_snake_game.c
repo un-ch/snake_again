@@ -276,24 +276,32 @@ move_object(struct coordinate_deque *snake_head_coordinate,
 								struct coordinate direction)
 {
 	struct coordinate_doubly_list *temp;
+	temp = snake_head_coordinate->first;
+
 	if(direction.x == 0 && direction.y == 0) {
-		for(temp = snake_head_coordinate->first; temp; temp = temp->next)
+		for(; temp; temp = temp->next) {
 			show_object(temp->coord, "snake");
+		}
 		return;
 	}
 
-	for(temp = snake_head_coordinate->first; temp; temp = temp->next)
+	for(; temp; temp = temp->next) {
 		hide_object(temp->coord);
+	}
 
-	for(temp = snake_head_coordinate->last; temp->prev; temp = temp->prev) {
+	temp = snake_head_coordinate->last;
+	for(; temp->prev; temp = temp->prev) {
 		temp->coord.x = temp->prev->coord.x;	
 		temp->coord.y = temp->prev->coord.y;	
 	}
+
 	snake_head_coordinate->first->coord.x += direction.x; 
 	snake_head_coordinate->first->coord.y += direction.y; 
 
-	for(temp = snake_head_coordinate->first; temp; temp = temp->next)
+	temp = snake_head_coordinate->first;
+	for(; temp; temp = temp->next) {
 		show_object(temp->coord, "snake");	
+	}
 }
 
 static void
