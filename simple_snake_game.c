@@ -25,7 +25,7 @@ string_length(const char *string)
 }
 
 static int
-strings_are_equal(const char *string, const char *pattern)
+is_equal_strings(const char *string, const char *pattern)
 {
 	int result = TRUE;
 	if(string_length(string) == string_length(pattern)) {
@@ -65,13 +65,13 @@ print_message(const char *string)
 static void
 end_program(const char *string)
 {
-	if(strings_are_equal(string, "request_end")) {
+	if(is_equal_strings(string, "request_end")) {
 		print_message("request_end");
 	}
-	if(strings_are_equal(string, "win")) {
+	if(is_equal_strings(string, "win")) {
 		print_message("win!");
 	}
-	if(strings_are_equal(string, "crash_end")) {
+	if(is_equal_strings(string, "crash_end")) {
 		print_message("game end!");
 	}
 	clear();
@@ -84,19 +84,19 @@ show_object(const struct coordinate coord, const char *object_name)
 {
 	move(coord.y, coord.x);
 	start_color();
-	if(strings_are_equal(object_name, "target")) {
+	if(is_equal_strings(object_name, "target")) {
 		init_pair(1, COLOR_WHITE, COLOR_BLACK);
 		attrset(COLOR_PAIR(1));
 		addch(symbol_target);
 	}
 	else if
-	(strings_are_equal(object_name, "snake")) {
+	(is_equal_strings(object_name, "snake")) {
 		init_pair(2, COLOR_GREEN, COLOR_BLACK);
 		attrset(COLOR_PAIR(2));
 		addch(symbol_snake);
 	}
 	else if
-	(strings_are_equal(object_name, "barrier")) {
+	(is_equal_strings(object_name, "barrier")) {
 		init_pair(3, COLOR_RED, COLOR_BLACK);
 		attrset(COLOR_PAIR(3));
 		addch(symbol_barrier_plus);
@@ -539,8 +539,6 @@ int main()
 	endwin();
 	return 0;
 }
-
-
 
 
 
