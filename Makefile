@@ -7,10 +7,15 @@ BUILD_DIR	=	build
 INCLUDE_DIR	=	include
 SRC_DIR		=	src
 
-OBJECT_FILES=	$(BUILD_DIR)/screen.o \
-				$(BUILD_DIR)/string.o
+SRC_FILES	=	$(SRC_DIR)/screen.c \
+				$(SRC_DIR)/string.c
 
-#OBJECT_FILES=	$(SRC_FILES:.c=.o)
+# set object files to the build directory:
+OBJECT_FILES=	$(subst \
+				$(SRC_DIR), \
+				$(BUILD_DIR), \
+				$(SRC_FILES:.c=.o))
+
 HEADER_FILES=	$(wildcard $(INCLUDE_DIR)/*.h)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_DIR)/%.h
