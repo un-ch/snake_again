@@ -8,7 +8,12 @@ INCLUDE_DIR	=	include
 SRC_DIR		=	src
 
 SRC_FILES	=	$(SRC_DIR)/screen.c \
-				$(SRC_DIR)/string.c
+				$(SRC_DIR)/string.c \
+				$(SRC_DIR)/display_message.c \
+				$(SRC_DIR)/end_program.c \
+				$(SRC_DIR)/objects.c \
+				$(SRC_DIR)/get_random_number.c \
+				$(SRC_DIR)/coordinate.c
 
 # set object files to the build directory:
 OBJECT_FILES=	$(subst \
