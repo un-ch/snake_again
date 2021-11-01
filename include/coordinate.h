@@ -6,11 +6,20 @@ struct coordinate {
 	int y;
 };
 
+struct coordinate_list {
+	struct coordinate coord;
+	struct coordinate_list *next;
+};
+
 void
 set_random_coordinate(struct coordinate *coord);
 
 int
 is_equal_coordinate(const struct coordinate coord,
 					const struct coordinate pattern);
+
+struct coordinate_list *
+fill_in_coordinate_random(const int max_iterator,
+						const struct coordinate snake_head_coordinate);
 
 #endif

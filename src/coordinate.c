@@ -1,5 +1,6 @@
 
 #include <ncurses.h>
+#include <stdlib.h>		/* for malloc */
 
 #include "coordinate.h"
 #include "get_random_number.h"
@@ -25,3 +26,21 @@ is_equal_coordinate(const struct coordinate coord,
 	return result;
 }
 
+struct coordinate_list *
+fill_in_coordinate_random(const int max_iterator,
+						const struct coordinate snake_head_coordinate)
+{
+	struct coordinate_list *first = NULL, *temp;
+	int i;
+
+	for(i = 0; i < max_iterator; i++) {
+		temp = malloc(sizeof(struct coordinate_list));
+		do {
+			set_random_coordinate(&temp->coord);
+		} while (is_equal_coordinate(temp->coord, \
+									snake_head_coordinate));
+		temp->next = first;
+		first = temp;
+	}
+	return first;
+}
