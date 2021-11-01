@@ -27,7 +27,7 @@ display_message_center(const char *string)
 }
 
 void
-print_round_number(const int number)
+display_round_number(const int number)
 {
 	static const char *message;
 	int max_screen_value_y, max_screen_value_x;
