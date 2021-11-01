@@ -2,6 +2,7 @@
 #include <ncurses.h>
 
 #include "objects.h"
+#include "coordinate.h"
 
 void 
 show_object_target(const struct coordinate coord)
