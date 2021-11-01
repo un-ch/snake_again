@@ -44,3 +44,20 @@ fill_in_coordinate_random(const int max_iterator,
 	}
 	return first;
 }
+
+int
+contact_with_borders(const struct coordinate snake_head_coordinate)
+{
+	int result, max_x, max_y;
+
+	getmaxyx(stdscr, max_y, max_x);
+	result = FALSE;
+
+	if((snake_head_coordinate.x < 0) ||
+		(snake_head_coordinate.x > max_x) ||
+		(snake_head_coordinate.y) < 0 ||
+		(snake_head_coordinate.y > max_y))
+		result = TRUE;
+
+	return result;
+}

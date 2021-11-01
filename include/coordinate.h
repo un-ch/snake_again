@@ -22,4 +22,7 @@ struct coordinate_list *
 fill_in_coordinate_random(const int max_iterator,
 						const struct coordinate snake_head_coordinate);
 
+int
+contact_with_borders(const struct coordinate snake_head_coordinate);
+
 #endif
