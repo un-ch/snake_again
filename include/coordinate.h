@@ -11,8 +11,17 @@ struct coordinate_list {
 	struct coordinate_list *next;
 };
 
+struct coordinate_doubly_list {
+	struct coordinate coord;
+	struct coordinate_doubly_list *next, *prev;
+};
+
+struct coordinate_deque {
+	struct coordinate_doubly_list *first, *last;
+};
+
 void
-set_random_coordinate(struct coordinate *coord);
+set_random_coordinate(struct coordinate *c);
 
 int
 is_equal_coordinate(const struct coordinate coord,
@@ -20,9 +29,9 @@ is_equal_coordinate(const struct coordinate coord,
 
 struct coordinate_list *
 fill_in_coordinate_random(const int max_iterator,
-						const struct coordinate snake_head_coordinate);
+						const struct coordinate c);
 
 int
-contact_with_borders(const struct coordinate snake_head_coordinate);
+is_contact_with_borders(const struct coordinate c);
 
 #endif
