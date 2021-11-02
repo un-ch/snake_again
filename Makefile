@@ -13,7 +13,10 @@ SRC_FILES	=	$(SRC_DIR)/screen.c \
 				$(SRC_DIR)/end_program.c \
 				$(SRC_DIR)/objects.c \
 				$(SRC_DIR)/get_random_number.c \
-				$(SRC_DIR)/coordinate.c
+				$(SRC_DIR)/coordinate.c \
+				$(SRC_DIR)/barrier.c \
+				$(SRC_DIR)/target.c \
+				$(SRC_DIR)/snake_object.c \
 
 # set object files to the build directory:
 OBJECT_FILES=	$(subst \
