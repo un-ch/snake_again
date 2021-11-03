@@ -1,5 +1,5 @@
-#ifndef BARRIER_H_SETNRY
-#define BARRIER_H_SETNRY
+#ifndef BARRIER_H_SENTRY
+#define BARRIER_H_SENTRY
 
 #include "coordinate.h"
 
@@ -7,11 +7,11 @@
 #define FALSE	0
 
 int
-is_contact_with_barrier(const struct coordinate c,
+is_contact_with_barrier(const struct coordinate snake_head,
 				const struct coordinate_list *barrier);
 
 void
-display_barrier_in_fog_of_war(struct coordinate snake,
-							struct coordinate_list *bar);
+display_barrier_in_fog_of_war(struct coordinate snake_head,
+							struct coordinate_list *barrier);
 
 #endif

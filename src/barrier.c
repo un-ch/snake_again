@@ -3,7 +3,7 @@
 #include "objects.h"
 
 int
-is_contact_with_barrier(const struct coordinate c,
+is_contact_with_barrier(const struct coordinate snake_head,
 				const struct coordinate_list *barrier)
 {
 	const struct coordinate_list *temp = barrier;
@@ -11,7 +11,7 @@ is_contact_with_barrier(const struct coordinate c,
 	result = FALSE;
 
 	for(; temp; temp = temp->next) {
-		if(is_equal_coordinate(c, temp->coord)) {
+		if(is_equal_coordinate(snake_head, temp->coord)) {
 			result = TRUE;
 			break;
 		}
@@ -20,16 +20,16 @@ is_contact_with_barrier(const struct coordinate c,
 }
 
 void
-display_barrier_in_fog_of_war(struct coordinate snake,
+display_barrier_in_fog_of_war(struct coordinate snake_head,
 							struct coordinate_list *barrier)
 {
 	struct coordinate_list *temp = barrier;
 	int x_max, x_min, y_max, y_min;
 
-	x_max = snake.x + 5;
-	x_min = snake.x - 5;
-	y_max = snake.y + 5;
-	y_min = snake.y - 5;
+	x_max = snake_head.x + 5;
+	x_min = snake_head.x - 5;
+	y_max = snake_head.y + 5;
+	y_min = snake_head.y - 5;
 	for(; temp; temp = temp->next) {
 		if((temp->coord.x < x_max) &&
 			(temp->coord.y < y_max) &&
