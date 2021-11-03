@@ -1,4 +1,3 @@
-
 CC			=	gcc
 CFLAGS		=	-Wall -g -I
 
@@ -17,6 +16,9 @@ SRC_FILES	=	$(SRC_DIR)/screen.c \
 				$(SRC_DIR)/barrier.c \
 				$(SRC_DIR)/target.c \
 				$(SRC_DIR)/snake_object.c \
+				$(SRC_DIR)/round_settings.c \
+				$(SRC_DIR)/handle_direction.c \
+				$(SRC_DIR)/continue_game_request.c
 
 # set object files to the build directory:
 OBJECT_FILES=	$(subst \
