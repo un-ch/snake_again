@@ -1,4 +1,5 @@
 #include <ncurses.h>
+
 #include "continue_game_request.h"
 #include "screen.h"
 #include "string.h"
@@ -6,7 +7,7 @@
 int
 affirmative_answer_to_continue_game_request()
 {
-	int result, ch;
+	int result, answer;
 	int max_screen_value_y, max_screen_value_x;
 	int string_len;
 	result = FALSE;
@@ -28,8 +29,8 @@ affirmative_answer_to_continue_game_request()
 	addstr("[y] [n]");
 	refresh();
 
-	while((ch = getch())) {
-		switch(ch) {
+	while((answer = getch())) {
+		switch(answer) {
 			case key_yes:
 				result = TRUE;
 				goto quit_while_loop;
