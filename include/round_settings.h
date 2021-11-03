@@ -26,4 +26,9 @@ game_settings_increase(struct round_settings *settings);
 void
 game_settings_decrease(struct round_settings *settings);
 
+void
+update_after_contact_with_target(struct round_settings *settings,
+										struct coordinate_deque *snake,
+										struct coordinate c);
+
 #endif

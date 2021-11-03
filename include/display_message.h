@@ -1,6 +1,8 @@
 #ifndef DISPLAY_MESSAGE_H_SETNRY
 #define DISPLAY_MESSAGE_H_SETNRY
 
+static const char greeting_message[] = "Simple Snake Game";
+
 void
 display_message_center(const char *string);
 

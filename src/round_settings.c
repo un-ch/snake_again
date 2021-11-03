@@ -62,3 +62,16 @@ game_settings_decrease(struct round_settings *settings)
 	settings->snake_speed -= 5;
 	settings->max_barrier_amount -= 150;
 }
+
+void
+update_after_contact_with_target(struct round_settings *settings,
+										struct coordinate_deque *snake,
+										struct coordinate c)
+{
+	struct coordinate temp;
+	temp.x = snake->last->coord.x - c.x;
+	temp.y = snake->last->coord.y - c.y;
+
+	settings->current_snake_length += 1;
+	add_new_snake_element(snake, temp);
+}
