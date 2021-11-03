@@ -46,7 +46,7 @@ fill_in_coordinate_random(const int max_iterator,
 }
 
 int
-contact_with_borders(const struct coordinate snake_head_coordinate)
+is_contact_with_borders(const struct coordinate snake_head_coordinate)
 {
 	int result, max_x, max_y;
 
