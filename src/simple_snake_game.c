@@ -1,8 +1,6 @@
-
 #include <time.h>		/*	for time	*/
 #include <stdlib.h>		/*	for srand	*/
 #include <ncurses.h>
-
 #include "screen.h"
 #include "string.h"
 #include "display_message.h"
@@ -13,6 +11,9 @@
 #include "barrier.h"
 #include "target.h"
 #include "snake_object.h"
+#include "round_settings.h"
+#include "handle_direction.h"
+#include "continue_game_request.h"
 
 enum {exit_success_code = 0 };
 
