@@ -1,5 +1,6 @@
 #include "barrier.h"
 #include "coordinate.h"
+#include "objects.h"
 
 int
 is_contact_with_barrier(const struct coordinate c,
@@ -20,16 +21,16 @@ is_contact_with_barrier(const struct coordinate c,
 
 void
 display_barrier_in_fog_of_war(struct coordinate snake,
-							struct coordinate_list *bar)
+							struct coordinate_list *barrier)
 {
-	struct coordinate_list *temp;
+	struct coordinate_list *temp = barrier;
 	int x_max, x_min, y_max, y_min;
 
 	x_max = snake.x + 5;
 	x_min = snake.x - 5;
 	y_max = snake.y + 5;
 	y_min = snake.y - 5;
-	for(temp = obj; temp; temp = temp->next) {
+	for(; temp; temp = temp->next) {
 		if((temp->coord.x < x_max) &&
 			(temp->coord.y < y_max) &&
 			(temp->coord.x > x_min) &&
