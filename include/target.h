@@ -6,6 +6,8 @@
 #define TRUE	1
 #define FALSE	0
 
+enum { max_target_amount = 20 };
+
 int
 is_contact_with_target(const struct coordinate c,
 					struct coordinate_list *target);
