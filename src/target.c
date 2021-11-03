@@ -22,3 +22,24 @@ is_contact_with_target(const struct coordinate c,
 	}
 	return result;
 }
+
+void
+display_target_in_fog_of_war(struct coordinate snake,
+							struct coordinate_list *tar,
+{
+	struct coordinate_list *temp;
+	int x_max, x_min, y_max, y_min;
+
+	x_max = snake.x + 5;
+	x_min = snake.x - 5;
+	y_max = snake.y + 5;
+	y_min = snake.y - 5;
+	for(temp = obj; temp; temp = temp->next) {
+		if((temp->coord.x < x_max) &&
+			(temp->coord.y < y_max) &&
+			(temp->coord.x > x_min) &&
+			(temp->coord.y > y_min)) {
+				show_object_target(temp->coord);
+			}
+	}
+}

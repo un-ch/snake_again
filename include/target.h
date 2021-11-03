@@ -10,4 +10,8 @@ int
 is_contact_with_target(const struct coordinate c,
 					struct coordinate_list *target);
 
+void
+display_target_in_fog_of_war(struct coordinate snake,
+							struct coordinate_list *tar);
+
 #endif
