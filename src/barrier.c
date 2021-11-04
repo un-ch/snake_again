@@ -39,3 +39,14 @@ display_barrier_in_fog_of_war(struct coordinate snake_head,
 			}
 	}
 }
+
+void
+display_barrier(struct coordinate_list *barrier)
+{
+	struct coordinate_list *temp = barrier;
+
+	while(temp) {
+		show_object_barrier(temp->coord);
+		temp = temp->next;
+	}
+}

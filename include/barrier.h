@@ -14,4 +14,7 @@ void
 display_barrier_in_fog_of_war(struct coordinate snake_head,
 							struct coordinate_list *barrier);
 
+void
+display_barrier(struct coordinate_list *barrier);
+
 #endif
