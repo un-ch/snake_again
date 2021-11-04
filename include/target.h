@@ -6,7 +6,7 @@
 #define TRUE	1
 #define FALSE	0
 
-enum { max_target_amount = 20 };
+enum { max_target_amount = 10 };
 
 int
 is_contact_with_target(const struct coordinate c,
@@ -14,6 +14,9 @@ is_contact_with_target(const struct coordinate c,
 
 void
 display_target_in_fog_of_war(struct coordinate snake,
-							struct coordinate_list *tar);
+							struct coordinate_list *target);
+
+void
+display_target(struct coordinate_list *target);
 
 #endif

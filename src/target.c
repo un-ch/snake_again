@@ -44,3 +44,14 @@ display_target_in_fog_of_war(struct coordinate snake,
 			}
 	}
 }
+
+void
+display_target(struct coordinate_list *target)
+{
+	struct coordinate_list *temp = target;
+
+	while(temp) {
+		show_object_target(temp->coord);
+		temp = temp->next;
+	}
+}
