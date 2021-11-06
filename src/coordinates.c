@@ -2,11 +2,11 @@
 #include <ncurses.h>
 #include <stdlib.h>		/* for malloc */
 
-#include "coordinate.h"
+#include "coordinates.h"
 #include "get_random_number.h"
 
 void
-set_random_coordinate(struct coordinate *coord)
+set_random_coordinates(struct coordinates *coord)
 {
 	int max_x, max_y;
 	getmaxyx(stdscr, max_y, max_x);
@@ -15,8 +15,8 @@ set_random_coordinate(struct coordinate *coord)
 }
 
 int
-is_equal_coordinate(const struct coordinate coord,
-					const struct coordinate pattern)
+is_equal_coordinates(const struct coordinates coord,
+					const struct coordinates pattern)
 {
 	int result;
 	result = TRUE;
@@ -26,18 +26,18 @@ is_equal_coordinate(const struct coordinate coord,
 	return result;
 }
 
-struct coordinate_list *
-fill_in_coordinate_random(const int max_iterator,
-						const struct coordinate snake_head_coordinate)
+struct coordinates_list *
+fill_in_coordinates_random(const int max_iterator,
+						const struct coordinates snake_head_coordinate)
 {
-	struct coordinate_list *first = NULL, *temp;
+	struct coordinates_list *first = NULL, *temp;
 	int i;
 
 	for(i = 0; i < max_iterator; i++) {
-		temp = malloc(sizeof(struct coordinate_list));
+		temp = malloc(sizeof(struct coordinates_list));
 		do {
-			set_random_coordinate(&temp->coord);
-		} while (is_equal_coordinate(temp->coord, \
+			set_random_coordinates(&temp->coord);
+		} while (is_equal_coordinates(temp->coord, \
 									snake_head_coordinate));
 		temp->next = first;
 		first = temp;
@@ -46,7 +46,7 @@ fill_in_coordinate_random(const int max_iterator,
 }
 
 int
-is_contact_with_borders(const struct coordinate snake_head_coordinate)
+is_contact_with_borders(const struct coordinates snake_head_coordinate)
 {
 	int result, max_x, max_y;
 
