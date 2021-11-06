@@ -1,9 +1,9 @@
 #include <ncurses.h>
 #include "objects.h"
-#include "coordinate.h"
+#include "coordinates.h"
 
 void 
-show_object_target(const struct coordinate coord)
+show_object_target(const struct coordinates coord)
 {
 	move(coord.y, coord.x);
 	start_color();
@@ -14,7 +14,7 @@ show_object_target(const struct coordinate coord)
 }
 
 void 
-show_object_snake(const struct coordinate coord)
+show_object_snake(const struct coordinates coord)
 {
 	move(coord.y, coord.x);
 	start_color();
@@ -25,7 +25,7 @@ show_object_snake(const struct coordinate coord)
 }
 
 void 
-show_object_barrier(const struct coordinate coord)
+show_object_barrier(const struct coordinates coord)
 {
 	move(coord.y, coord.x);
 	start_color();
@@ -36,7 +36,7 @@ show_object_barrier(const struct coordinate coord)
 }
 
 void
-hide_object(const struct coordinate coord)
+hide_object(const struct coordinates coord)
 {
 	move(coord.y, coord.x);
 	start_color();

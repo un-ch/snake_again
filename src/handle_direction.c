@@ -1,11 +1,11 @@
 #include <ncurses.h>
 #include "handle_direction.h"
 #include "snake_object.h"
-#include "coordinate.h"
+#include "coordinates.h"
 
 void
-handle_direction_signal(int signal, struct coordinate *coord,
-						struct coordinate_deque *snake)
+handle_direction_signal(int signal, struct coordinates *coord,
+						struct coordinates_deque *snake)
 {
 	switch(signal) {
 	case key_spacebar:

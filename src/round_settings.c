@@ -1,18 +1,18 @@
 #include <stddef.h>			/* for NULL */
 #include "round_settings.h"
-#include "coordinate.h"
+#include "coordinates.h"
 #include "display_message.h"
 #include "snake_object.h"
 #include "target.h"
 
 void
-set_objects_another_round(struct coordinate_deque *snake,
-							struct coordinate_list **target,
-							struct coordinate_list **barrier,
+set_objects_another_round(struct coordinates_deque *snake,
+							struct coordinates_list **target,
+							struct coordinates_list **barrier,
 							const struct round_settings st,
-							struct coordinate *coord)
+							struct coordinates *coord)
 {
-	struct coordinate snake_head_coordinate;
+	struct coordinates snake_head_coordinate;
 
 	snake->first = NULL;
 	snake->last = NULL;
@@ -21,20 +21,20 @@ set_objects_another_round(struct coordinate_deque *snake,
 	coord->x = 0;
 	coord->y = 0;
 	display_round_number(st.round_num);
-	set_random_coordinate(&snake_head_coordinate);
+	set_random_coordinates(&snake_head_coordinate);
 	add_new_snake_element(snake, snake_head_coordinate);
-	*barrier = fill_in_coordinate_random(st.max_barrier_amount,
+	*barrier = fill_in_coordinates_random(st.max_barrier_amount,
 										snake_head_coordinate);
-	*target = fill_in_coordinate_random(max_target_amount,
+	*target = fill_in_coordinates_random(max_target_amount,
 									snake_head_coordinate);
 }
 
 void
-set_objects_another_round(struct coordinate_deque *snake,
-							struct coordinate_list **target,
-							struct coordinate_list **barrier,
+set_objects_another_round(struct coordinates_deque *snake,
+							struct coordinates_list **target,
+							struct coordinates_list **barrier,
 							const struct round_settings st,
-							struct coordinate *coord);
+							struct coordinates *coord);
 
 void
 set_settings_initial_round(struct round_settings *settings)
@@ -65,10 +65,10 @@ game_settings_decrease(struct round_settings *settings)
 
 void
 update_after_contact_with_target(struct round_settings *settings,
-										struct coordinate_deque *snake,
-										struct coordinate c)
+										struct coordinates_deque *snake,
+										struct coordinates c)
 {
-	struct coordinate temp;
+	struct coordinates temp;
 	temp.x = snake->last->coord.x - c.x;
 	temp.y = snake->last->coord.y - c.y;
 

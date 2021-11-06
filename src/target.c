@@ -1,19 +1,19 @@
 #include <stdlib.h>		/* for free() */
 
 #include "target.h"
-#include "coordinate.h"
+#include "coordinates.h"
 #include "objects.h"
 
 int
-is_contact_with_target(const struct coordinate c,
-					struct coordinate_list *target)
+is_contact_with_target(const struct coordinates c,
+					struct coordinates_list *target)
 {
-	struct coordinate_list **pp = &target;
+	struct coordinates_list **pp = &target;
 	int result = FALSE;
 
 	while(*pp) {
-		if(is_equal_coordinate(c, (*pp)->coord)) {
-			struct coordinate_list *temp = *pp;
+		if(is_equal_coordinates(c, (*pp)->coord)) {
+			struct coordinates_list *temp = *pp;
 			*pp = (*pp)->next;
 			free(temp);
 			result = TRUE;
@@ -25,10 +25,10 @@ is_contact_with_target(const struct coordinate c,
 }
 
 void
-display_target_in_fog_of_war(struct coordinate snake,
-							struct coordinate_list *target)
+display_target_in_fog_of_war(struct coordinates snake,
+							struct coordinates_list *target)
 {
-	struct coordinate_list *temp = target;
+	struct coordinates_list *temp = target;
 	int x_max, x_min, y_max, y_min;
 
 	x_max = snake.x + 5;
@@ -46,9 +46,9 @@ display_target_in_fog_of_war(struct coordinate snake,
 }
 
 void
-display_target(struct coordinate_list *target)
+display_target(struct coordinates_list *target)
 {
-	struct coordinate_list *temp = target;
+	struct coordinates_list *temp = target;
 
 	while(temp) {
 		show_object_target(temp->coord);

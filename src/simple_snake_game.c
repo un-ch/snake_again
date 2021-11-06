@@ -7,7 +7,7 @@
 #include "end_program.h"
 #include "objects.h"
 #include "get_random_number.h"
-#include "coordinate.h"
+#include "coordinates.h"
 #include "barrier.h"
 #include "target.h"
 #include "snake_object.h"
@@ -31,9 +31,9 @@ int main()
 	noecho();
 	curs_set(0);
 
-	struct coordinate_deque snake;
-	struct coordinate_list *target, *barrier;
-	struct coordinate coordin;
+	struct coordinates_deque snake;
+	struct coordinates_list *target, *barrier;
+	struct coordinates coordin;
 	struct round_settings sett;
 	int direction_signal;
 

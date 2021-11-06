@@ -1,17 +1,17 @@
 #include "barrier.h"
-#include "coordinate.h"
+#include "coordinates.h"
 #include "objects.h"
 
 int
-is_contact_with_barrier(const struct coordinate snake_head,
-				const struct coordinate_list *barrier)
+is_contact_with_barrier(const struct coordinates snake_head,
+				const struct coordinates_list *barrier)
 {
-	const struct coordinate_list *temp = barrier;
+	const struct coordinates_list *temp = barrier;
 	int result;
 	result = FALSE;
 
 	for(; temp; temp = temp->next) {
-		if(is_equal_coordinate(snake_head, temp->coord)) {
+		if(is_equal_coordinates(snake_head, temp->coord)) {
 			result = TRUE;
 			break;
 		}
@@ -20,10 +20,10 @@ is_contact_with_barrier(const struct coordinate snake_head,
 }
 
 void
-display_barrier_in_fog_of_war(struct coordinate snake_head,
-							struct coordinate_list *barrier)
+display_barrier_in_fog_of_war(struct coordinates snake_head,
+							struct coordinates_list *barrier)
 {
-	struct coordinate_list *temp = barrier;
+	struct coordinates_list *temp = barrier;
 	int x_max, x_min, y_max, y_min;
 
 	x_max = snake_head.x + 5;
@@ -41,9 +41,9 @@ display_barrier_in_fog_of_war(struct coordinate snake_head,
 }
 
 void
-display_barrier(struct coordinate_list *barrier)
+display_barrier(struct coordinates_list *barrier)
 {
-	struct coordinate_list *temp = barrier;
+	struct coordinates_list *temp = barrier;
 
 	while(temp) {
 		show_object_barrier(temp->coord);
