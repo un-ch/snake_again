@@ -3,9 +3,9 @@
 #include "coordinates.h"
 
 void 
-show_object_target(const struct coordinates coord)
+show_object_target(const struct coordinates crd)
 {
-	move(coord.y, coord.x);
+	move(crd.y, crd.x);
 	start_color();
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
 	attrset(COLOR_PAIR(1));
@@ -14,9 +14,9 @@ show_object_target(const struct coordinates coord)
 }
 
 void 
-show_object_snake(const struct coordinates coord)
+show_object_snake(const struct coordinates crd)
 {
-	move(coord.y, coord.x);
+	move(crd.y, crd.x);
 	start_color();
 	init_pair(2, COLOR_GREEN, COLOR_BLACK);
 	attrset(COLOR_PAIR(2));
@@ -25,9 +25,9 @@ show_object_snake(const struct coordinates coord)
 }
 
 void 
-show_object_barrier(const struct coordinates coord)
+show_object_barrier(const struct coordinates crd)
 {
-	move(coord.y, coord.x);
+	move(crd.y, crd.x);
 	start_color();
 	init_pair(3, COLOR_RED, COLOR_BLACK);
 	attrset(COLOR_PAIR(3));
@@ -36,9 +36,9 @@ show_object_barrier(const struct coordinates coord)
 }
 
 void
-hide_object(const struct coordinates coord)
+hide_object(const struct coordinates crd)
 {
-	move(coord.y, coord.x);
+	move(crd.y, crd.x);
 	start_color();
 	init_pair(4, COLOR_BLACK, COLOR_BLACK);
 	attrset(COLOR_PAIR(4));

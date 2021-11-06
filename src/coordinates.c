@@ -6,29 +6,29 @@
 #include "get_random_number.h"
 
 void
-set_random_coordinates(struct coordinates *coord)
+set_random_coordinates(struct coordinates *crd)
 {
 	int max_x, max_y;
 	getmaxyx(stdscr, max_y, max_x);
-	coord->x = get_random_int_number(max_x);
-	coord->y = get_random_int_number(max_y);
+	crd->x = get_random_int_number(max_x);
+	crd->y = get_random_int_number(max_y);
 }
 
 int
-is_equal_coordinates(const struct coordinates coord,
-					const struct coordinates pattern)
+is_equal_coordinates(const struct coordinates crd,
+					const struct coordinates crd_pattern)
 {
 	int result;
 	result = TRUE;
 
-	if(coord.x != pattern.x || coord.y != pattern.y)
+	if(crd.x != crd_pattern.x || crd.y != crd_pattern.y)
 		result = FALSE;
 	return result;
 }
 
 struct coordinates_list *
 fill_in_coordinates_random(const int max_iterator,
-						const struct coordinates snake_head_coordinate)
+						const struct coordinates snake_head)
 {
 	struct coordinates_list *first = NULL, *temp;
 	int i;
@@ -38,7 +38,7 @@ fill_in_coordinates_random(const int max_iterator,
 		do {
 			set_random_coordinates(&temp->coord);
 		} while (is_equal_coordinates(temp->coord, \
-									snake_head_coordinate));
+									snake_head));
 		temp->next = first;
 		first = temp;
 	}
@@ -46,17 +46,17 @@ fill_in_coordinates_random(const int max_iterator,
 }
 
 int
-is_contact_with_borders(const struct coordinates snake_head_coordinate)
+is_contact_with_borders(const struct coordinates snake_head)
 {
 	int result, max_x, max_y;
 
 	getmaxyx(stdscr, max_y, max_x);
 	result = FALSE;
 
-	if((snake_head_coordinate.x < 0) ||
-		(snake_head_coordinate.x > max_x) ||
-		(snake_head_coordinate.y) < 0 ||
-		(snake_head_coordinate.y > max_y))
+	if((snake_head.x < 0) ||
+		(snake_head.x > max_x) ||
+		(snake_head.y) < 0 ||
+		(snake_head.y > max_y))
 		result = TRUE;
 
 	return result;

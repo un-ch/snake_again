@@ -9,6 +9,6 @@ move_snake_object(struct coordinates_deque *snake,
 
 void
 add_new_snake_element(struct coordinates_deque *snake,
-								struct coordinates c);
+								struct coordinates crd);
 
 #endif

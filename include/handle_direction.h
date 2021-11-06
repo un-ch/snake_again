@@ -6,7 +6,7 @@
 enum { key_spacebar = ' ' };
 
 void
-handle_direction_signal(int signal, struct coordinates *coord,
-						struct coordinates_deque *snake);
+handle_direction_signal(int signal, struct coordinates *crd,
+							struct coordinates_deque *snake);
 
 #endif

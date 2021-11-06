@@ -5,14 +5,14 @@
 #include "objects.h"
 
 int
-is_contact_with_target(const struct coordinates c,
+is_contact_with_target(const struct coordinates crd,
 					struct coordinates_list *target)
 {
 	struct coordinates_list **pp = &target;
 	int result = FALSE;
 
 	while(*pp) {
-		if(is_equal_coordinates(c, (*pp)->coord)) {
+		if(is_equal_coordinates(crd, (*pp)->coord)) {
 			struct coordinates_list *temp = *pp;
 			*pp = (*pp)->next;
 			free(temp);

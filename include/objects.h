@@ -9,15 +9,15 @@ enum { symbol_barrier_plus = 'x' };
 enum { symbol_blank = ' ' };
 
 void 
-show_object_target(const struct coordinates coord);
+show_object_target(const struct coordinates crd);
 
 void 
-show_object_snake(const struct coordinates coord);
+show_object_snake(const struct coordinates crd);
 
 void 
-show_object_barrier(const struct coordinates coord);
+show_object_barrier(const struct coordinates crd);
 
 void
-hide_object(const struct coordinates coord);
+hide_object(const struct coordinates crd);
 
 #endif

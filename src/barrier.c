@@ -4,7 +4,7 @@
 
 int
 is_contact_with_barrier(const struct coordinates snake_head,
-				const struct coordinates_list *barrier)
+						const struct coordinates_list *barrier)
 {
 	const struct coordinates_list *temp = barrier;
 	int result;

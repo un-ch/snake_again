@@ -14,13 +14,13 @@ string_length(const char *string)
 }
 
 int
-is_equal_strings(const char *string, const char *pattern)
+is_equal_strings(const char *string, const char *str_pattern)
 {
 	int result = TRUE;
 
-	if(string_length(string) == string_length(pattern)) {
+	if(string_length(string) == string_length(str_pattern)) {
 		const char *temp_string = string;
-		const char *temp_pattern = pattern;
+		const char *temp_pattern = str_pattern;
 
 		while(*temp_string) {
 			if(*temp_string != *temp_pattern)

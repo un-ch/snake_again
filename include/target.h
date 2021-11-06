@@ -9,12 +9,12 @@
 enum { max_target_amount = 10 };
 
 int
-is_contact_with_target(const struct coordinates c,
+is_contact_with_target(const struct coordinates crd,
 					struct coordinates_list *target);
 
 void
 display_target_in_fog_of_war(struct coordinates snake,
-							struct coordinates_list *target);
+						struct coordinates_list *target);
 
 void
 display_target(struct coordinates_list *target);

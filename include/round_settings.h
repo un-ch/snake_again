@@ -12,23 +12,23 @@ struct round_settings {
 
 void
 set_objects_another_round(struct coordinates_deque *snake,
-							struct coordinates_list **target,
-							struct coordinates_list **barrier,
-							const struct round_settings st,
-							struct coordinates *coord);
+						struct coordinates_list **target,
+						struct coordinates_list **barrier,
+						const struct round_settings rnd_stt,
+						struct coordinates *crd);
 
 void
-set_settings_initial_round(struct round_settings *settings);
+set_settings_initial_round(struct round_settings *rnd_stt);
 
 void
-game_settings_increase(struct round_settings *settings);
+game_settings_increase(struct round_settings *rnd_stt);
 
 void
-game_settings_decrease(struct round_settings *settings);
+game_settings_decrease(struct round_settings *rnd_stt);
 
 void
-update_after_contact_with_target(struct round_settings *settings,
-										struct coordinates_deque *snake,
-										struct coordinates c);
+update_after_contact_with_target(struct round_settings *rnd_stt,
+								struct coordinates_deque *snake,
+								struct coordinates crd);
 
 #endif

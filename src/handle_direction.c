@@ -4,32 +4,32 @@
 #include "coordinates.h"
 
 void
-handle_direction_signal(int signal, struct coordinates *coord,
-						struct coordinates_deque *snake)
+handle_direction_signal(int signal, struct coordinates *crd,
+							struct coordinates_deque *snake)
 {
 	switch(signal) {
 	case key_spacebar:
-		coord->x = 0;
-		coord->y = 0;
+		crd->x = 0;
+		crd->y = 0;
 		break;
 	case KEY_UP:
-		coord->x = 0;
-		coord->y = -1;
+		crd->x = 0;
+		crd->y = -1;
 		break;
 	case KEY_DOWN:
-		coord->x = 0;
-		coord->y = 1;
+		crd->x = 0;
+		crd->y = 1;
 		break;
 	case KEY_LEFT:
-		coord->x = -1;
-		coord->y = 0;
+		crd->x = -1;
+		crd->y = 0;
 		break;
 	case KEY_RIGHT:
-		coord->x = 1;
-		coord->y = 0;
+		crd->x = 1;
+		crd->y = 0;
 		break;
 	case ERR:
-		move_snake_object(snake, *coord);
+		move_snake_object(snake, *crd);
 		break;
 	}
 }

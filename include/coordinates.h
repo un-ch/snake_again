@@ -21,17 +21,17 @@ struct coordinates_deque {
 };
 
 void
-set_random_coordinates(struct coordinates *c);
+set_random_coordinates(struct coordinates *crd);
 
 int
-is_equal_coordinates(const struct coordinates coord,
-					const struct coordinates pattern);
+is_equal_coordinates(const struct coordinates crd,
+					const struct coordinates crd_pattern);
 
 struct coordinates_list *
 fill_in_coordinates_random(const int max_iterator,
-						const struct coordinates c);
+						const struct coordinates crd);
 
 int
-is_contact_with_borders(const struct coordinates c);
+is_contact_with_borders(const struct coordinates crd);
 
 #endif

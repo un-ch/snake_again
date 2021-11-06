@@ -8,6 +8,6 @@ int
 string_length(const char *string);
 
 int
-is_equal_strings(const char *string, const char *pattern);
+is_equal_strings(const char *string, const char *str_pattern);
 
 #endif
