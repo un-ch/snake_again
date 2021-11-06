@@ -1,12 +1,12 @@
-CC			=	gcc
-CFLAGS		=	-Wall -g -I
+CC=				gcc
+CFLAGS=			-Wall -g -I
 
 # directories definitions:
-BUILD_DIR	=	build
-INCLUDE_DIR	=	include
-SRC_DIR		=	src
+BUILD_DIR=		build
+INCLUDE_DIR=	include
+SRC_DIR=		src
 
-SRC_FILES	=	$(SRC_DIR)/screen.c \
+SRC_FILES=		$(SRC_DIR)/screen.c \
 				$(SRC_DIR)/string.c \
 				$(SRC_DIR)/display_message.c \
 				$(SRC_DIR)/end_program.c \
