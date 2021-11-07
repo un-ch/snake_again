@@ -3,11 +3,11 @@
 int
 string_length(const char *string)
 {
-	const char *temp_string;
-	temp_string = string;
+	const char *temp_string = string;
 
-	while(*temp_string)
+	while(*temp_string) {
 		temp_string++;
+	}
 
 	return (temp_string - string);
 }
