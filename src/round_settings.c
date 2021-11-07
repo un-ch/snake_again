@@ -1,4 +1,5 @@
 #include <stddef.h>			/* for NULL */
+
 #include "round_settings.h"
 #include "coordinates.h"
 #include "display_message.h"

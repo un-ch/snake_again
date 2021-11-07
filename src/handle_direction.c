@@ -1,4 +1,5 @@
 #include <ncurses.h>
+
 #include "handle_direction.h"
 #include "snake_object.h"
 #include "coordinates.h"

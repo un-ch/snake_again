@@ -1,4 +1,5 @@
 #include <ncurses.h>
+
 #include "objects.h"
 #include "coordinates.h"
 

@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 
 #include "get_random_number.h"

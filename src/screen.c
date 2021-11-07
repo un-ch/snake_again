@@ -1,5 +1,5 @@
-
 #include	<ncurses.h>
+
 #include	"screen.h"
 
 void
