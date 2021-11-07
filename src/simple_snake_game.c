@@ -1,6 +1,7 @@
 #include <time.h>		/*	for time	*/
 #include <stdlib.h>		/*	for srand	*/
 #include <ncurses.h>
+
 #include "screen.h"
 #include "string.h"
 #include "display_message.h"
