@@ -7,10 +7,9 @@
 int
 affirmative_answer_to_continue_game_request()
 {
-	int result, answer;
+	int result = FALSE;
 	int max_screen_value_y, max_screen_value_x;
-	int string_len;
-	result = FALSE;
+	int string_len, answer;
 
 	clear_screen();
 	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
@@ -41,5 +40,6 @@ affirmative_answer_to_continue_game_request()
 		}
 	}
 	quit_while_loop:
+
 	return result;
 }
