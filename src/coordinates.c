@@ -18,11 +18,13 @@ int
 is_equal_coordinates(const struct coordinates crd,
 					const struct coordinates crd_pattern)
 {
-	int result;
-	result = TRUE;
+	int result = TRUE;
 
-	if(crd.x != crd_pattern.x || crd.y != crd_pattern.y)
+	if((crd.x != crd_pattern.x) ||
+		(crd.y != crd_pattern.y)) {
 		result = FALSE;
+	}
+
 	return result;
 }
 
