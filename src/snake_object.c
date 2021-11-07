@@ -55,9 +55,11 @@ add_new_snake_element(struct coordinates_deque *snake,
 	temp->coord.y = crd.y;
 	temp->prev = snake->last;
 	temp->next = NULL;
-	if(snake->last == NULL)
+
+	if(snake->last == NULL) {
 		snake->first = temp;
-	else
+	} else {
 		snake->last->next = temp;
+	}
 	snake->last = temp;
 }
