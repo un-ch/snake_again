@@ -12,29 +12,35 @@ move_snake_object(struct coordinates_deque *snake,
 
 	temp = snake->first;
 
-	if(direction.x == 0 && direction.y == 0) {
-		for(; temp; temp = temp->next) {
+	if((direction.x == 0) &&
+		(direction.y == 0)) {
+		while(temp) {
 			show_object_snake(temp->coord);
+			temp = temp->next;
 		}
 		return;
 	}
 
-	for(; temp; temp = temp->next) {
+	while(temp) {
 		hide_object(temp->coord);
+		temp = temp->next;
 	}
 
 	temp = snake->last;
-	for(; temp->prev; temp = temp->prev) {
+	while(temp->prev) {
 		temp->coord.x = temp->prev->coord.x;	
 		temp->coord.y = temp->prev->coord.y;	
+
+		temp = temp->prev;
 	}
 
 	snake->first->coord.x += direction.x; 
 	snake->first->coord.y += direction.y; 
 
 	temp = snake->first;
-	for(; temp; temp = temp->next) {
+	while(temp) {
 		show_object_snake(temp->coord);	
+		temp = temp->next;
 	}
 }
 
