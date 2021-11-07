@@ -8,10 +8,10 @@
 
 void
 set_objects_another_round(struct coordinates_deque *snake,
-							struct coordinates_list **target,
-							struct coordinates_list **barrier,
-							const struct round_settings rnd_stt,
-							struct coordinates *crd)
+						struct coordinates_list **target,
+						struct coordinates_list **barrier,
+						const struct round_settings rnd_stt,
+						struct coordinates *crd)
 {
 	struct coordinates snake_head;
 
@@ -21,6 +21,7 @@ set_objects_another_round(struct coordinates_deque *snake,
 	*target = NULL;
 	crd->x = 0;
 	crd->y = 0;
+
 	display_round_number(rnd_stt.round_num);
 	set_random_coordinates(&snake_head);
 	add_new_snake_element(snake, snake_head);
@@ -59,10 +60,11 @@ game_settings_decrease(struct round_settings *rnd_stt)
 
 void
 update_after_contact_with_target(struct round_settings *rnd_stt,
-									struct coordinates_deque *snake,
-									struct coordinates crd)
+								struct coordinates_deque *snake,
+										struct coordinates crd)
 {
 	struct coordinates temp;
+
 	temp.x = snake->last->coord.x - crd.x;
 	temp.y = snake->last->coord.y - crd.y;
 
