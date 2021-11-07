@@ -22,14 +22,15 @@ is_equal_strings(const char *string, const char *str_pattern)
 		const char *temp_pattern = str_pattern;
 
 		while(*temp_string) {
-			if(*temp_string != *temp_pattern)
+			if(*temp_string != *temp_pattern) {
 				return FALSE;
+			}
 			temp_string++;
 			temp_pattern++;
 		}
-	}
-	else
+	} else {
 		result = FALSE;
+	}
 
 	return result;
 }
