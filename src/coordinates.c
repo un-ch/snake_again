@@ -33,17 +33,19 @@ fill_in_coordinates_random(const int max_iterator,
 						const struct coordinates snake_head)
 {
 	struct coordinates_list *first = NULL, *temp;
-	int i;
+	int i = 0;
 
-	for(i = 0; i < max_iterator; i++) {
+	for(; i < max_iterator; i++) {
 		temp = malloc(sizeof(struct coordinates_list));
+
 		do {
 			set_random_coordinates(&temp->coord);
-		} while (is_equal_coordinates(temp->coord, \
-									snake_head));
+		} while (is_equal_coordinates(temp->coord, snake_head));
+
 		temp->next = first;
 		first = temp;
 	}
+
 	return first;
 }
 
