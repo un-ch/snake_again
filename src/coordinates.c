@@ -7,15 +7,29 @@
 void
 set_random_coordinates(struct coordinates *crd)
 {
+	int min_x = 1;
+	int min_y = 1;
 	int max_x, max_y;
+
 	getmaxyx(stdscr, max_y, max_x);
-	crd->x = get_random_int_number(max_x);
-	crd->y = get_random_int_number(max_y);
+
+	/* we assume that there is no opportunity to display symbols
+	 * in (max_y, max_x) screen coordinates;
+	 * borders around the game field holds the (max_y-1, max_x-1)
+	 * coordinates;
+	 * so, objects inside the borders should have next maximum
+	 * values:
+	 */
+	max_x -= 2;
+	max_y -= 2;
+
+	crd->x = get_random_int_number(min_x, max_x);
+	crd->y = get_random_int_number(min_y, max_y);
 }
 
 int
 is_equal_coordinates(const struct coordinates crd,
-					const struct coordinates crd_pattern)
+				const struct coordinates crd_pattern)
 {
 	int result = TRUE;
 
@@ -30,7 +44,7 @@ is_equal_coordinates(const struct coordinates crd,
 
 struct coordinates_list *
 fill_in_coordinates_random(const int max_iterator,
-						const struct coordinates snake_head)
+				const struct coordinates snake_head)
 {
 	struct coordinates_list *first = NULL, *temp;
 	int i = 0;
