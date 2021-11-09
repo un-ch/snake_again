@@ -16,7 +16,6 @@ display_message_center(const char *string)
 	string_len = string_length(string);
 	move(max_screen_value_y / 2, \
 						(max_screen_value_x - string_len - 1) / 2);
-	start_color();
 	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
 	attrset(COLOR_PAIR(4));
 	addstr(string);
@@ -38,7 +37,6 @@ display_round_number(const int number)
 	string_len = string_length(message);
 	move(max_screen_value_y / 2, \
 						(max_screen_value_x - string_len - 1) / 2);
-	start_color();
 	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
 	attrset(COLOR_PAIR(4));
 	printw("%s %d", message, number);
