@@ -31,7 +31,4 @@ struct coordinates_list *
 fill_in_coordinates_random(const int max_iterator,
 						const struct coordinates crd);
 
-int
-is_contact_with_borders(const struct coordinates crd);
-
 #endif

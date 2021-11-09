@@ -62,22 +62,3 @@ fill_in_coordinates_random(const int max_iterator,
 
 	return first;
 }
-
-int
-is_contact_with_borders(const struct coordinates snake_head)
-{
-	int result = FALSE;
-	int max_x, max_y;
-
-	getmaxyx(stdscr, max_y, max_x);
-
-	if((snake_head.x < 0) ||
-		(snake_head.x > max_x) ||
-		(snake_head.y) < 0 ||
-		(snake_head.y > max_y)) {
-
-		result = TRUE;
-	}
-
-	return result;
-}
