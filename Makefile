@@ -18,7 +18,8 @@ SRC_FILES=	$(SRC_DIR)/screen.c \
 		$(SRC_DIR)/snake_object.c \
 		$(SRC_DIR)/round_settings.c \
 		$(SRC_DIR)/handle_direction.c \
-		$(SRC_DIR)/continue_game_request.c
+		$(SRC_DIR)/continue_game_request.c \
+		$(SRC_DIR)/borders.c
 
 # set object files to the build directory:
 OBJECT_FILES=	$(subst \
