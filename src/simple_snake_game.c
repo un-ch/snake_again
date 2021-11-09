@@ -15,6 +15,7 @@
 #include "round_settings.h"
 #include "handle_direction.h"
 #include "continue_game_request.h"
+#include "borders.h"
 
 enum { exit_success_code = 0 };
 enum { max_snake_length = 5 };
@@ -24,6 +25,7 @@ int main()
 {
 	srand(time(NULL));
 	initscr();
+	start_color();
 	/* enable ctrl-c, ctrl-d: */
 	cbreak();
 	/* enable escape-sequences: */
@@ -51,6 +53,7 @@ int main()
 		handle_direction_signal(direction_signal,
 											&crd,
 											&snake);
+		display_borders();
 		display_target(target);
 		display_barrier(barrier);
 		/*
