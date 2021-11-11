@@ -13,7 +13,7 @@ display_borders()
 int
 is_contact_with_borders(const struct coordinates snake_head)
 {
-	int result = false_exit_code;
+	int result = FALSE;
 	int min_x = 1;
 	int min_y = 1;
 	int max_x, max_y;
@@ -26,7 +26,7 @@ is_contact_with_borders(const struct coordinates snake_head)
 		|| (snake_head.x > max_x)
 		|| (snake_head.y < min_y)
 		|| (snake_head.y > max_y)) {
-		result = true_exit_code;
+		result = TRUE;
 	}
 
 	return result;
