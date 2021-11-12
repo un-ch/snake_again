@@ -60,8 +60,8 @@ int main()
 		display_target_in_fog_of_war(snake.first->coord, target);
 		display_barrier_in_fog_of_war(snake.first->coord, barrier);
 		*/
-		if(is_contact_with_borders(snake.first->coord) ||
-			(is_contact_with_barrier(snake.first->coord, barrier))) {
+		if(is_contact_with_borders(snake.first->coord)
+		|| is_contact_with_barrier(snake.first->coord, barrier)) {
 			display_message_center("crash!");
 			game_settings_decrease(&rnd_stt);
 			if(rnd_stt.round_num < 1) {
