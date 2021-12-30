@@ -1,5 +1,5 @@
-#ifndef DISPLAY_MESSAGE_H_SETNRY
-#define DISPLAY_MESSAGE_H_SETNRY
+#ifndef DISPLAY_MESSAGE_H_SENTRY
+#define DISPLAY_MESSAGE_H_SENTRY
 
 static const char greeting_message[] = "Simple Snake Game";
 
