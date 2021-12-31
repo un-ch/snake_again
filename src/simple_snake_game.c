@@ -40,7 +40,6 @@ int main()
 	struct round_settings rnd_stt;
 	int direction_signal;
 
-	display_message_center(greeting_message);
 	set_settings_initial_round(&rnd_stt);
 	timeout(rnd_stt.snake_speed);
 	set_objects_another_round(&snake,
@@ -53,7 +52,7 @@ int main()
 		handle_direction_signal(direction_signal,
 											&crd,
 											&snake);
-		display_borders();
+		display_borders_with_game_title();
 		display_target(target);
 		display_barrier(barrier);
 		/*
