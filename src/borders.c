@@ -1,13 +1,28 @@
 #include <ncurses.h>
 
 #include "borders.h"
+#include "string.h"
 
 void
-display_borders()
+display_borders_with_game_title()
 {
+
+	const char *game_title = "Simple Snake Game";
+	int max_screen_width;
+	int str_length;
+	int cursor_width_coordinate;
+	int cursor_height_coordinate = 0;
+
 	init_pair(borders_color_pair, COLOR_WHITE, COLOR_BLACK);
 	attrset(COLOR_PAIR(borders_color_pair));
 	box(stdscr, 0, 0);
+
+	max_screen_width = getmaxx(stdscr);
+	str_length = string_length(game_title);
+	cursor_width_coordinate = (max_screen_width - str_length) / 2;
+
+	mvwprintw(stdscr, cursor_height_coordinate, cursor_width_coordinate,\
+																									" %s ", game_title);
 }
 
 int
