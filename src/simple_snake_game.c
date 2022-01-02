@@ -37,12 +37,13 @@ int main()
 	struct coordinates_deque snake;
 	struct coordinates_list *target, *barrier;
 	struct coordinates crd;
-	struct round_settings rnd_stt;
+	struct round_settings round_settngs;
 	int direction_signal;
 
-	set_settings_initial_round(&rnd_stt);
-	timeout(rnd_stt.snake_speed);
-	set_objects_another_round(&snake, &target, &barrier, rnd_stt, &crd);
+	set_settings_initial_round(&round_settngs);
+	timeout(round_settngs.snake_speed);
+	set_objects_another_round(&snake, &target, &barrier, round_settngs,
+																																&crd);
 
 	while((direction_signal = getch()) != key_escape) {
 		handle_direction_signal(direction_signal, &crd, &snake);
@@ -53,30 +54,30 @@ int main()
 		if(is_contact_with_borders(snake.first->coord)
 		|| is_contact_with_barrier(snake.first->coord, barrier)) {
 			display_message_center("crash!");
-			game_settings_decrease(&rnd_stt);
-			if(rnd_stt.round_num < 1) {
+			game_settings_decrease(&round_settngs);
+			if(round_settngs.round_num < 1) {
 				if(affirmative_answer_to_continue_game_request()) {
-					set_settings_initial_round(&rnd_stt);
-					set_objects_another_round(&snake, &target, &barrier, rnd_stt,
-																																	&crd);
+					set_settings_initial_round(&round_settngs);
+					set_objects_another_round(&snake, &target, &barrier,
+																					round_settngs, &crd);
 					continue;
 				} else {
 					end_program_crash_end();
 				}
 			}
-			set_objects_another_round(&snake, &target, &barrier, rnd_stt,
-																															&crd);
+			set_objects_another_round(&snake, &target, &barrier,
+																			round_settngs, &crd);
 		}
 		if(is_contact_with_target(snake.first->coord, target)) {
-			update_after_contact_with_target(&rnd_stt, &snake,
-																			snake.first->coord);
-			if(rnd_stt.current_snake_length > max_snake_length) {
-				game_settings_increase(&rnd_stt);
-				if(rnd_stt.round_num > max_round_num) {
+			update_after_contact_with_target(&round_settngs, &snake,
+																					snake.first->coord);
+			if(round_settngs.current_snake_length > max_snake_length) {
+				game_settings_increase(&round_settngs);
+				if(round_settngs.round_num > max_round_num) {
 					end_program_win();
 				}
-				set_objects_another_round(&snake, &target, &barrier, rnd_stt,
-																																&crd);
+				set_objects_another_round(&snake, &target, &barrier,
+																				round_settngs, &crd);
 			}
 		}
 	}
