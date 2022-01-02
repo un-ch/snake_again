@@ -36,17 +36,17 @@ int main()
 
 	struct coordinates_deque snake;
 	struct coordinates_list *target, *barrier;
-	struct coordinates crd;
+	struct coordinates coordinate;
 	struct round_settings round_settngs;
 	int direction_signal;
 
 	set_settings_initial_round(&round_settngs);
 	timeout(round_settngs.snake_speed);
 	set_objects_another_round(&snake, &target, &barrier, round_settngs,
-																																&crd);
+																												&coordinate);
 
 	while((direction_signal = getch()) != key_escape) {
-		handle_direction_signal(direction_signal, &crd, &snake);
+		handle_direction_signal(direction_signal, &coordinate, &snake);
 		display_borders_with_game_title();
 		display_target_in_fog_of_war(snake.first->coord, target);
 		display_barrier_in_fog_of_war(snake.first->coord, barrier);
@@ -59,14 +59,14 @@ int main()
 				if(affirmative_answer_to_continue_game_request()) {
 					set_settings_initial_round(&round_settngs);
 					set_objects_another_round(&snake, &target, &barrier,
-																					round_settngs, &crd);
+																	round_settngs, &coordinate);
 					continue;
 				} else {
 					end_program_crash_end();
 				}
 			}
 			set_objects_another_round(&snake, &target, &barrier,
-																			round_settngs, &crd);
+															round_settngs, &coordinate);
 		}
 		if(is_contact_with_target(snake.first->coord, target)) {
 			update_after_contact_with_target(&round_settngs, &snake,
@@ -77,7 +77,7 @@ int main()
 					end_program_win();
 				}
 				set_objects_another_round(&snake, &target, &barrier,
-																				round_settngs, &crd);
+																round_settngs, &coordinate);
 			}
 		}
 	}
