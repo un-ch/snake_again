@@ -1,4 +1,5 @@
 #include <stddef.h>			/* for NULL */
+#include <ncurses.h>		/* for getmaxyx() */
 
 #include "round_settings.h"
 #include "coordinates.h"
@@ -34,10 +35,15 @@ set_objects_another_round(struct coordinates_deque *snake,
 void
 set_settings_initial_round(struct round_settings *rnd_stt)
 {
+	int max_screen_value_x, max_screen_value_y;
+	int barrier_amount;
+
+	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
+	barrier_amount = (max_screen_value_y + max_screen_value_x) * 5;
 	rnd_stt->round_num = 1;
 	rnd_stt->current_snake_length = 1;
 	rnd_stt->snake_speed = 180;
-	rnd_stt->max_barrier_amount = 150;
+	rnd_stt->max_barrier_amount = barrier_amount;
 }
 
 void
