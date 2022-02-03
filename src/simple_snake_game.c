@@ -18,7 +18,7 @@
 #include "borders.h"
 
 enum { exit_success_code = 0 };
-enum { max_snake_length = 5 };
+enum { max_snake_length = 1 };
 enum { max_round_num = 5 };
 
 int main()
@@ -47,7 +47,6 @@ int main()
 
 	while((direction_signal = getch()) != key_escape) {
 		handle_direction_signal(direction_signal, &coordinate, &snake);
-		display_borders_with_game_title();
 		display_target_in_fog_of_war(snake.first->coord, target);
 		display_barrier_in_fog_of_war(snake.first->coord, barrier);
 
