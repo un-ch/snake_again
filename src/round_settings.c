@@ -1,5 +1,6 @@
 #include <stddef.h>			/* for NULL */
 #include <ncurses.h>		/* for getmaxyx() */
+#include <borders.h>
 
 #include "round_settings.h"
 #include "coordinates.h"
@@ -30,6 +31,7 @@ set_objects_another_round(struct coordinates_deque *snake,
 														snake_head);
 	*target = fill_in_coordinates_random(max_target_amount,
 												snake_head);
+	display_borders_with_game_title();
 }
 
 void
