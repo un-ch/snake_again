@@ -1,13 +1,12 @@
 #ifndef END_PROGRAM_H_SENTRY
 #define END_PROGRAM_H_SENTRY
 
-void
-end_program_request();
+enum end_type {
+	quit	= 1,
+	win		= 2
+};
 
 void
-end_program_win();
-
-void
-end_program_crash_end();
+end(int end_type);
 
 #endif

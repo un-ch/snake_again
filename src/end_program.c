@@ -5,27 +5,16 @@
 #include "display_message.h"
 
 void
-end_program_request()
+end(int end_type)
 {
-	display_message_center("request_end");
-	clear();
-	endwin();
-	exit(0);
-}
-
-void
-end_program_win()
-{
-	display_message_center("win!");
-	clear();
-	endwin();
-	exit(0);
-}
-
-void
-end_program_crash_end()
-{
-	display_message_center("game end!");
+	switch(end_type) {
+		case quit:
+			display_message_center("end!");
+			break;
+		case win:
+			display_message_center("win!");
+			break;
+	}
 	clear();
 	endwin();
 	exit(0);
