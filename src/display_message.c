@@ -16,8 +16,7 @@ display_message_center(const char *string)
 	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
 	string_len = string_length(string);
 	move((max_screen_value_y / 2), (max_screen_value_x - string_len - 1) / 2);
-	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
-	attrset(COLOR_PAIR(4));
+	set_color(magenta_on_black);
 	addstr(string);
 	refresh();
 	sleep(2);
@@ -36,8 +35,7 @@ display_round_number(const int number)
 	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
 	string_len = string_length(message);
 	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
-	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
-	attrset(COLOR_PAIR(4));
+	set_color(magenta_on_black);
 	printw("%s %d", message, number);
 	refresh();
 	sleep(2);
