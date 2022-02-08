@@ -2,6 +2,7 @@
 
 #include "borders.h"
 #include "string.h"
+#include "color.h"
 
 void
 display_borders_with_game_title()
@@ -13,8 +14,7 @@ display_borders_with_game_title()
 	int cursor_width_coordinate;
 	int cursor_height_coordinate = 0;
 
-	init_pair(borders_color_pair, COLOR_WHITE, COLOR_BLACK);
-	attrset(COLOR_PAIR(borders_color_pair));
+	set_border_color();
 	box(stdscr, 0, 0);
 
 	max_screen_width = getmaxx(stdscr);
