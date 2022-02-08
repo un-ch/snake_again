@@ -2,6 +2,7 @@
 
 #include "objects.h"
 #include "coordinates.h"
+#include "color.h"
 
 void 
 show_object_target(const struct coordinates crd)
