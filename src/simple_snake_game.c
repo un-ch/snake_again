@@ -52,7 +52,6 @@ int main()
 
 		if(is_contact_with_borders(snake.first->coord)
 		|| is_contact_with_barrier(snake.first->coord, barrier)) {
-			display_message_center("crash!");
 			game_settings_decrease(&round_settngs);
 			if(round_settngs.round_num < 1) {
 				if(affirmative_answer_to_continue_game_request()) {
