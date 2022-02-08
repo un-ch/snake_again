@@ -7,6 +7,7 @@
 #include "display_message.h"
 #include "snake_object.h"
 #include "target.h"
+#include "screen.h"
 
 void
 set_objects_another_round(struct coordinates_deque *snake,
