@@ -14,7 +14,7 @@ display_borders_with_game_title()
 	int cursor_width_coordinate;
 	int cursor_height_coordinate = 0;
 
-	set_border_color();
+	set_color(white_on_black);
 	box(stdscr, 0, 0);
 
 	max_screen_width = getmaxx(stdscr);
