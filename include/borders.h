@@ -6,7 +6,6 @@
 #define TRUE	1
 #define FALSE	0
 
-enum { borders_color_pair = 6 };
 enum { false_exit_code = 0 };
 
 void
