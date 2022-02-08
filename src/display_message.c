@@ -4,6 +4,7 @@
 #include "display_message.h"
 #include "string.h"
 #include "screen.h"
+#include "color.h"
 
 void
 display_message_center(const char *string)
