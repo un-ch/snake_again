@@ -28,19 +28,23 @@ void
 display_round_number(const int number)
 {
 	static const char *message;
+	static const char *blank = "       ";
 	int max_screen_value_y, max_screen_value_x;
 	int string_len;
 
 	message = "Round";
-	clear_screen();
 	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
 	string_len = string_length(message);
-	move(max_screen_value_y / 2, \
-						(max_screen_value_x - string_len - 1) / 2);
+	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
 	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
 	attrset(COLOR_PAIR(4));
 	printw("%s %d", message, number);
 	refresh();
 	sleep(2);
-	clear_screen();
+
+	init_pair(5, COLOR_BLACK, COLOR_BLACK);
+	attrset(COLOR_PAIR(5));
+	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
+	addstr(blank);
+	refresh();
 }
