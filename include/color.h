@@ -12,6 +12,6 @@ enum all_colors {
 };
 
 void
-set_border_color();
+set_color(int all_colors);
 
 #endif
