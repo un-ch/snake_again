@@ -34,4 +34,7 @@ fill_in_coordinates_random(const int max_iterator,
 void
 delete_coordinate_list(struct coordinates_list *list);
 
+void
+delete_coordinate_doubly_list(struct coordinates_doubly_list **list);
+
 #endif
