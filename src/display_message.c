@@ -14,8 +14,7 @@ display_message_center(const char *string)
 	clear_screen();
 	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
 	string_len = string_length(string);
-	move(max_screen_value_y / 2, \
-						(max_screen_value_x - string_len - 1) / 2);
+	move((max_screen_value_y / 2), (max_screen_value_x - string_len - 1) / 2);
 	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
 	attrset(COLOR_PAIR(4));
 	addstr(string);
