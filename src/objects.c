@@ -8,8 +8,7 @@ void
 show_object_target(const struct coordinates crd)
 {
 	move(crd.y, crd.x);
-	init_pair(1, COLOR_WHITE, COLOR_BLACK);
-	attrset(COLOR_PAIR(1));
+	set_color(white_on_black);
 	addch(symbol_target);
 	refresh();
 }
@@ -18,8 +17,7 @@ void
 show_object_snake(const struct coordinates crd)
 {
 	move(crd.y, crd.x);
-	init_pair(2, COLOR_GREEN, COLOR_BLACK);
-	attrset(COLOR_PAIR(2));
+	set_color(green_on_black);
 	addch(symbol_snake);
 	refresh();
 }
@@ -28,8 +26,7 @@ void
 show_object_barrier(const struct coordinates crd)
 {
 	move(crd.y, crd.x);
-	init_pair(3, COLOR_RED, COLOR_BLACK);
-	attrset(COLOR_PAIR(3));
+	set_color(red_on_black);
 	addch(symbol_barrier_plus);
 	refresh();
 }
@@ -38,8 +35,7 @@ void
 hide_object(const struct coordinates crd)
 {
 	move(crd.y, crd.x);
-	init_pair(4, COLOR_BLACK, COLOR_BLACK);
-	attrset(COLOR_PAIR(4));
+	set_color(black_on_black);
 	addch(symbol_blank);
 	refresh();
 }
