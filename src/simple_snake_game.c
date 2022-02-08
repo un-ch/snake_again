@@ -60,7 +60,7 @@ int main()
 																	round_settngs, &coordinate);
 					continue;
 				} else {
-					end_program_crash_end();
+					end(quit);
 				}
 			}
 			set_objects_another_round(&snake, &target, &barrier,
@@ -72,7 +72,7 @@ int main()
 			if(round_settngs.current_snake_length > max_snake_length) {
 				game_settings_increase(&round_settngs);
 				if(round_settngs.round_num > max_round_num) {
-					end_program_win();
+					end(win);
 				}
 				set_objects_another_round(&snake, &target, &barrier,
 																round_settngs, &coordinate);
