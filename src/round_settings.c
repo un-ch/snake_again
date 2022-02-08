@@ -18,6 +18,12 @@ set_objects_another_round(struct coordinates_deque *snake,
 {
 	struct coordinates snake_head;
 
+	if(*target) {
+		delete_coordinate_doubly_list(&snake->first);
+		delete_coordinate_list(*target);
+		delete_coordinate_list(*barrier);
+	}
+
 	snake->first = NULL;
 	snake->last = NULL;
 	*barrier = NULL;
