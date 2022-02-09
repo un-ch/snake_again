@@ -1,8 +1,6 @@
 #ifndef COLOR_H_SENTRY
 #define COLOR_H_SENTRY
 
-enum { border_color_pair = 6 };
-
 enum all_colors {
 	white_on_black		= 1,
 	magenta_on_black	= 2,
