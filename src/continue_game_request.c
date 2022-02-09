@@ -15,8 +15,7 @@ affirmative_answer_to_continue_game_request()
 	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
 	string_len = string_length(question_on_game_continue);
 
-	move(max_screen_value_y / 2, \
-			(max_screen_value_x - string_len - 1) / 2);
+	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
 	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
 	attrset(COLOR_PAIR(4));
 	addstr(question_on_game_continue);
