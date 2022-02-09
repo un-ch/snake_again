@@ -8,6 +8,7 @@ enum all_colors {
 	magenta_on_black,
 	green_on_black,
 	red_on_black,
+	yellow_on_black,
 	black_on_black
 };
 
