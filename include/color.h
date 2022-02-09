@@ -11,6 +11,7 @@ enum all_colors {
 	yellow_on_black		= 5,
 	black_on_black		= 6
 };
+
 void
 set_color(int all_colors);
 
