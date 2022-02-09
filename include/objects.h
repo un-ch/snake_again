@@ -5,7 +5,7 @@
 
 enum { symbol_target = '+' };
 enum { symbol_snake = '+' };
-enum { symbol_barrier_plus = '#' };
+enum { symbol_barrier = '#' };
 enum { symbol_blank = ' ' };
 
 void 

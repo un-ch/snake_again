@@ -27,7 +27,7 @@ show_object_barrier(const struct coordinates crd)
 {
 	move(crd.y, crd.x);
 	set_color(red_on_black);
-	addch(symbol_barrier_plus);
+	addch(symbol_barrier);
 	refresh();
 }
 
