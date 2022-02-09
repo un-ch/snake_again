@@ -3,6 +3,7 @@
 #include "continue_game_request.h"
 #include "screen.h"
 #include "string.h"
+#include "color.h"
 
 int
 affirmative_answer_to_continue_game_request()
