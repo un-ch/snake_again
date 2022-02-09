@@ -26,12 +26,11 @@ display_message_center(const char *string)
 void
 display_round_number(const int number)
 {
-	static const char *message;
+	static const char *message = "Round";
 	static const char *blank = "       ";
 	int max_screen_value_y, max_screen_value_x;
 	int string_len;
 
-	message = "Round";
 	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
 	string_len = string_length(message);
 	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
