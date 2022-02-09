@@ -22,6 +22,10 @@ set_color(int all_colors)
 			init_pair(red_on_black, COLOR_RED, COLOR_BLACK);
 			attrset(COLOR_PAIR(red_on_black));
 			break;
+		case yellow_on_black:
+			init_pair(yellow_on_black, COLOR_YELLOW, COLOR_BLACK);
+			attrset(COLOR_PAIR(yellow_on_black));
+			break;
 		case black_on_black:
 			init_pair(black_on_black, COLOR_BLACK, COLOR_BLACK);
 			attrset(COLOR_PAIR(black_on_black));
