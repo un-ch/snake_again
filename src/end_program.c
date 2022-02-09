@@ -16,6 +16,8 @@ end(int end_type)
 			break;
 	}
 	clear();
+	/* restore terminal after ncurses activity: */
 	endwin();
-	exit(0);
+
+	exit(exit_success_code);
 }
