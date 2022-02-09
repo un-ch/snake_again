@@ -17,7 +17,6 @@
 #include "continue_game_request.h"
 #include "borders.h"
 
-enum { exit_success_code = 0 };
 enum { max_snake_length = 1 };
 enum { max_round_num = 5 };
 
@@ -79,10 +78,5 @@ int main()
 			}
 		}
 	}
-	clear_screen();
-
-	/* restore terminal after ncurses activity: */
-	endwin();
-
-	return exit_success_code;
+	end(quit);
 }
