@@ -40,8 +40,7 @@ display_round_number(const int number)
 	refresh();
 	sleep(2);
 
-	init_pair(5, COLOR_BLACK, COLOR_BLACK);
-	attrset(COLOR_PAIR(5));
+	set_color(black_on_black);
 	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
 	addstr(blank);
 	refresh();
