@@ -3,9 +3,9 @@
 #include "color.h"
 
 void
-set_color(int all_colors)
+set_color(enum fgr_bgr_colors colors)
 {
-	switch(all_colors) {
+	switch(colors) {
 		case white_on_black:
 			init_pair(white_on_black, COLOR_WHITE, COLOR_BLACK);
 			attrset(COLOR_PAIR(white_on_black));
