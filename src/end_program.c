@@ -5,9 +5,9 @@
 #include "display_message.h"
 
 void
-end(int end_type)
+end(enum end_type how)
 {
-	switch(end_type) {
+	switch(how) {
 		case quit:
 			display_message_center("end!");
 			break;

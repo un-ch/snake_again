@@ -9,6 +9,6 @@ enum end_type {
 };
 
 void
-end(int end_type);
+end(enum end_type how);
 
 #endif
