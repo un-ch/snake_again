@@ -6,21 +6,22 @@ BUILD_DIR=	build
 INCLUDE_DIR=	include
 SRC_DIR=	src
 
-SRC_FILES=	$(SRC_DIR)/screen.c \
-	$(SRC_DIR)/string.c \
-	$(SRC_DIR)/display_message.c \
-	$(SRC_DIR)/end_program.c \
-	$(SRC_DIR)/objects.c \
-	$(SRC_DIR)/get_random_number.c \
-	$(SRC_DIR)/coordinates.c \
-	$(SRC_DIR)/barrier.c \
-	$(SRC_DIR)/target.c \
-	$(SRC_DIR)/snake_object.c \
-	$(SRC_DIR)/round_settings.c \
-	$(SRC_DIR)/handle_direction.c \
-	$(SRC_DIR)/continue_game_request.c \
-	$(SRC_DIR)/borders.c \
-	$(SRC_DIR)/color.c
+SRC_FILES=	$(SRC_DIR)/screen.c			\
+	$(SRC_DIR)/string.c								\
+	$(SRC_DIR)/display_message.c			\
+	$(SRC_DIR)/end_program.c					\
+	$(SRC_DIR)/objects.c							\
+	$(SRC_DIR)/get_random_number.c		\
+	$(SRC_DIR)/coordinates.c					\
+	$(SRC_DIR)/barrier.c							\
+	$(SRC_DIR)/target.c								\
+	$(SRC_DIR)/snake_object.c					\
+	$(SRC_DIR)/round_settings.c				\
+	$(SRC_DIR)/handle_direction.c			\
+	$(SRC_DIR)/continue_game_request.c\
+	$(SRC_DIR)/borders.c							\
+	$(SRC_DIR)/color.c								\
+	$(SRC_DIR)/dot_background.c				\
 
 # set object files to the build directory:
 OBJECT_FILES=	$(subst \
