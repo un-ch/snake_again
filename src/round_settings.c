@@ -8,6 +8,7 @@
 #include "snake_object.h"
 #include "target.h"
 #include "screen.h"
+#include "dot_background.h"
 
 void
 set_objects_another_round(struct coordinates_deque *snake,
@@ -40,6 +41,7 @@ set_objects_another_round(struct coordinates_deque *snake,
 														snake_head);
 	*target = fill_in_coordinates_random(max_target_amount,
 												snake_head);
+	display_dot_background();
 }
 
 void
