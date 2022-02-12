@@ -7,6 +7,7 @@ enum { symbol_target = '+' };
 enum { symbol_snake = '+' };
 enum { symbol_barrier = '#' };
 enum { symbol_blank = ' ' };
+enum { symbol_dot = '.' };
 
 void 
 show_object_target(const struct coordinates crd);
