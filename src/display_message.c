@@ -27,7 +27,6 @@ void
 display_round_number(const int number)
 {
 	static const char *message = "Round";
-	static const char *blank = "       ";
 	int max_screen_value_y, max_screen_value_x;
 	int string_len;
 
