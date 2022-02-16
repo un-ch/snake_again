@@ -20,7 +20,6 @@ display_message_center(const char *string)
 	addstr(string);
 	refresh();
 	sleep(2);
-	clear_screen();
 }
 
 void
