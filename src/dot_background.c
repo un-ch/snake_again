@@ -15,7 +15,7 @@ display_dot_background()
 	int screen_width = 1;
 
 	getmaxyx(stdscr, max_screen_height, max_screen_width);
-	set_color(white_on_black);
+	set_color(black_on_white);
 
 	for(; screen_height < (max_screen_height - 1); ++screen_height) {
 		for(screen_width = 1; screen_width < (max_screen_width - 1); ++screen_width) {
