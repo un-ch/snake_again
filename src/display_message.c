@@ -38,9 +38,4 @@ display_round_number(const int number)
 	printw("%s %d", message, number);
 	refresh();
 	sleep(2);
-
-	set_color(black_on_black);
-	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
-	addstr(blank);
-	refresh();
 }
