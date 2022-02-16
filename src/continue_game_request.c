@@ -23,7 +23,7 @@ affirmative_answer_to_continue_game_request()
 	string_len = string_length("[y] [n]");
 	move((max_screen_value_y / 2) + 2, \
 			(max_screen_value_x - string_len - 1) / 2);
-	addstr("[y] [n]");
+	addstr("(y) (n)");
 	refresh();
 
 	while((answer = getch())) {
