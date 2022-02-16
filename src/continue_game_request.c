@@ -17,7 +17,7 @@ affirmative_answer_to_continue_game_request()
 	string_len = string_length(question_on_game_continue);
 
 	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
-	set_color(white_on_black);
+	set_color(black_on_white);
 	addstr(question_on_game_continue);
 
 	string_len = string_length("[y] [n]");
