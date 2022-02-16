@@ -14,9 +14,6 @@ display_dot_background()
 	int screen_height = 1;
 	int screen_width = 1;
 
-	/*
-	clear_screen();
-	*/
 	getmaxyx(stdscr, max_screen_height, max_screen_width);
 	set_color(white_on_black);
 
@@ -24,7 +21,6 @@ display_dot_background()
 		for(screen_width = 1; screen_width < (max_screen_width - 1); ++screen_width) {
 			move(screen_height, screen_width);
 			addch(symbol_dot);
-			refresh();
 		}
 	}
 }
@@ -47,7 +43,6 @@ display_dot_background_in_fog_of_war(const struct coordinates snake)
 		for(screen_width = x_min; screen_width < (x_max - 1); ++screen_width) {
 			move(screen_height, screen_width);
 			addch(symbol_dot);
-			refresh();
 		}
 	}
 }
