@@ -64,11 +64,11 @@ fill_in_coordinates_random(const int max_iterator,
 }
 
 void
-delete_coordinate_list(struct coordinates_list *list)
+delete_coordinate_list(struct coordinates_list **list)
 {
-	while(list) {
-		struct coordinates_list *temp = list;
-		list = list->next;
+	while(*list) {
+		struct coordinates_list *temp = *list;
+		*list = (*list)->next;
 		free(temp);
 	}
 }
