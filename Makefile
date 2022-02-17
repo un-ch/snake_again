@@ -1,5 +1,5 @@
 CC=	gcc
-CFLAGS=	-Wall -g -pg -I
+CFLAGS=	-Wall -I
 
 # directories definitions:
 BUILD_DIR=	build
