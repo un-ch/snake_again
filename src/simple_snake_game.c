@@ -34,6 +34,8 @@ int main()
 	curs_set(0);
 
 	struct coordinates_deque snake;
+	snake.first = NULL;
+	snake.last = NULL;
 	struct coordinates_list *target = NULL, *barrier = NULL;
 	struct coordinates coordinate;
 	struct round_settings round_settngs;
