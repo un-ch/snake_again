@@ -21,6 +21,7 @@ set_objects_another_round(struct coordinates_deque *snake,
 
 	delete_coordinate_list(target);
 	delete_coordinate_list(barrier);
+	delete_coordinate_doubly_list(&(snake->first));
 
 	snake->first = NULL;
 	snake->last = NULL;
