@@ -34,10 +34,10 @@ set_objects_another_round(struct coordinates_deque *snake,
 	display_round_number(rnd_stt.round_num);
 	set_random_coordinates(&snake_head);
 	add_new_snake_element(snake, snake_head);
-	*barrier = fill_in_coordinates_random(rnd_stt.max_barrier_amount,
-														snake_head);
-	*target = fill_in_coordinates_random(max_target_amount,
-												snake_head);
+	*barrier = \
+		fill_in_coordinates_random(rnd_stt.max_barrier_amount, snake_head);
+	*target = \
+		fill_in_coordinates_random(max_target_amount, snake_head);
 	display_dot_background();
 }
 
