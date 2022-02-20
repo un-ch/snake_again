@@ -9,6 +9,14 @@ enum { symbol_barrier = '#' };
 enum { symbol_blank = ' ' };
 enum { symbol_dot = '.' };
 
+enum object {
+	target,
+	snake,
+	barrier,
+	blank,
+	dot
+};
+
 void 
 show_object_target(const struct coordinates crd);
 
@@ -20,5 +28,8 @@ show_object_barrier(const struct coordinates crd);
 
 void
 hide_object(const struct coordinates crd);
+
+void
+display_object(const struct coordinates crd, enum object obj);
 
 #endif
