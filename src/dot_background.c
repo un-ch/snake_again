@@ -22,7 +22,7 @@ display_dot_background()
 		for(screen_width = 1; screen_width < (max_screen_width - 1); ++screen_width) {
 			crd.y = screen_height;
 			crd.x = screen_width;
-			display_object(crd, dot);
+			display_object(dot_obj, crd);
 		}
 	}
 }
