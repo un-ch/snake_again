@@ -10,11 +10,11 @@ enum { symbol_blank = ' ' };
 enum { symbol_dot = '.' };
 
 enum object {
-	target,
-	snake,
-	barrier,
-	blank,
-	dot
+	target_obj,
+	snake_obj,
+	barrier_obj,
+	blank_obj,
+	dot_obj
 };
 
 void 
