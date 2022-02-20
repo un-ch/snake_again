@@ -13,14 +13,16 @@ display_dot_background()
 	/* int min_screen_height, min_screen_width; */
 	int screen_height = 1;
 	int screen_width = 1;
+	struct coordinates crd;
 
 	getmaxyx(stdscr, max_screen_height, max_screen_width);
 	set_color(black_on_white);
 
 	for(; screen_height < (max_screen_height - 1); ++screen_height) {
 		for(screen_width = 1; screen_width < (max_screen_width - 1); ++screen_width) {
-			move(screen_height, screen_width);
-			addch(symbol_dot);
+			crd.y = screen_height;
+			crd.x = screen_width;
+			display_object(crd, dot);
 		}
 	}
 }
