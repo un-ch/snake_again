@@ -41,7 +41,7 @@ hide_object(const struct coordinates crd)
 }
 
 void
-display_object(const struct coordinates crd, enum object obj)
+display_object(enum object obj, const struct coordinates crd)
 {
 	move(crd.y, crd.x);
 	switch(obj) {
