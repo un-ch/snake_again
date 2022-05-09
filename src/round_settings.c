@@ -53,7 +53,7 @@ set_settings_initial_round(struct round_settings *rnd_stt)
 	barrier_amount = (max_screen_value_y + max_screen_value_x) * 5;
 	rnd_stt->round_num = 1;
 	rnd_stt->current_snake_length = 1;
-	rnd_stt->snake_speed = 350;
+	rnd_stt->snake_speed = 250;
 	rnd_stt->max_barrier_amount = barrier_amount;
 }
 
