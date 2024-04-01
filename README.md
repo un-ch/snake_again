@@ -1,5 +1,5 @@
 # Another Snake Game
-Game installation:<br>
+Game installation on the Linux:<br>
 <ol>
 <li><code>git clone git@github.com:un-ch/another_snake_game.git</code></li>
 <li><code>cd another_snake_game</code></li>
