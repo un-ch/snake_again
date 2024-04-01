@@ -9,7 +9,7 @@ end(enum end_type how)
 {
 	switch(how) {
 		case quit:
-			display_message_center("end!");
+			display_message_center("The end.");
 			break;
 		case win:
 			display_message_center("win!");
