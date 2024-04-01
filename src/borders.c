@@ -8,7 +8,7 @@ void
 display_borders_with_game_title()
 {
 
-	const char *game_title = "Simple Snake Game";
+	const char game_title[] = "Simple Snake Game";
 	int max_screen_width;
 	int str_length;
 	int cursor_width_coordinate;
