@@ -43,8 +43,11 @@ int main()
 
 	set_settings_initial_round(&round_settngs);
 	timeout(round_settngs.snake_speed);
-	set_objects_another_round(&snake, &target, &barrier, round_settngs,
-																												&coordinate);
+	set_objects_another_round(&snake,
+                                &target,
+                                &barrier,
+                                round_settngs,
+                                &coordinate);
 
 	while((direction_signal = getch()) != key_escape) {
 		handle_direction_signal(direction_signal, &coordinate, &snake);
