@@ -50,8 +50,15 @@ $(PRJ_TITLE): \
 	$(BUILD_DIR)/$(CURRENT_TARGET)
 
 .PHONY: run
-run: another_snake_game
+run: $(PRJ_TITLE)
 	@./$(BUILD_DIR)/$(PRJ_TITLE)
+
+ifneq (clean, $(MAKECMDGOALS))
+-include deps.mk
+endif
+
+deps.mk: $(SRC_FILES)
+	$(CC) -MM $(ALL_PREREQUISITES) > $(CURRENT_TARGET)
 
 .PHONY: clean
 clean:
