@@ -53,13 +53,6 @@ $(PRJ_TITLE): \
 run: $(PRJ_TITLE)
 	@./$(BUILD_DIR)/$(PRJ_TITLE)
 
-ifneq (clean, $(MAKECMDGOALS))
--include deps.mk
-endif
-
-deps.mk: $(SRC_FILES)
-	$(CC) -MM $(ALL_PREREQUISITES) > $(CURRENT_TARGET)
-
 .PHONY: clean
 clean:
 	@rm -f	$(BUILD_DIR)/*.o $(BUILD_DIR)/$(PRJ_TITLE)
