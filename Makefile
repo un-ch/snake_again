@@ -42,7 +42,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_DIR)/%.h
 	@$(CC) $(CFLAGS)$(INCLUDE_DIR) -c $(FIRST_PREREQUISITE) -o $(CURRENT_TARGET)
 
 # targets:
-another_snake_game: \
+$(PRJ_TITLE): \
 	$(SRC_DIR)/$(PRJ_TITLE).c \
 	$(LIBS) \
 	$(OBJECT_FILES)
@@ -56,7 +56,3 @@ run: another_snake_game
 .PHONY: clean
 clean:
 	@rm -f	$(BUILD_DIR)/*.o $(BUILD_DIR)/$(PRJ_TITLE)
-
-.PHONY: delete_files
-delete_files:
-	@rm -f	$(BUILD_DIR)/* $(SRC_DIR)/* $(INCLUDE_DIR)/*
