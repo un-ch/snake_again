@@ -1,4 +1,4 @@
-CC 		= gcc
+CC 	= gcc
 CFLAGS 	= -Wall -I
 LIBS 	= -lncurses
 
@@ -52,6 +52,10 @@ $(PRJ_TITLE): \
 .PHONY: run
 run: $(PRJ_TITLE)
 	@./$(BUILD_DIR)/$(PRJ_TITLE)
+
+.PHONY: valg
+valg:
+	@valgrind --tool=memcheck --leak-check=full ./$(BUILD_DIR)/$(PRJ_TITLE) 2>VALG_LOG
 
 .PHONY: clean
 clean:
