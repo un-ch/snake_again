@@ -1,4 +1,4 @@
-#include	<ncurses.h>
+#include <ncurses.h>
 
 #include "screen.h"
 #include "objects.h"
@@ -19,8 +19,8 @@ clear_screen()
 	getmaxyx(stdscr, max_screen_height, max_screen_width);
 	set_color(white_on_white);
 
-	for(; screen_height < (max_screen_height - 1); ++screen_height) {
-		for(screen_width = 1; screen_width < (max_screen_width - 1); ++screen_width) {
+	for(; screen_height < (max_screen_height - 1); screen_height++) {
+		for(screen_width = 1; screen_width < (max_screen_width - 1); screen_width++) {
 			move(screen_height, screen_width);
 			addch(symbol_blank);
 		}
