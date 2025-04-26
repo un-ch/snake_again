@@ -1,7 +1,6 @@
-#include <stddef.h>			/* for NULL */
+#include <stddef.h>		/* for NULL */
 #include <ncurses.h>		/* for getmaxyx() */
-#include <borders.h>
-
+#include "borders.h"
 #include "round_settings.h"
 #include "coordinates.h"
 #include "display_message.h"
