@@ -1,17 +1,23 @@
 CC 	= gcc
-CFLAGS 	= -Wall -I
-LIBS 	= -lncurses
 
-PRJ_TITLE = another_snake_game
+CFLAGS 	= -Wall -ggdb -ansi -pg -O0 -MMD -MP -fdiagnostics-color=never -fno-diagnostics-show-caret -save-temps --verbose
+CFLAGS	+= -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero
+CFLAGS	+= -static-libasan
+CFLAGS	+= -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
+CFLAGS	+= -I
+
+LIBS		= -lncurses
+
+MAIN_BIN	= main
 
 # directories definitions:
 BUILD_DIR 	= build
-INCLUDE_DIR = include
+INCLUDE_DIR	= include
 SRC_DIR 	= src
 
-CURRENT_TARGET 		= $@
-FIRST_PREREQUISITE 	= $<
-ALL_PREREQUISITES 	= $^
+CURRENT_TARGET		= $@
+FIRST_PREREQUISITE	= $<
+ALL_PREREQUISITES	= $^
 
 SRC_FILES = $(SRC_DIR)/screen.c \
 	$(SRC_DIR)/string.c	\
@@ -36,27 +42,24 @@ OBJECT_FILES = $(subst \
 	$(BUILD_DIR), \
 	$(SRC_FILES:.c=.o))
 
-HEADER_FILES = $(wildcard $(INCLUDE_DIR)/*.h)
-
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_DIR)/%.h
 	@$(CC) $(CFLAGS)$(INCLUDE_DIR) -c $(FIRST_PREREQUISITE) -o $(CURRENT_TARGET)
 
 # targets:
-$(PRJ_TITLE): \
-	$(SRC_DIR)/$(PRJ_TITLE).c \
+$(MAIN_BIN): \
+	$(SRC_DIR)/$(MAIN_BIN).c \
 	$(LIBS) \
 	$(OBJECT_FILES)
 	@$(CC) $(CFLAGS) $(INCLUDE_DIR) $(ALL_PREREQUISITES) -o \
 	$(BUILD_DIR)/$(CURRENT_TARGET)
 
-.PHONY: run
-run: $(PRJ_TITLE)
-	@./$(BUILD_DIR)/$(PRJ_TITLE)
+.PHONY: run valg clean
 
-.PHONY: valg
+run: $(MAIN_BIN)
+	@./$(BUILD_DIR)/$(MAIN_BIN)
+
 valg:
-	@valgrind --tool=memcheck --leak-check=full ./$(BUILD_DIR)/$(PRJ_TITLE) 2>VALG_LOG
+	@valgrind --tool=memcheck --leak-check=full ./$(BUILD_DIR)/$(MAIN_BIN) 2>VALG_LOG
 
-.PHONY: clean
 clean:
-	@rm -f	$(BUILD_DIR)/*.o $(BUILD_DIR)/$(PRJ_TITLE)
+	@rm -f	$(BUILD_DIR)/*.o $(BUILD_DIR)/$(MAIN_BIN)
