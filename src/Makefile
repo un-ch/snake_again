@@ -12,7 +12,9 @@ MODULES	= main.o screen.o string.o display_message.o end_program.o objects.o get
 		coordinates.o barrier.o target.o snake_object.o round_settings.o handle_direction.o \
 		continue_game_request.o borders.o color.o dot_background.o
 
-all: $(MAIN_BIN)
+DEPS	= $(MODULES:.o=.d)
+
+all: $(MAIN_BIN) tags
 
 %.o:	%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -28,5 +30,11 @@ run:	$(MAIN_BIN)
 valg:
 	@valgrind --tool=memcheck --leak-check=full ./$(BUILD_DIR)/$(MAIN_BIN) 2>VALG_LOG
 
+tags:
+	@ctags -R -n --c-kinds=+p --fields=+iaS --extras=+q
+
 clean:
 	@rm -f *.o *.i *.d $(MAIN_BIN)
+
+# dependency files:
+-include $(DEPS)
