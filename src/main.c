@@ -47,8 +47,8 @@ int main()
 
 	while((direction_signal = getch()) != key_escape) {
 		handle_direction_signal(direction_signal, &coordinate, &snake);
-		display_target_in_fog_of_war(snake.first->coord, target);
-		display_barrier_in_fog_of_war(snake.first->coord, barrier);
+
+		display_in_fog_of_war(snake.first->coord, target, barrier);
 
 		if(is_contact_with_borders(snake.first->coord) ||
 		   is_contact_with_barrier(snake.first->coord, barrier)) {
