@@ -1,7 +1,5 @@
 CC	= gcc
-
 CFLAGS	= -Wall -ggdb -ansi -O0 -MMD -MP -fdiagnostics-color=never -fno-diagnostics-show-caret
-
 LIBS	= -lncurses
 MAIN_BIN= snake_again
 
@@ -19,13 +17,10 @@ all: $(MAIN_BIN) tags
 $(MAIN_BIN): $(MODULES)
 	@$(CC) $(CFLAGS) $(MODULES) $(LIBS) -o $@
 
-.PHONY: run valg clean
+.PHONY: run clean
 
 run:	$(MAIN_BIN)
 	@./$(MAIN_BIN)
-
-valg:
-	@valgrind --tool=memcheck --leak-check=full ./$(BUILD_DIR)/$(MAIN_BIN) 2>VALG_LOG
 
 tags:
 	@ctags -R -n --c-kinds=+p --fields=+iaS --extras=+q
