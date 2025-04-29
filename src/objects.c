@@ -68,3 +68,37 @@ display_object(enum object obj, const struct coordinates crd)
 	}
 	refresh();
 }
+
+void
+display_object_in_fog_of_war(const struct coordinates sn,
+				const struct coordinates_list *list,
+				void (*func)(struct coordinates))
+{
+	const struct coordinates_list *temp = list;
+	int x_max, x_min, y_max, y_min;
+
+	x_max = sn.x + 5;
+	x_min = sn.x - 5;
+	y_max = sn.y + 5;
+	y_min = sn.y - 5;
+
+	while (temp) {
+		if ((temp->coord.x < x_max) &&
+		    (temp->coord.y < y_max) &&
+		    (temp->coord.x > x_min) &&
+		    (temp->coord.y > y_min)) {
+			func(temp->coord);
+		}
+
+		temp = temp->next;
+	}
+}
+
+void
+display_in_fog_of_war(const struct coordinates sn,
+			const struct coordinates_list *t,
+			const struct coordinates_list *b)
+{
+	display_object_in_fog_of_war(sn, b, &show_object_barrier);
+	display_object_in_fog_of_war(sn, t, &show_object_target);
+}
