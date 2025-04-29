@@ -1,10 +1,10 @@
 # Snake Again
 Clone the repository and build the game:<br>
 <ol>
-```bash
+\```
 <li><code>git clone git@github.com:un-ch/snake_again.git</code></li>
 <li><code>cd snake_again</code></li>
-```
+\```
 <li><code>make</code></li>
 </ol>
 Launch the game:<br>
