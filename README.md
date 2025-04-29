@@ -1,11 +1,11 @@
-### Build instructions:
+### Snake Again build instructions:
 ```
 git clone git@github.com:un-ch/snake_again.git && cd snake_again
 ```
 ```
 make
 ```
-### Launch the game:
+### Run the game:
 ```
 make run
 ```
