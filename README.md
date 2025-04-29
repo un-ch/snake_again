@@ -1,7 +1,7 @@
-# Another Snake Game
+# Snake Again
 Game installation on the Linux:<br>
 <ol>
-<li><code>git clone git@github.com:un-ch/another_snake_game.git</code></li>
+<li><code>git clone git@github.com:un-ch/snake_again.git</code></li>
 <li><code>cd another_snake_game</code></li>
 <li><code>make</code></li>
 </ol>
