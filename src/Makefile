@@ -1,9 +1,6 @@
 CC	= gcc
 
-CFLAGS	= -Wall -ggdb -ansi -pg -O0 -MMD -MP -fdiagnostics-color=never -fno-diagnostics-show-caret
-CFLAGS	+= -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero
-CFLAGS	+= -static-libasan
-CFLAGS	+= -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
+CFLAGS	= -Wall -ggdb -ansi -O0 -MMD -MP -fdiagnostics-color=never -fno-diagnostics-show-caret
 
 LIBS	= -lncurses
 MAIN_BIN= snake_again
