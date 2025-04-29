@@ -1,10 +1,12 @@
 default:
 	@cd src && $(MAKE) --no-print-directory
 
-all:	@default
+all:	default
 
 clean:
 	@cd src && $(MAKE) clean --no-print-directory
 
-run:
+run:	all
 	@./src/snake_again
+
+.PHONY: default all clean run
