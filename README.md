@@ -1,14 +1,9 @@
-# Snake Again
-Clone the repository and build the game:<br>
+## Build instructions:
 ```
-<code>git clone git@github.com:un-ch/snake_again.git</code>
+git clone git@github.com:un-ch/snake_again.git && cd snake_again
 ```
-<ol>
-<li><code>cd snake_again</code></li>
-<li><code>make</code></li>
-</ol>
-Launch the game:<br>
-<code>make run</code></li><br>
-<br/>
-
+## Launch the game:
+```
+make run
+```
 ![example](https://github.com/un-ch/another_snake_game/blob/main_loop_refactoring/screenshot.png)
