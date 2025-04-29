@@ -6,7 +6,7 @@ CFLAGS	+= -static-libasan
 CFLAGS	+= -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
 
 LIBS	= -lncurses
-MAIN_BIN= main
+MAIN_BIN= snake_again
 
 MODULES	= main.o screen.o string.o display_message.o end_program.o objects.o get_random_number.o \
 		coordinates.o barrier.o target.o snake_object.o round_settings.o handle_direction.o \
