@@ -5,8 +5,7 @@ enum { key_escape = 27 };
 enum { key_yes = 121 };
 enum { key_no = 110 };
 
-static const char question_on_game_continue[] = \
-					"would you like to continue the game?";
+static const char continue_quest[] = "Crash! Would you like to continue the game?";
 
 int
 affirmative_answer_to_continue_game_request();

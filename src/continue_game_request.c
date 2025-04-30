@@ -14,15 +14,15 @@ affirmative_answer_to_continue_game_request()
 
 	clear_screen();
 	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
-	string_len = string_length(question_on_game_continue);
+	string_len = string_length(continue_quest);
 
 	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
 	set_color(black_on_white);
-	addstr(question_on_game_continue);
+	addstr(continue_quest);
 
-	string_len = string_length("[y] [n]");
+	string_len = string_length("(y) (n)");
 	move((max_screen_value_y / 2) + 2, \
-			(max_screen_value_x - string_len - 1) / 2);
+		(max_screen_value_x - string_len - 1) / 2);
 	addstr("(y) (n)");
 	refresh();
 
