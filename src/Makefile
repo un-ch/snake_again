@@ -26,7 +26,7 @@ tags:
 	@ctags -R -n --c-kinds=+p --fields=+iaS --extras=+q
 
 clean:
-	@rm -f *.o *.i *.d *.s $(MAIN_BIN)
+	@rm -f *.o *.i *.d *.s tags $(MAIN_BIN)
 
 # dependency files:
 -include $(DEPS)
