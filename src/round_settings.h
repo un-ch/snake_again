@@ -3,6 +3,10 @@
 
 #include "coordinates.h"
 
+enum {
+	max_round_num = 5
+};
+
 struct round_settings {
 	int round_num;
 	int current_snake_length;
@@ -11,24 +15,24 @@ struct round_settings {
 };
 
 void
-set_objects_another_round(struct coordinates_deque *snake,
-						struct coordinates_list **target,
-						struct coordinates_list **barrier,
-						const struct round_settings rnd_stt,
-						struct coordinates *crd);
+set_objects_another_round(struct coordinates_deque *s,
+				struct coordinates_list **t,
+				struct coordinates_list **b,
+				const struct round_settings r,
+				struct coordinates *c);
 
 void
-set_settings_initial_round(struct round_settings *rnd_stt);
+set_settings_initial_round(struct round_settings *r);
 
 void
-game_settings_increase(struct round_settings *rnd_stt);
+game_settings_increase(struct round_settings *r);
 
 void
-game_settings_decrease(struct round_settings *rnd_stt);
+game_settings_decrease(struct round_settings *r);
 
 void
-update_after_contact_with_target(struct round_settings *rnd_stt,
-								struct coordinates_deque *snake,
-								struct coordinates crd);
+update_after_contact_with_target(struct round_settings *r,
+					struct coordinates_deque *s,
+					struct coordinates c);
 
 #endif
