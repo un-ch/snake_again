@@ -17,7 +17,6 @@
 #include "continue_game_request.h"
 #include "borders.h"
 
-enum { max_snake_length = 5 };
 enum { max_round_num = 5 };
 
 int main()
