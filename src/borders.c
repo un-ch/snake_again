@@ -21,8 +21,8 @@ display_borders_with_game_title()
 	str_length = string_length(game_title);
 	cursor_width_coordinate = (max_screen_width - str_length) / 2;
 
-	mvwprintw(stdscr, cursor_height_coordinate, cursor_width_coordinate,\
-																									" %s ", game_title);
+	mvwprintw(stdscr, cursor_height_coordinate, cursor_width_coordinate,
+							" %s ", game_title);
 }
 
 int
