@@ -1,5 +1,5 @@
-#include <time.h>		/*	for time	*/
-#include <stdlib.h>		/*	for srand	*/
+#include <time.h>	/* for time() */
+#include <stdlib.h>	/* for srand() */
 #include <ncurses.h>
 
 #include "screen.h"
@@ -31,19 +31,21 @@ int main()
 	curs_set(0);
 
 	struct coordinates_deque snake;
-	struct coordinates_list *target, *barrier;
+	struct coordinates_list *target, *barrier, *dot_back;
 	struct coordinates coordinate;
 	struct round_settings round_settngs;
 	int direction_signal;
 
 	set_settings_initial_round(&round_settngs);
 	timeout(round_settngs.snake_speed);
-	set_objects_another_round(&snake, &target, &barrier, round_settngs, &coordinate);
+	set_objects_another_round(&snake, &target,
+				&barrier, &dot_back,
+				round_settngs, &coordinate);
 
 	while((direction_signal = getch()) != key_escape) {
 		handle_direction_signal(direction_signal, &coordinate, &snake);
 
-		display_in_fog_of_war(snake.first->coord, target, barrier);
+		display_in_fog_of_war(snake.first->coord, target, barrier, dot_back);
 
 		if(is_contact_with_borders(snake.first->coord) ||
 		   is_contact_with_barrier(snake.first->coord, barrier)) {
@@ -52,13 +54,17 @@ int main()
 			if(round_settngs.round_num < 1) {
 				if(affirmative_answer_to_continue_game_request()) {
 					set_settings_initial_round(&round_settngs);
-					set_objects_another_round(&snake, &target, &barrier, round_settngs, &coordinate);
+					set_objects_another_round(&snake, &target,
+								&barrier, &dot_back,
+								round_settngs, &coordinate);
 					continue;
 				} else {
 					end(quit);
 				}
 			}
-			set_objects_another_round(&snake, &target, &barrier, round_settngs, &coordinate);
+			set_objects_another_round(&snake, &target,
+						&barrier, &dot_back,
+						round_settngs, &coordinate);
 		}
 
 		if(is_contact_with_target(snake.first->coord, target)) {
@@ -70,7 +76,9 @@ int main()
 				if(round_settngs.round_num > max_round_num) {
 					end(win);
 				}
-				set_objects_another_round(&snake, &target, &barrier, round_settngs, &coordinate);
+				set_objects_another_round(&snake, &target,
+							&barrier, &dot_back,
+							round_settngs, &coordinate);
 			}
 		}
 	}
