@@ -1,5 +1,5 @@
-#ifndef ROUND_SETTINGS_H_SENTRY
-#define ROUND_SETTINGS_H_SENTRY
+#ifndef ROUND_SETTINGS_H
+#define ROUND_SETTINGS_H
 
 #include "coordinates.h"
 
@@ -18,6 +18,7 @@ void
 set_objects_another_round(struct coordinates_deque *s,
 				struct coordinates_list **t,
 				struct coordinates_list **b,
+				struct coordinates_list **d,
 				const struct round_settings r,
 				struct coordinates *c);
 
