@@ -1,8 +1,9 @@
 #include <ncurses.h>
-#include <stdlib.h>		/* for malloc */
+#include <stdlib.h>	/* for malloc */
 
 #include "coordinates.h"
 #include "get_random_number.h"
+#include "end_program.h"
 
 void
 set_random_coordinates(struct coordinates *crd)
@@ -13,13 +14,15 @@ set_random_coordinates(struct coordinates *crd)
 
 	getmaxyx(stdscr, max_y, max_x);
 
-	/* we assume that there is no opportunity to display symbols
-	 * in (max_y, max_x) screen coordinates;
-	 * borders around the game field holds the (max_y-1, max_x-1)
-	 * coordinates;
-	 * so, objects inside the borders should have next maximum
-	 * values:
-	 */
+	/*
+	* We assume that it is not possible to display symbols
+	* at the (max_y, max_x) screen coordinates.
+	* The borders around the game field occupy the (max_y - 1, max_x - 1)
+	* coordinates.
+	* Therefore, objects inside the borders should have the following
+	* maximum values:
+	*/
+
 	max_x -= 2;
 	max_y -= 2;
 
@@ -28,13 +31,13 @@ set_random_coordinates(struct coordinates *crd)
 }
 
 int
-is_equal_coordinates(const struct coordinates crd,
-				const struct coordinates crd_pattern)
+is_equal_coordinates(const struct coordinates c,
+			const struct coordinates p)
 {
 	int result = TRUE;
 
-	if((crd.x != crd_pattern.x) ||
-		(crd.y != crd_pattern.y)) {
+	if ((c.x != p.x) ||
+	    (c.y != p.y)) {
 
 		result = FALSE;
 	}
@@ -44,13 +47,17 @@ is_equal_coordinates(const struct coordinates crd,
 
 struct coordinates_list *
 fill_in_coordinates_random(const int max_iterator,
-				const struct coordinates snake_head)
+		const struct coordinates snake_head)
 {
 	struct coordinates_list *first = NULL, *temp;
-	int i = 0;
+	int i;
 
-	for(; i < max_iterator; i++) {
+	for (i = 0; i < max_iterator; i++) {
+		temp = NULL;
 		temp = malloc(sizeof(struct coordinates_list));
+
+		if (!temp)
+			end(malloc_err);
 
 		do {
 			set_random_coordinates(&temp->coord);
