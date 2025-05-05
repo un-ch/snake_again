@@ -42,5 +42,13 @@ set_color(enum fgr_bgr_colors colors)
 			init_pair(red_on_white, COLOR_RED, COLOR_WHITE);
 			attrset(COLOR_PAIR(red_on_white));
 			break;
+		case gray_on_black:
+			init_pair(gray_on_black, 0b1000, COLOR_BLACK);
+			attrset(COLOR_PAIR(gray_on_black));
+			break;
+		case cyan_on_black:
+			init_pair(cyan_on_black, COLOR_CYAN, COLOR_BLACK);
+			attrset(COLOR_PAIR(cyan_on_black));
+			break;
 	}
 }
