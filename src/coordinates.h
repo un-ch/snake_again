@@ -1,5 +1,5 @@
-#ifndef COORDINATES_H_SENTRY
-#define COORDINATES_H_SENTRY
+#ifndef COORDINATES_H
+#define COORDINATES_H
 
 struct coordinates {
 	int x;
@@ -25,11 +25,11 @@ set_random_coordinates(struct coordinates *crd);
 
 int
 is_equal_coordinates(const struct coordinates crd,
-					const struct coordinates crd_pattern);
+		const struct coordinates crd_pattern);
 
 struct coordinates_list *
 fill_in_coordinates_random(const int max_iterator,
-						const struct coordinates crd);
+			const struct coordinates crd);
 
 void
 delete_coordinate_list(struct coordinates_list **list);
