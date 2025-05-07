@@ -18,7 +18,6 @@ void
 set_objects_another_round(struct coordinates_deque *s,
 				struct coordinates_list **t,
 				struct coordinates_list **b,
-				struct coordinates_list **d,
 				const struct round_settings r,
 				struct coordinates *c);
 
