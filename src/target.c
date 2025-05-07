@@ -6,7 +6,7 @@
 
 int
 is_contact_with_target(const struct coordinates crd,
-					struct coordinates_list *target)
+			struct coordinates_list *target)
 {
 	struct coordinates_list **pp = &target;
 	int result = FALSE;
