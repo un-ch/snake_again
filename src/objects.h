@@ -32,6 +32,6 @@ void display_object_in_fog_of_war(const struct coordinates sn,
 void
 display_in_fog_of_war(const struct coordinates sn,
 			const struct coordinates_list *tar,
-			const struct coordinates_list *bar,
-			const struct coordinates_list *dot);
+			const struct coordinates_list *bar);
+
 #endif
