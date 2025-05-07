@@ -6,28 +6,31 @@
 
 void
 move_snake_object(struct coordinates_deque *snake,
-					struct coordinates direction)
+			struct coordinates direction)
 {
 	struct coordinates_doubly_list *temp;
 
 	temp = snake->first;
 
-	if((direction.x == 0) &&
-		(direction.y == 0)) {
-		while(temp) {
+	if ((direction.x == 0) &&
+	    (direction.y == 0)) {
+
+		while (temp) {
 			show_object_snake(temp->coord);
 			temp = temp->next;
 		}
+
 		return;
 	}
 
-	while(temp) {
+	while (temp) {
 		hide_object(temp->coord);
 		temp = temp->next;
 	}
 
 	temp = snake->last;
-	while(temp->prev) {
+
+	while (temp->prev) {
 		temp->coord.x = temp->prev->coord.x;	
 		temp->coord.y = temp->prev->coord.y;	
 
@@ -38,7 +41,8 @@ move_snake_object(struct coordinates_deque *snake,
 	snake->first->coord.y += direction.y; 
 
 	temp = snake->first;
-	while(temp) {
+
+	while (temp) {
 		show_object_snake(temp->coord);	
 		temp = temp->next;
 	}
@@ -46,20 +50,22 @@ move_snake_object(struct coordinates_deque *snake,
 
 void
 add_new_snake_element(struct coordinates_deque *snake,
-								struct coordinates crd)
+				struct coordinates crd)
 {
 	struct coordinates_doubly_list *temp;
 
 	temp = malloc(sizeof(struct coordinates_doubly_list));
+
 	temp->coord.x = crd.x;
 	temp->coord.y = crd.y;
 	temp->prev = snake->last;
 	temp->next = NULL;
 
-	if(snake->last == NULL) {
+	if (snake->last == NULL) {
 		snake->first = temp;
 	} else {
 		snake->last->next = temp;
 	}
+
 	snake->last = temp;
 }
