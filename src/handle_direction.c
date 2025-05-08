@@ -5,8 +5,8 @@
 #include "coordinates.h"
 
 void
-handle_direction_signal(int signal, struct coordinates *crd,
-				struct coordinates_deque *snake)
+handle_direction(int signal, struct coordinates *crd,
+			struct coordinates_deque *snake)
 {
 	switch(signal) {
 	case key_spacebar:
