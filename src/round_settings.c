@@ -16,7 +16,7 @@ reset_settings(struct round_settings *cfg)
 	int barrier_amount;
 
 	getmaxyx(stdscr, max_y, max_x);
-	barrier_amount = (max_y + max_x) * 5;
+	barrier_amount = (max_y + max_x) * 3;
 	cfg->round_num = 1;
 	cfg->current_snake_length = 1;
 	cfg->snake_speed = 250;
