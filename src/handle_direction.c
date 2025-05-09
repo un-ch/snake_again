@@ -34,4 +34,3 @@ handle_direction(int signal, struct coordinates *crd,
 		break;
 	}
 }
-
