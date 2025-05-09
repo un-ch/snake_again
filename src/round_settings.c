@@ -19,7 +19,7 @@ reset_settings(struct round_settings *cfg)
 	barrier_amount = (max_y + max_x) * 3;
 	cfg->round_num = 1;
 	cfg->current_snake_length = 1;
-	cfg->snake_speed = 250;
+	cfg->snake_speed = 300;
 	cfg->max_barrier_amount = barrier_amount;
 
 	timeout(cfg->snake_speed);
@@ -58,7 +58,7 @@ game_settings_increase(struct round_settings *cfg)
 {
 	cfg->round_num += 1;
 	cfg->current_snake_length = 1;
-	cfg->snake_speed -= 10;
+	cfg->snake_speed -= 30;
 	cfg->max_barrier_amount += 150;
 
 	timeout(cfg->snake_speed);
@@ -69,7 +69,7 @@ game_settings_decrease(struct round_settings *cfg)
 {
 	cfg->round_num -= 1;
 	cfg->current_snake_length = 1;
-	cfg->snake_speed += 50;
+	cfg->snake_speed += 30;
 	cfg->max_barrier_amount -= 150;
 
 	timeout(cfg->snake_speed);
