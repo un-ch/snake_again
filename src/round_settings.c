@@ -26,11 +26,11 @@ reset_settings(struct round_settings *cfg)
 }
 
 void
-set_objects_another_round(struct coordinates_deque *snake,
-				struct coordinates_list **target,
-				struct coordinates_list **barrier,
-				const struct round_settings cfg,
-				struct coordinates *point)
+setup_objects(struct coordinates_deque *snake,
+		struct coordinates_list **target,
+		struct coordinates_list **barrier,
+		const struct round_settings cfg,
+		struct coordinates *point)
 {
 	struct coordinates snake_head;
 
