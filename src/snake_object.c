@@ -1,5 +1,5 @@
 #include <stdlib.h>
-
+#include <ncurses.h>
 #include "snake_object.h"
 #include "coordinates.h"
 #include "objects.h"
@@ -68,4 +68,10 @@ add_new_snake_element(struct coordinates_deque *snake,
 	}
 
 	snake->last = temp;
+}
+
+void
+apply_snake_speed(const unsigned int speed)
+{
+	timeout(speed);
 }
