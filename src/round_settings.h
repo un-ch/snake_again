@@ -15,14 +15,15 @@ struct round_settings {
 };
 
 void
+reset_settings(struct round_settings *r);
+
+void
 set_objects_another_round(struct coordinates_deque *s,
 				struct coordinates_list **t,
 				struct coordinates_list **b,
 				const struct round_settings r,
 				struct coordinates *c);
 
-void
-set_settings_initial_round(struct round_settings *r);
 
 void
 game_settings_increase(struct round_settings *r);

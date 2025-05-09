@@ -10,6 +10,22 @@
 #include "dot_background.h"
 
 void
+reset_settings(struct round_settings *cfg)
+{
+	int max_x, max_y;
+	int barrier_amount;
+
+	getmaxyx(stdscr, max_y, max_x);
+	barrier_amount = (max_y + max_x) * 5;
+	cfg->round_num = 1;
+	cfg->current_snake_length = 1;
+	cfg->snake_speed = 250;
+	cfg->max_barrier_amount = barrier_amount;
+
+	timeout(cfg->snake_speed);
+}
+
+void
 set_objects_another_round(struct coordinates_deque *snake,
 				struct coordinates_list **target,
 				struct coordinates_list **barrier,
@@ -35,23 +51,6 @@ set_objects_another_round(struct coordinates_deque *snake,
 
 	*barrier = fill_in_coordinates_random(cfg.max_barrier_amount, snake_head);
 	*target = fill_in_coordinates_random(max_target_amount, snake_head);
-}
-
-void
-set_settings_initial_round(struct round_settings *cfg)
-{
-	int max_x, max_y;
-	int barrier_amount;
-
-
-	getmaxyx(stdscr, max_y, max_x);
-	barrier_amount = (max_y + max_x) * 5;
-	cfg->round_num = 1;
-	cfg->current_snake_length = 1;
-	cfg->snake_speed = 250;
-	cfg->max_barrier_amount = barrier_amount;
-
-	timeout(cfg->snake_speed);
 }
 
 void
