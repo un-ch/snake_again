@@ -29,7 +29,7 @@ valg:
 	valgrind --tool=memcheck --log-file=VALG_LOG ./$(MAIN_BIN)
 
 clean:
-	@rm -f *.o *.i *.d *.s tags $(MAIN_BIN)
+	@rm -f *.o *.i *.d *.s $(MAIN_BIN)
 
 # dependency files:
 -include $(DEPS)
