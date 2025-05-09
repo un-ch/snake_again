@@ -25,7 +25,7 @@ handle_event(struct coordinates_deque *snake,
 
 		if (cfg->round_num < 1) {
 			if (affirmative_answer_to_continue_game_request()) {
-				set_settings_initial_round(cfg);
+				reset_settings(cfg);
 				set_objects_another_round(snake, tar, bar, *cfg, crd);
 
 				/* TODO: better solution should be done: */

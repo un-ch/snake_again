@@ -20,8 +20,7 @@ int main()
 	int direction;
 
 	init_screen();
-	set_settings_initial_round(&cfg);
-
+	reset_settings(&cfg);
 	set_objects_another_round(&snake, &target, &barrier, cfg, &coordinate);
 
 	while ((direction = getch()) != key_escape) {
