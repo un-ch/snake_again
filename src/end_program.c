@@ -12,11 +12,11 @@ end(enum end_type how)
 	switch (how) {
 		case quit:
 			display_message_center("The end.");
-			status = exit_success_code;
+			status = exit_success;
 			break;
 		case win:
 			display_message_center("Win!");
-			status = exit_success_code;
+			status = exit_success;
 			break;
 		case malloc_err:
 			fprintf(stderr, "Malloc error.\n");

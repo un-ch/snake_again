@@ -2,8 +2,8 @@
 #define END_PROGRAM_H_SENTRY
 
 enum {
-	exit_success_code = 0,
-	exit_failure_code = 1
+	exit_success = 0,
+	exit_failure = 1
 };
 
 enum end_type {
