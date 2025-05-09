@@ -21,7 +21,7 @@ int main()
 
 	init_screen();
 	reset_settings(&cfg);
-	set_objects_another_round(&snake, &target, &barrier, cfg, &coordinate);
+	setup_objects(&snake, &target, &barrier, cfg, &coordinate);
 
 	while ((direction = getch()) != key_escape) {
 		handle_direction(direction, &coordinate, &snake);
@@ -30,5 +30,5 @@ int main()
 
 	end(quit);
 
-	return exit_success_code;
+	return exit_success;
 }

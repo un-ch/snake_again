@@ -26,7 +26,7 @@ handle_event(struct coordinates_deque *snake,
 		if (cfg->round_num < 1) {
 			if (affirmative_answer_to_continue_game_request()) {
 				reset_settings(cfg);
-				set_objects_another_round(snake, tar, bar, *cfg, crd);
+				setup_objects(snake, tar, bar, *cfg, crd);
 
 				/* TODO: better solution should be done: */
 				return;
@@ -36,7 +36,7 @@ handle_event(struct coordinates_deque *snake,
 			}
 		}
 
-		set_objects_another_round(snake, tar, bar, *cfg, crd);
+		setup_objects(snake, tar, bar, *cfg, crd);
 	}
 
 	if (is_contact_with_target(snake->first->coord, *tar)) {
@@ -49,7 +49,7 @@ handle_event(struct coordinates_deque *snake,
 				end(win);
 			}
 
-			set_objects_another_round(snake, tar, bar, *cfg, crd);
+			setup_objects(snake, tar, bar, *cfg, crd);
 		}
 	}
 }
