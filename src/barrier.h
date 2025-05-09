@@ -6,15 +6,19 @@
 #define TRUE	1
 #define FALSE	0
 
+enum {
+	fog_radius = 5
+};
+
 int
 is_contact_with_barrier(const struct coordinates snake_head,
 				const struct coordinates_list *barrier);
 
 void
-display_barrier_in_fog_of_war(struct coordinates snake_head,
-							struct coordinates_list *barrier);
+display_barrier_in_fog_of_war(const struct coordinates snake_head,
+				struct coordinates_list *barrier);
 
 void
-display_barrier(struct coordinates_list *barrier);
+display_barrier(const struct coordinates_list *barrier);
 
 #endif
