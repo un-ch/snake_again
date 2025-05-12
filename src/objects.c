@@ -1,6 +1,5 @@
-#include <ncurses.h>
-
 #include "objects.h"
+#include <ncurses.h>
 #include "coordinates.h"
 #include "color.h"
 #include "dot_background.h"
@@ -54,43 +53,45 @@ void
 display_object(enum object obj, const struct coordinates crd)
 {
 	move(crd.y, crd.x);
-	switch(obj) {
-		case target_obj:
-			set_color(green_on_black);
-			addch(symbol_target);
-			break;
-		case snake_obj:
-			set_color(red_on_black);
-			addch(symbol_snake);
-			break;
-		case barrier_obj:
-			set_color(yellow_on_black);
-			addch(symbol_barrier);
-			break;
-		case blank_obj:
-			set_color(black_on_black);
-			addch(symbol_blank);
-			break;
-		case dot_obj:
-			set_color(gray_on_black);
-			addch(symbol_dot);
-			break;
+
+	switch (obj) {
+	case target_obj:
+		set_color(green_on_black);
+		addch(symbol_target);
+		break;
+	case snake_obj:
+		set_color(red_on_black);
+		addch(symbol_snake);
+		break;
+	case barrier_obj:
+		set_color(yellow_on_black);
+		addch(symbol_barrier);
+		break;
+	case blank_obj:
+		set_color(black_on_black);
+		addch(symbol_blank);
+		break;
+	case dot_obj:
+		set_color(gray_on_black);
+		addch(symbol_dot);
+		break;
 	}
+
 	refresh();
 }
 
 void
 display_object_in_fog_of_war(const struct coordinates sn,
-				const struct coordinates_list *list,
-				void (*func)(struct coordinates))
+			const struct coordinates_list *list,
+			void (*func)(struct coordinates))
 {
 	const struct coordinates_list *temp = list;
 	int x_max, x_min, y_max, y_min;
 
-	x_max = sn.x + 5;
-	x_min = sn.x - 5;
-	y_max = sn.y + 5;
-	y_min = sn.y - 5;
+	x_max = sn.x + fog_radius;
+	x_min = sn.x - fog_radius;
+	y_max = sn.y + fog_radius;
+	y_min = sn.y - fog_radius;
 
 	while (temp) {
 		if ((temp->coord.x < x_max) &&
@@ -106,8 +107,8 @@ display_object_in_fog_of_war(const struct coordinates sn,
 
 void
 display_in_fog_of_war(const struct coordinates sn,
-			const struct coordinates_list *tar,
-			const struct coordinates_list *bar)
+		const struct coordinates_list *tar,
+		const struct coordinates_list *bar)
 {
 	/*
 	* Temporary solution to resolve conflicts between targets and barriers:
