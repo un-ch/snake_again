@@ -11,7 +11,8 @@
 #include "event.h"
 #include "screen.h"
 
-int main()
+int
+main()
 {
 	struct coordinates_deque snake;
 	struct coordinates_list *target = NULL, *barrier = NULL;
