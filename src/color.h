@@ -1,6 +1,10 @@
 #ifndef COLOR_H
 #define COLOR_H
 
+enum {
+	color_gray = 0b1000
+};
+
 enum fgr_bgr_colors {
 	black_on_black,
 	white_on_white,
