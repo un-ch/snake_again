@@ -1,7 +1,7 @@
-#include <stddef.h>		/* for NULL */
-#include <ncurses.h>		/* for getmaxyx() */
-#include "borders.h"
 #include "round_settings.h"
+#include <stddef.h>	/* for NULL */
+#include <ncurses.h>	/* for getmaxyx() */
+#include "borders.h"
 #include "coordinates.h"
 #include "display_message.h"
 #include "snake_object.h"
@@ -34,10 +34,16 @@ setup_objects(struct coordinates_deque *snake,
 {
 	struct coordinates snake_head;
 
+	if (snake->first) {
+		delete_coordinate_doubly_list(&(snake->first));
+	}
+
 	if (*target) {
 		delete_coordinate_list(target);
+	}
+	
+	if (*barrier) {
 		delete_coordinate_list(barrier);
-		delete_coordinate_doubly_list(&(snake->first));
 	}
 
 	snake->last = NULL;
