@@ -5,20 +5,20 @@
 #include "screen.h"
 #include "objects.h"
 #include "coordinates.h"
+#include "end_program.h"
 
 void
-display_dot_background()
+display_dot_background(void)
 {
-	int max_y, max_x;
-	int y = 1;
-	int x = 1;
 	struct coordinates crd;
+	int max_y, max_x;
+	int y, x;
 
 	getmaxyx(stdscr, max_y, max_x);
 	set_color(black_on_white);
 
-	for(; y < (max_y - 1); y++) {
-		for(x = 1; x < (max_x - 1); x++) {
+	for (y = 1; y < (max_y - 1); y++) {
+		for (x = 1; x < (max_x - 1); x++) {
 			crd.y = y;
 			crd.x = x;
 			display_object(dot_obj, crd);
@@ -41,8 +41,8 @@ display_dot_background_in_fog_of_war(const struct coordinates snake)
 	y = y_min;
 	x = x_min;
 
-	for(; y < (y_max - 1); y++) {
-		for(x = x_min; x < (x_max - 1); x++) {
+	for (; y < (y_max - 1); y++) {
+		for (x = x_min; x < (x_max - 1); x++) {
 			move(y, x);
 			c.y = y;
 			c.x = x;
@@ -56,15 +56,20 @@ struct coordinates_list *
 init_dot_background(void)
 {
 	struct coordinates_list *first = NULL, *temp;
-	int x, y;
-	int max_height, max_width;
+	int y, x;
+	int max_y, max_x;
 
-	getmaxyx(stdscr, max_height, max_width);
+	getmaxyx(stdscr, max_y, max_x);
 
-	for(y = 1; y < (max_height - 1); y++) {
-		for(x = 1; x < (max_width - 1); x++) {
+	for (y = 1; y < (max_y - 1); y++) {
+		for (x = 1; x < (max_x - 1); x++) {
+			temp = NULL;
 			temp = malloc(sizeof(struct coordinates_list));
-			/* TODO: malloc error handling; */
+
+			if (!temp) {
+				end(malloc_err);
+			}
+
 			temp->coord.x = x;
 			temp->coord.y = y;
 			temp->next = first;
