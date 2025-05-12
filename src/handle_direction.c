@@ -1,6 +1,5 @@
-#include <ncurses.h>
-
 #include "handle_direction.h"
+#include <ncurses.h>
 #include "snake_object.h"
 #include "coordinates.h"
 
@@ -8,7 +7,7 @@ void
 handle_direction(int signal, struct coordinates *crd,
 			struct coordinates_deque *snake)
 {
-	switch(signal) {
+	switch (signal) {
 	case key_spacebar:
 		crd->x = 0;
 		crd->y = 0;

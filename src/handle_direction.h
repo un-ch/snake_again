@@ -3,7 +3,9 @@
 
 #include "coordinates.h"
 
-enum { key_spacebar = ' ' };
+enum {
+	key_spacebar = ' '
+};
 
 void
 handle_direction(int signal, struct coordinates *crd,
