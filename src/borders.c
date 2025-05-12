@@ -1,13 +1,13 @@
 #include <ncurses.h>
+#include <stdbool.h>
 
 #include "borders.h"
 #include "string.h"
 #include "color.h"
 
 void
-display_borders_with_game_title()
+display_borders_with_game_title(void)
 {
-	const char game_title[] = "Snake Again";
 	int max_screen_width;
 	int str_length;
 	int cursor_width_coordinate;
@@ -24,10 +24,10 @@ display_borders_with_game_title()
 							" %s ", game_title);
 }
 
-int
+bool
 is_contact_with_borders(const struct coordinates snake_head)
 {
-	int result = FALSE;
+	int result = false;
 	int min_x = 1;
 	int min_y = 1;
 	int max_x, max_y;
@@ -36,11 +36,11 @@ is_contact_with_borders(const struct coordinates snake_head)
 	max_y -= 2;
 	max_x -= 2;
 
-	if((snake_head.x < min_x)
-		|| (snake_head.x > max_x)
-		|| (snake_head.y < min_y)
-		|| (snake_head.y > max_y)) {
-		result = TRUE;
+	if ((snake_head.x < min_x) ||
+	    (snake_head.x > max_x) ||
+	    (snake_head.y < min_y) ||
+	    (snake_head.y > max_y)) {
+		result = true;
 	}
 
 	return result;
