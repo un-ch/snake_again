@@ -1,17 +1,15 @@
-#ifndef BORDERS_H_SENTRY
-#define BORDERS_H_SENTRY
+#ifndef BORDERS_H
+#define BORDERS_H
 
 #include "coordinates.h"
+#include <stdbool.h>
 
-#define TRUE	1
-#define FALSE	0
-
-enum { false_exit_code = 0 };
+static const char game_title[] = "Snake Again";
 
 void
-display_borders_with_game_title();
+display_borders_with_game_title(void);
 
-int
+bool
 is_contact_with_borders(const struct coordinates crd);
 
 #endif
