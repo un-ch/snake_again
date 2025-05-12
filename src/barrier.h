@@ -1,22 +1,16 @@
-#ifndef BARRIER_H_SENTRY
-#define BARRIER_H_SENTRY
+#ifndef BARRIER_H
+#define BARRIER_H
 
 #include "coordinates.h"
+#include <stdbool.h>
 
-#define TRUE	1
-#define FALSE	0
-
-enum {
-	fog_radius = 5
-};
-
-int
+bool
 is_contact_with_barrier(const struct coordinates snake_head,
-				const struct coordinates_list *barrier);
+			const struct coordinates_list *barrier);
 
 void
 display_barrier_in_fog_of_war(const struct coordinates snake_head,
-				struct coordinates_list *barrier);
+				const struct coordinates_list *barrier);
 
 void
 display_barrier(const struct coordinates_list *barrier);
