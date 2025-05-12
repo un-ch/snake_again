@@ -7,4 +7,4 @@
 !*.c
 !*.h
 !*/
-!screenshot.png
+!doc/*.png
