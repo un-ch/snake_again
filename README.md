@@ -9,4 +9,4 @@ make
 ```
 make run
 ```
-![example](https://github.com/un-ch/snake_again/main/doc/screenshot.png)
+![example](doc/screenshot.png)
