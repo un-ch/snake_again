@@ -2,13 +2,13 @@
 #define TARGET_H
 
 #include "coordinates.h"
+#include <stdbool.h>
 
-#define TRUE	1
-#define FALSE	0
+enum {
+	max_target_amount = 100
+};
 
-enum { max_target_amount = 100 };
-
-int
+bool
 is_contact_with_target(const struct coordinates crd,
 			struct coordinates_list *target);
 

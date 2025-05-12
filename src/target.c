@@ -1,22 +1,22 @@
-#include <stdlib.h>		/* for free() */
-
 #include "target.h"
+#include <stdlib.h>	/* for free() */
+#include <stdbool.h>
 #include "coordinates.h"
 #include "objects.h"
 
-int
+bool
 is_contact_with_target(const struct coordinates crd,
 			struct coordinates_list *target)
 {
 	struct coordinates_list **pp = &target;
-	int result = FALSE;
+	int result = false;
 
-	while(*pp) {
-		if(is_equal_coordinates(crd, (*pp)->coord)) {
+	while (*pp) {
+		if (is_equal_coordinates(crd, (*pp)->coord)) {
 			struct coordinates_list *temp = *pp;
 			*pp = (*pp)->next;
 			free(temp);
-			result = TRUE;
+			result = true;
 			break;
 		}
 		pp = &(*pp)->next;
@@ -27,7 +27,7 @@ is_contact_with_target(const struct coordinates crd,
 
 void
 display_target_in_fog_of_war(struct coordinates snake,
-						struct coordinates_list *target)
+			struct coordinates_list *target)
 {
 	struct coordinates_list *temp = target;
 	int x_max, x_min, y_max, y_min;
@@ -37,13 +37,14 @@ display_target_in_fog_of_war(struct coordinates snake,
 	y_max = snake.y + 5;
 	y_min = snake.y - 5;
 	
-	while(temp) {
-		if((temp->coord.x < x_max) &&
+	while (temp) {
+		if ((temp->coord.x < x_max) &&
 			(temp->coord.y < y_max) &&
 			(temp->coord.x > x_min) &&
 			(temp->coord.y > y_min)) {
 				display_object(target_obj, temp->coord);
 		}
+
 		temp = temp->next;
 	}
 }
@@ -53,7 +54,7 @@ display_target(struct coordinates_list *target)
 {
 	struct coordinates_list *temp = target;
 
-	while(temp) {
+	while (temp) {
 		show_object_target(temp->coord);
 		temp = temp->next;
 	}
