@@ -1,6 +1,5 @@
 #include <ncurses.h>
-#include <unistd.h>
-
+#include <unistd.h>	/* for sleep() */
 #include "display_message.h"
 #include "string.h"
 #include "screen.h"
@@ -29,7 +28,6 @@ display_message_center(const char *string)
 void
 display_round_number(const int number)
 {
-	static const char *message = "Round";
 	int max_y, max_x;
 	int string_len = string_length(message);
 
