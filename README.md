@@ -9,4 +9,4 @@ make
 ```
 make run
 ```
-![example](https://github.com/un-ch/another_snake_game/blob/main_loop_refactoring/screenshot.png)
+![example](https://github.com/un-ch/snake_again/doc/screenshot.png)
