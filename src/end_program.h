@@ -1,5 +1,5 @@
-#ifndef END_PROGRAM_H_SENTRY
-#define END_PROGRAM_H_SENTRY
+#ifndef END_PROGRAM_H
+#define END_PROGRAM_H
 
 enum {
 	exit_success = 0,
@@ -7,7 +7,7 @@ enum {
 };
 
 enum end_type {
-	quit, win, malloc_err
+	quit, win, malloc_err, monochrome_display
 };
 
 void
