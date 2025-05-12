@@ -1,43 +1,40 @@
 #include <ncurses.h>
-
 #include "continue_game_request.h"
 #include "screen.h"
 #include "string.h"
 #include "color.h"
 
-int
-affirmative_answer_to_continue_game_request()
+bool
+affirmative_answer_to_continue_game_request(void)
 {
-	int result = FALSE;
-	int max_screen_value_y, max_screen_value_x;
+	bool result = false;
+	int max_y, max_x;
 	int string_len, answer;
 
 	clear_screen();
-	getmaxyx(stdscr, max_screen_value_y, max_screen_value_x);
-	string_len = string_length(continue_quest);
+	getmaxyx(stdscr, max_y, max_x);
+	string_len = string_length(continue_question);
 
-	move(max_screen_value_y / 2, (max_screen_value_x - string_len - 1) / 2);
+	move(max_y / 2, (max_x - string_len - 1) / 2);
 	set_color(gray_on_black);
-	addstr(continue_quest);
+	addstr(continue_question);
 
 	string_len = string_length("(y) (n)");
-	move((max_screen_value_y / 2) + 2, \
-		(max_screen_value_x - string_len - 1) / 2);
+
+	move((max_y / 2) + 2, (max_x - string_len - 1) / 2);
 	addstr("(y) (n)");
 	refresh();
 
-	while((answer = getch())) {
-		switch(answer) {
-			case key_yes:
-				result = TRUE;
-				goto quit_while_loop;
-			case key_no:
-				goto quit_while_loop;
-			case key_escape:
-				goto quit_while_loop;
+	while ((answer = getch())) {
+		switch (answer) {
+		case key_yes:
+			return true;
+		case key_no:
+			return false;
+		case key_escape:
+			return false;
 		}
 	}
-	quit_while_loop:
 
 	return result;
 }
