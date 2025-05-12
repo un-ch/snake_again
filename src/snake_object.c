@@ -1,6 +1,6 @@
+#include "snake_object.h"
 #include <stdlib.h>
 #include <ncurses.h>
-#include "snake_object.h"
 #include "coordinates.h"
 #include "objects.h"
 
