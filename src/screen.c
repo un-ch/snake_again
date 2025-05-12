@@ -1,11 +1,10 @@
 #include "screen.h"
+#include <ncurses.h>
+#include <time.h>	/* for time() */
+#include <stdlib.h>	/* for srand() */
 #include "objects.h"
 #include "borders.h"
 #include "color.h"
-#include <time.h>	/* for time() */
-#include <stdlib.h>	/* for srand() */
-
-#include <ncurses.h>
 
 void
 init_screen(void)
@@ -23,7 +22,7 @@ init_screen(void)
 }
 
 void
-clear_screen()
+clear_screen(void)
 {
 	clear();
 	refresh();
