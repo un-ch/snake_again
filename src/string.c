@@ -1,36 +1,38 @@
 #include "string.h"
+#include <stdbool.h>
 
 int
-string_length(const char *string)
+string_length(const char *str)
 {
-	const char *temp_string = string;
+	const char *temp = str;
 
-	while(*temp_string) {
-		temp_string++;
+	while (*temp) {
+		temp++;
 	}
 
-	return (temp_string - string);
+	return (temp - str);
 }
 
-int
-is_equal_strings(const char *string, const char *str_pattern)
+bool
+is_equal_strings(const char *a, const char *b)
 {
-	int result = TRUE;
+	int result = true;
 
-	if(string_length(string) == string_length(str_pattern)) {
-		const char *temp_string = string;
-		const char *temp_pattern = str_pattern;
+	if (string_length(a) == string_length(b)) {
+		const char *temp_a = a;
+		const char *temp_b = b;
 
-		while(*temp_string) {
-			if(*temp_string != *temp_pattern) {
-				return FALSE;
+		while (*temp_a) {
+			if (*temp_a != *temp_b) {
+				return false;
 			}
-			temp_string++;
-			temp_pattern++;
+
+			temp_a++;
+			temp_b++;
 		}
-	} else {
-		result = FALSE;
-	}
+
+	} else
+		result = false;
 
 	return result;
 }
