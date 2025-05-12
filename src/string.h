@@ -1,13 +1,12 @@
-#ifndef STRING_H_SENTRY
-#define STRING_H_SENTRY
+#ifndef STRING_H
+#define STRING_H
 
-#define TRUE	1
-#define FALSE	0
+#include <stdbool.h>
 
 int
 string_length(const char *string);
 
-int
-is_equal_strings(const char *string, const char *str_pattern);
+bool
+is_equal_strings(const char *a, const char *b);
 
 #endif
