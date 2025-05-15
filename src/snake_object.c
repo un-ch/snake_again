@@ -3,6 +3,7 @@
 #include <ncurses.h>
 #include "coordinates.h"
 #include "objects.h"
+#include "end_program.h"
 
 void
 move_snake_object(struct coordinates_deque *snake,
@@ -52,9 +53,13 @@ void
 add_new_snake_element(struct coordinates_deque *snake,
 				struct coordinates crd)
 {
-	struct coordinates_doubly_list *temp;
+	struct coordinates_doubly_list *temp = NULL;
 
 	temp = malloc(sizeof(struct coordinates_doubly_list));
+
+	if (!temp) {
+		end(malloc_err);
+	}
 
 	temp->coord.x = crd.x;
 	temp->coord.y = crd.y;
