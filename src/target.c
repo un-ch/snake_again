@@ -39,10 +39,10 @@ display_target_in_fog_of_war(struct coordinates snake,
 	
 	while (temp) {
 		if ((temp->coord.x < x_max) &&
-			(temp->coord.y < y_max) &&
-			(temp->coord.x > x_min) &&
-			(temp->coord.y > y_min)) {
-				display_object(target_obj, temp->coord);
+		    (temp->coord.y < y_max) &&
+		    (temp->coord.x > x_min) &&
+		    (temp->coord.y > y_min)) {
+			display_object(target_obj, temp->coord);
 		}
 
 		temp = temp->next;
