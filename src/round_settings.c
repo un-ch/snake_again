@@ -19,7 +19,7 @@ reset_settings(struct round_settings *cfg)
 	barrier_amount = (max_y + max_x) * 3;
 	cfg->round_num = 1;
 	cfg->current_snake_length = 1;
-	cfg->snake_speed = 300;
+	cfg->snake_speed = 250;
 	cfg->max_barrier_amount = barrier_amount;
 
 	apply_snake_speed(cfg->snake_speed);
