@@ -25,6 +25,5 @@ void
 clear_screen(void)
 {
 	clear();
-	refresh();
 	display_borders_with_game_title();
 }

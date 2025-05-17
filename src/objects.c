@@ -10,7 +10,6 @@ show_object_target(const struct coordinates crd)
 	move(crd.y, crd.x);
 	set_color(red_on_black);
 	addch(symbol_target);
-	refresh();
 }
 
 void 
@@ -19,7 +18,6 @@ show_object_snake(const struct coordinates crd)
 	move(crd.y, crd.x);
 	set_color(green_on_black);
 	addch(symbol_snake);
-	refresh();
 }
 
 void
@@ -28,7 +26,6 @@ show_object_barrier(const struct coordinates crd)
 	move(crd.y, crd.x);
 	set_color(gray_on_black);
 	addch(symbol_barrier);
-	refresh();
 }
 
 void
@@ -37,7 +34,6 @@ show_object_dot_background(const struct coordinates crd)
 	move(crd.y, crd.x);
 	set_color(green_on_black);
 	addch(symbol_dot);
-	refresh();
 }
 
 void
@@ -46,7 +42,6 @@ hide_object(const struct coordinates crd)
 	move(crd.y, crd.x);
 	set_color(gray_on_black);
 	addch(symbol_dot);
-	refresh();
 }
 
 void
@@ -77,7 +72,6 @@ display_object(enum object obj, const struct coordinates crd)
 		break;
 	}
 
-	refresh();
 }
 
 void
