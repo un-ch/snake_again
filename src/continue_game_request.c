@@ -23,7 +23,6 @@ affirmative_answer_to_continue_game_request(void)
 
 	move((max_y / 2) + 2, (max_x - string_len - 1) / 2);
 	addstr("(y) (n)");
-	refresh();
 
 	while ((answer = getch())) {
 		switch (answer) {
