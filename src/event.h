@@ -12,7 +12,7 @@ handle_event(struct coordinates_deque *snake,
 		struct coordinates *crd);
 
 void
-free_resource(struct coordinates_deque *snake,
+cleanup(struct coordinates_deque *snake,
 		struct coordinates_list **tar,
 		struct coordinates_list **bar);
 #endif

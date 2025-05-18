@@ -35,7 +35,7 @@ setup_objects(struct coordinates_deque *snake,
 {
 	struct coordinates snake_head;
 
-	free_resource(snake, target, barrier);
+	cleanup(snake, target, barrier);
 
 	point->x = 0;
 	point->y = 0;
