@@ -8,6 +8,7 @@
 #include "target.h"
 #include "screen.h"
 #include "dot_background.h"
+#include "event.h"
 
 void
 reset_settings(struct round_settings *cfg)
@@ -34,19 +35,8 @@ setup_objects(struct coordinates_deque *snake,
 {
 	struct coordinates snake_head;
 
-	if (snake->first) {
-		delete_coordinate_doubly_list(&(snake->first));
-	}
+	free_resource(snake, target, barrier);
 
-	if (*target) {
-		delete_coordinate_list(target);
-	}
-	
-	if (*barrier) {
-		delete_coordinate_list(barrier);
-	}
-
-	snake->last = NULL;
 	point->x = 0;
 	point->y = 0;
 
