@@ -1,4 +1,5 @@
 #include "event.h"
+#include <stddef.h>
 #include "coordinates.h"
 #include "handle_direction.h"
 #include "objects.h"
@@ -32,6 +33,7 @@ handle_event(struct coordinates_deque *snake,
 				return;
 
 			} else {
+				free_resource(snake, tar, bar);
 				end(quit);
 			}
 		}
@@ -52,4 +54,17 @@ handle_event(struct coordinates_deque *snake,
 			setup_objects(snake, tar, bar, *cfg, crd);
 		}
 	}
+}
+
+void
+free_resource(struct coordinates_deque *snake,
+		struct coordinates_list **tar,
+		struct coordinates_list **bar)
+{
+	delete_coordinate_doubly_list(&(snake->first));
+
+	snake->last = NULL;
+
+	delete_coordinate_list(tar);
+	delete_coordinate_list(bar);
 }
