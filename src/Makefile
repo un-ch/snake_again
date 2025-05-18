@@ -26,7 +26,7 @@ tags:
 	@ctags -R -n --c-kinds=+p --fields=+iaS --extras=+q
 
 valg:
-	valgrind --tool=memcheck --log-file=VALG_LOG ./$(MAIN_BIN)
+	valgrind -s --tool=memcheck --leak-check=full --track-origins=yes --log-file=VALG_LOG ./$(MAIN_BIN)
 
 clean:
 	@rm -f *.o *.i *.d *.s $(MAIN_BIN)
