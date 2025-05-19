@@ -5,7 +5,7 @@
 #include "round_settings.h"
 
 enum {
-	max_snake_length = 5
+	max_snake_length = 15
 };
 
 void
