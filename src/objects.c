@@ -79,19 +79,17 @@ display_object_in_fog_of_war(const struct coordinates sn,
 			const struct coordinates_list *list,
 			void (*func)(struct coordinates))
 {
-	const struct coordinates_list *temp = list;
-	int x_max, x_min, y_max, y_min;
+	int dx, dy, dist_squared;
 
-	x_max = sn.x + fog_radius;
-	x_min = sn.x - fog_radius;
-	y_max = sn.y + fog_radius;
-	y_min = sn.y - fog_radius;
+	const struct coordinates_list *temp = list;
+	const unsigned int radius_squared = fog_radius * fog_radius;
 
 	while (temp) {
-		if ((temp->coord.x < x_max) &&
-		    (temp->coord.y < y_max) &&
-		    (temp->coord.x > x_min) &&
-		    (temp->coord.y > y_min)) {
+		dx = temp->coord.x - sn.x;
+		dy = temp->coord.y - sn.y;
+		dist_squared = dx * dx + dy * dy;
+
+		if (dist_squared < radius_squared) {
 			func(temp->coord);
 		}
 
