@@ -72,7 +72,6 @@ display_object(enum object obj, const struct coordinates crd)
 		addch(symbol_dot);
 		break;
 	}
-
 }
 
 void
