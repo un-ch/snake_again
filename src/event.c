@@ -72,7 +72,7 @@ cleanup(struct snake_type **snake,
 		delete_coordinate_list(tar);
 	}
 
-	if (*tar) {
+	if (*bar) {
 		delete_coordinate_list(bar);
 	}
 }
