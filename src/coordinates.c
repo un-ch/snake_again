@@ -82,15 +82,3 @@ delete_coordinate_list(struct coordinates_list **list)
 
 	(*list) = NULL;
 }
-
-void
-delete_coordinate_doubly_list(struct coordinates_doubly_list **list)
-{
-	while (*list) {
-		struct coordinates_doubly_list *temp = *list;
-		*list = (*list)->next;
-		free(temp);
-	}
-	
-	(*list) = NULL;
-}
