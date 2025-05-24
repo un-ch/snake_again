@@ -5,7 +5,7 @@
 
 void
 handle_direction(int signal, struct coordinates *crd,
-			struct coordinates_deque *snake)
+			struct snake_type *snake)
 {
 	switch (signal) {
 	case key_spacebar:

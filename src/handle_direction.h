@@ -2,6 +2,7 @@
 #define HANDLE_DIRECTION_H
 
 #include "coordinates.h"
+#include "snake_object.h"
 
 enum {
 	key_spacebar = ' '
@@ -9,6 +10,6 @@ enum {
 
 void
 handle_direction(int signal, struct coordinates *crd,
-			struct coordinates_deque *snake);
+			struct snake_type *snake);
 
 #endif
