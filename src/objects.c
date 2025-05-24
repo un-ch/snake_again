@@ -41,8 +41,8 @@ void
 hide_object(const struct coordinates crd)
 {
 	move(crd.y, crd.x);
-	set_color(gray_on_black);
-	addch(symbol_dot);
+	set_color(black_on_black);
+	addch(symbol_blank);
 }
 
 void
