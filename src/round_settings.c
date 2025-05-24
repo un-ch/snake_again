@@ -79,8 +79,8 @@ update_after_contact_with_target(struct round_settings *cfg,
 {
 	struct coordinates temp;
 
-	temp.x = (*snake)->last->coord.x - point.x;
-	temp.y = (*snake)->last->coord.y - point.y;
+	temp.x = (*snake)->last->coord.x + point.x;
+	temp.y = (*snake)->last->coord.y + point.y;
 
 	cfg->current_snake_length += 1;
 	add_new_snake_element(snake, temp);
