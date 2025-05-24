@@ -6,14 +6,14 @@
 #include "objects.h"
 
 bool
-is_contact_with_target(const struct coordinates crd,
+is_contact_with_target(const struct coordinates snake_head,
 			struct coordinates_list *target)
 {
 	struct coordinates_list **pp = &target;
 	int result = false;
 
 	while (*pp) {
-		if (is_equal_coordinates(crd, (*pp)->coord)) {
+		if (is_equal_coordinates(snake_head, (*pp)->coord)) {
 			struct coordinates_list *temp = *pp;
 			*pp = (*pp)->next;
 			free(temp);
