@@ -27,7 +27,7 @@ reset_settings(struct round_settings *cfg)
 }
 
 void
-setup_objects(struct coordinates_deque *snake,
+setup_objects(struct snake_type **snake,
 		struct coordinates_list **target,
 		struct coordinates_list **barrier,
 		const struct round_settings cfg,
@@ -45,8 +45,8 @@ setup_objects(struct coordinates_deque *snake,
 	set_random_coordinates(&snake_head);
 	add_new_snake_element(snake, snake_head);
 
-	*barrier = fill_in_coordinates_random(cfg.max_barrier_amount, snake_head);
-	*target = fill_in_coordinates_random(max_target_amount, snake_head);
+	(*barrier) = fill_in_coordinates_random(cfg.max_barrier_amount, snake_head);
+	(*target) = fill_in_coordinates_random(max_target_amount, snake_head);
 }
 
 void
@@ -73,13 +73,13 @@ game_settings_decrease(struct round_settings *cfg)
 
 void
 update_after_contact_with_target(struct round_settings *cfg,
-					struct coordinates_deque *snake,
+					struct snake_type **snake,
 					struct coordinates point)
 {
 	struct coordinates temp;
 
-	temp.x = snake->last->coord.x - point.x;
-	temp.y = snake->last->coord.y - point.y;
+	temp.x = (*snake)->last->coord.x - point.x;
+	temp.y = (*snake)->last->coord.y - point.y;
 
 	cfg->current_snake_length += 1;
 	add_new_snake_element(snake, temp);
