@@ -6,7 +6,7 @@ enum {
 };
 
 enum fgr_bgr_colors {
-	black_on_black,
+	black_on_black = 1,
 	white_on_white,
 	magenta_on_black,
 	green_on_black,
