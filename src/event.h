@@ -5,14 +5,15 @@
 #include "round_settings.h"
 
 void
-handle_event(struct coordinates_deque *snake,
+handle_event(struct snake_type **snake,
 		struct coordinates_list **tar,
 		struct coordinates_list **bar,
 		struct round_settings *cfg,
 		struct coordinates *crd);
 
 void
-cleanup(struct coordinates_deque *snake,
-		struct coordinates_list **tar,
-		struct coordinates_list **bar);
+cleanup(struct snake_type **snake,
+	struct coordinates_list **tar,
+	struct coordinates_list **bar);
+
 #endif

@@ -1,5 +1,6 @@
 #include "event.h"
 #include <stddef.h>
+#include <stdlib.h>
 #include "coordinates.h"
 #include "handle_direction.h"
 #include "objects.h"
@@ -12,16 +13,16 @@
 #include "snake_object.h"
 
 void
-handle_event(struct coordinates_deque *snake,
+handle_event(struct snake_type **snake,
 		struct coordinates_list **tar,
 		struct coordinates_list **bar,
 		struct round_settings *cfg,
 		struct coordinates *crd)
 {
-	display_in_fog_of_war(snake->first->coord, *tar, *bar);
+	display_in_fog_of_war((*snake)->first->coord, *tar, *bar);
 
-	if (is_contact_with_borders(snake->first->coord) ||
-	    is_contact_with_barrier(snake->first->coord, *bar)) {
+	if (is_contact_with_borders((*snake)->first->coord) ||
+	    is_contact_with_barrier((*snake)->first->coord, *bar)) {
 		game_settings_decrease(cfg);
 
 		if (cfg->round_num < 1) {
@@ -41,8 +42,8 @@ handle_event(struct coordinates_deque *snake,
 		setup_objects(snake, tar, bar, *cfg, crd);
 	}
 
-	if (is_contact_with_target(snake->first->coord, *tar)) {
-		update_after_contact_with_target(cfg, snake, snake->first->coord);
+	if (is_contact_with_target((*snake)->first->coord, *tar)) {
+		update_after_contact_with_target(cfg, snake, (*snake)->first->coord);
 
 		if (cfg->current_snake_length > max_snake_length) {
 			game_settings_increase(cfg);
@@ -57,14 +58,20 @@ handle_event(struct coordinates_deque *snake,
 }
 
 void
-cleanup(struct coordinates_deque *snake,
-		struct coordinates_list **tar,
-		struct coordinates_list **bar)
+cleanup(struct snake_type **snake,
+	struct coordinates_list **tar,
+	struct coordinates_list **bar)
 {
-	delete_coordinate_doubly_list(&(snake->first));
+	if (*snake) {
+		delete_coordinate_list(&((*snake)->first));
+		(*snake)->last = NULL;
+	}
 
-	snake->last = NULL;
+	if (*tar) {
+		delete_coordinate_list(tar);
+	}
 
-	delete_coordinate_list(tar);
-	delete_coordinate_list(bar);
+	if (*tar) {
+		delete_coordinate_list(bar);
+	}
 }
