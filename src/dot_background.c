@@ -1,6 +1,7 @@
-#include "dot_background.h"
 #include <ncurses.h>
 #include <stdlib.h>
+
+#include "dot_background.h"
 #include "color.h"
 #include "screen.h"
 #include "objects.h"

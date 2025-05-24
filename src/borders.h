@@ -1,8 +1,9 @@
 #ifndef BORDERS_H
 #define BORDERS_H
 
-#include "coordinates.h"
 #include <stdbool.h>
+
+#include "coordinates.h"
 
 static const char game_title[] = "Snake Again";
 

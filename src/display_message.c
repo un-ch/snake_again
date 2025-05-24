@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <unistd.h>	/* for sleep() */
+
 #include "display_message.h"
 #include "string.h"
 #include "screen.h"

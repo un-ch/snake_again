@@ -1,8 +1,9 @@
 #ifndef BARRIER_H
 #define BARRIER_H
 
-#include "coordinates.h"
 #include <stdbool.h>
+
+#include "coordinates.h"
 
 bool
 is_contact_with_barrier(const struct coordinates snake_head,

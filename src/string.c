@@ -1,5 +1,6 @@
-#include "string.h"
 #include <stdbool.h>
+
+#include "string.h"
 
 int
 string_length(const char *str)

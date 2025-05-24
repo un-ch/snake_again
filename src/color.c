@@ -1,5 +1,6 @@
-#include "color.h"
 #include <ncurses.h>
+
+#include "color.h"
 #include "end_program.h"
 
 void

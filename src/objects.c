@@ -1,5 +1,6 @@
-#include "objects.h"
 #include <ncurses.h>
+
+#include "objects.h"
 #include "coordinates.h"
 #include "color.h"
 #include "dot_background.h"

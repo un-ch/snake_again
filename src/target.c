@@ -1,6 +1,7 @@
-#include "target.h"
 #include <stdlib.h>	/* for free() */
 #include <stdbool.h>
+
+#include "target.h"
 #include "coordinates.h"
 #include "objects.h"
 

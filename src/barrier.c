@@ -1,5 +1,6 @@
-#include "barrier.h"
 #include <stdbool.h>
+
+#include "barrier.h"
 #include "coordinates.h"
 #include "objects.h"
 

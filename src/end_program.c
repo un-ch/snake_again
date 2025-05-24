@@ -1,6 +1,7 @@
-#include "end_program.h"
 #include <ncurses.h>
 #include <stdlib.h>
+
+#include "end_program.h"
 #include "display_message.h"
 
 void

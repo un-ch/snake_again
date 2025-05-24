@@ -1,6 +1,7 @@
-#include "event.h"
 #include <stddef.h>
 #include <stdlib.h>
+
+#include "event.h"
 #include "coordinates.h"
 #include "handle_direction.h"
 #include "objects.h"

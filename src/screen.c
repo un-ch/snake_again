@@ -1,7 +1,8 @@
-#include "screen.h"
 #include <ncurses.h>
 #include <time.h>	/* for time() */
 #include <stdlib.h>	/* for srand() */
+
+#include "screen.h"
 #include "objects.h"
 #include "borders.h"
 #include "color.h"

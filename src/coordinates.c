@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include <stdlib.h>	/* for malloc */
 #include <stdbool.h>
+
 #include "coordinates.h"
 #include "get_random_number.h"
 #include "end_program.h"

@@ -1,8 +1,9 @@
 #ifndef TARGET_H
 #define TARGET_H
 
-#include "coordinates.h"
 #include <stdbool.h>
+
+#include "coordinates.h"
 
 enum {
 	max_target_amount = 100

@@ -1,5 +1,6 @@
 #include <stdlib.h>	/* for NULL */
 #include <ncurses.h>	/* for getch() */
+
 #include "end_program.h"
 #include "coordinates.h"
 #include "barrier.h"
