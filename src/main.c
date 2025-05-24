@@ -12,20 +12,21 @@
 #include "screen.h"
 
 int
-main()
+main(void)
 {
-	struct coordinates_deque snake;
+	struct snake_type *snake = NULL;
 	struct coordinates_list *target = NULL, *barrier = NULL;
 	struct coordinates coordinate;
 	struct round_settings cfg;
 	int direction;
 
 	init_screen();
+	init_snake_object(&snake);
 	reset_settings(&cfg);
 	setup_objects(&snake, &target, &barrier, cfg, &coordinate);
 
 	while ((direction = getch()) != key_escape) {
-		handle_direction(direction, &coordinate, &snake);
+		handle_direction(direction, &coordinate, snake);
 		handle_event(&snake, &target, &barrier, &cfg, &coordinate);
 	}
 
