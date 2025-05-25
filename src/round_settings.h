@@ -33,8 +33,7 @@ void
 game_settings_decrease(struct round_settings *r);
 
 void
-update_after_contact_with_target(struct round_settings *r,
-					struct snake_type **s,
-					struct coordinates c);
+update_after_contact_with_target(struct snake_type **s,
+					struct round_settings *r);
 
 #endif

@@ -44,7 +44,7 @@ handle_event(struct snake_type **snake,
 	}
 
 	if (is_contact_with_target((*snake)->first->coord, *tar)) {
-		update_after_contact_with_target(cfg, snake, (*snake)->first->coord);
+		update_after_contact_with_target(snake, cfg);
 
 		if (cfg->current_snake_length > max_snake_length) {
 			game_settings_increase(cfg);

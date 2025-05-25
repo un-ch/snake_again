@@ -32,14 +32,14 @@ setup_objects(struct snake_type **snake,
 		struct coordinates_list **target,
 		struct coordinates_list **barrier,
 		const struct round_settings cfg,
-		struct coordinates *point)
+		struct coordinates *crd)
 {
 	struct coordinates snake_head;
 
 	cleanup(snake, target, barrier);
 
-	point->x = 0;
-	point->y = 0;
+	crd->x = 0;
+	crd->y = 0;
 
 	display_round_number(cfg.round_num);
 
@@ -73,15 +73,15 @@ game_settings_decrease(struct round_settings *cfg)
 }
 
 void
-update_after_contact_with_target(struct round_settings *cfg,
-					struct snake_type **snake,
-					struct coordinates point)
+update_after_contact_with_target(struct snake_type **snake,
+					struct round_settings *cfg)
 {
-	struct coordinates temp;
+	struct coordinates c;
 
-	temp.x = (*snake)->last->coord.x + point.x;
-	temp.y = (*snake)->last->coord.y + point.y;
+	c.x = 1;
+	c.y = 1;
 
 	cfg->current_snake_length += 1;
-	add_new_snake_element(snake, temp);
+
+	add_new_snake_element(snake, c);
 }
