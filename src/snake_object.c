@@ -32,7 +32,9 @@ move_snake_object(struct snake_type *snake,
 		struct coordinates direction)
 {
 	struct coordinates_list *temp = snake->first;
+	struct coordinates_list *prev = NULL, *next = NULL;
 	struct coordinates prev_coord, next_coord;
+
 
 	/* for pause: */
 	if ((direction.x == 0) && (direction.y == 0)) {
@@ -42,6 +44,25 @@ move_snake_object(struct snake_type *snake,
 
 	display_object_list(snake->first, &hide_object);
 
+	/* opposite direction case: */
+	if ((direction.x == -snake->last_direction->x) &&
+	    (direction.y == -snake->last_direction->y)) {
+
+		snake->last = snake->first;
+
+		while (temp) {
+			next = temp->next;
+			temp->next = prev;
+			prev = temp;
+			temp = next;
+		}
+
+		snake->first = prev;
+
+		temp = snake->first;
+	}
+
+
 	/* save the head snake value: */
 	prev_coord.x = snake->first->coord.x;
 	prev_coord.y = snake->first->coord.y;
@@ -50,7 +71,7 @@ move_snake_object(struct snake_type *snake,
 	snake->first->coord.x += direction.x;
 	snake->first->coord.y += direction.y;
 
-	/* access the second element: be sure if it is exists */
+	/* TODO: access the second element, be sure if it is exists */
 	temp = snake->first->next;
 
 	while (temp) {
