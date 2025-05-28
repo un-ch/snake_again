@@ -43,7 +43,7 @@ handle_event(struct snake_type **snake,
 		setup_objects(snake, tar, bar, *cfg, crd);
 	}
 
-	if (is_contact_with_target((*snake)->first->coord, *tar)) {
+	if (is_contact_with_target((*snake)->first->coord, tar)) {
 		update_after_contact_with_target(snake, cfg);
 
 		if (cfg->current_snake_length > max_snake_length) {

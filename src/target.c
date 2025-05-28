@@ -7,9 +7,9 @@
 
 bool
 is_contact_with_target(const struct coordinates snake_head,
-			struct coordinates_list *target)
+			struct coordinates_list **target)
 {
-	struct coordinates_list **pp = &target;
+	struct coordinates_list **pp = target;
 	int result = false;
 
 	while (*pp) {
