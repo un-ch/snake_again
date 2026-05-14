@@ -12,7 +12,7 @@ DEPS	= $(MODULES:.o=.d)
 all: $(MAIN_BIN) tags
 
 %.o:	%.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) -c $< -o $@
 
 $(MAIN_BIN): $(MODULES)
 	@$(CC) $(CFLAGS) $(MODULES) $(LIBS) -o $@
