@@ -76,3 +76,18 @@ cleanup(struct snake_type **snake,
 		delete_coordinate_list(bar);
 	}
 }
+
+void
+release_mem(struct snake_type **snake,
+	struct coordinates_list **tar,
+	struct coordinates_list **bar)
+{
+	cleanup(snake, tar, bar);
+		
+	if ((*snake) != NULL) {
+		free((*snake)->last_direction);
+		free(*snake);
+		(*snake)->last_direction = NULL;
+		(*snake) = NULL;
+	}
+}

@@ -16,4 +16,9 @@ cleanup(struct snake_type **snake,
 	struct coordinates_list **tar,
 	struct coordinates_list **bar);
 
+void
+release_mem(struct snake_type **snake,
+		struct coordinates_list **tar,
+		struct coordinates_list **bar);
+
 #endif

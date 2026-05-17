@@ -31,6 +31,7 @@ main(void)
 		handle_event(&snake, &target, &barrier, &cfg, &coordinate);
 	}
 
+	release_mem(&snake, &target, &barrier);
 	end(quit);
 
 	return exit_success;
