@@ -12,10 +12,10 @@ DEPS	= $(MODULES:.o=.d)
 all: $(MAIN_BIN) tags
 
 %.o:	%.c
-	@$(CC) -c $< -o $@
+	$(CC) -c $< -o $@
 
 $(MAIN_BIN): $(MODULES)
-	@$(CC) $(CFLAGS) $(MODULES) $(LIBS) -o $@
+	$(CC) $(CFLAGS) $(MODULES) $(LIBS) -o $@
 
 .PHONY: run clean
 
@@ -30,7 +30,7 @@ valg:
 		--log-file=VALG_LOG ./$(MAIN_BIN)
 
 clean:
-	@rm -f *.o *.i *.d *.s $(MAIN_BIN)
+	rm -f *.o *.i *.d *.s $(MAIN_BIN)
 
 # dependency files:
 -include $(DEPS)
