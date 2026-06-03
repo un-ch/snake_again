@@ -22,8 +22,8 @@ handle_event(struct snake_type **snake,
 {
 	display_in_fog_of_war((*snake)->first->coord, *tar, *bar);
 
-	if (is_contact_with_borders((*snake)->first->coord) ||
-	    is_contact_with_barrier((*snake)->first->coord, *bar)) {
+	if (border_collision((*snake)->first->coord) ||
+	    barrier_collision((*snake)->first->coord, *bar)) {
 		game_settings_decrease(cfg);
 
 		if (cfg->round_num < 1) {
@@ -43,7 +43,7 @@ handle_event(struct snake_type **snake,
 		setup_objects(snake, tar, bar, *cfg, crd);
 	}
 
-	if (is_contact_with_target((*snake)->first->coord, tar)) {
+	if (target_collision((*snake)->first->coord, tar)) {
 		update_after_contact_with_target(snake, cfg);
 
 		if (cfg->current_snake_length > max_snake_length) {

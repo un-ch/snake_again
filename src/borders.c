@@ -23,7 +23,7 @@ display_borders_with_game_title(void)
 }
 
 int
-is_contact_with_borders(const struct coordinates head)
+border_collision(const struct coordinates head)
 {
 	int max_x, max_y;
 	int rc = 0;

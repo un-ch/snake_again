@@ -3,7 +3,7 @@
 #include "objects.h"
 
 int
-is_contact_with_barrier(const struct coordinates head,
+barrier_collision(const struct coordinates head,
 			const struct coordinates_list *barrier)
 {
 	int rc = 0;

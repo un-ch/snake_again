@@ -8,8 +8,8 @@ enum {
 };
 
 int
-is_contact_with_target(const struct coordinates crd,
-			struct coordinates_list **target);
+target_collision(const struct coordinates crd,
+		struct coordinates_list **target);
 
 void
 display_target_in_fog_of_war(struct coordinates snake,

@@ -5,7 +5,7 @@
 #include "objects.h"
 
 int
-is_contact_with_target(const struct coordinates head,
+target_collision(const struct coordinates head,
 			struct coordinates_list **target)
 {
 	struct coordinates_list **pp = target;
