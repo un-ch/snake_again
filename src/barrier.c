@@ -4,7 +4,7 @@
 #include "coordinates.h"
 #include "objects.h"
 
-bool
+int
 is_contact_with_barrier(const struct coordinates head,
 			const struct coordinates_list *barrier)
 {

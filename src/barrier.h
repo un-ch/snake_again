@@ -5,12 +5,12 @@
 
 #include "coordinates.h"
 
-bool
-is_contact_with_barrier(const struct coordinates snake_head,
+int
+is_contact_with_barrier(const struct coordinates head,
 			const struct coordinates_list *barrier);
 
 void
-display_barrier_in_fog_of_war(const struct coordinates snake_head,
+display_barrier_in_fog_of_war(const struct coordinates head,
 				const struct coordinates_list *barrier);
 
 void
