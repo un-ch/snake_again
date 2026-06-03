@@ -24,7 +24,7 @@ get_user_input(void)
 }
 
 int
-continue_game_confirmed(void)
+resuming(void)
 {
 	const char quest[] = "Crash! Would you like to continue the game?";
 	int max_y, max_x, rc, len;

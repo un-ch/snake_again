@@ -27,7 +27,7 @@ handle_event(struct snake_type **snake,
 		game_settings_decrease(cfg);
 
 		if (cfg->round_num < 1) {
-			if (continue_game_confirmed()) {
+			if (resuming()) {
 				reset_settings(cfg);
 				setup_objects(snake, tar, bar, *cfg, crd);
 

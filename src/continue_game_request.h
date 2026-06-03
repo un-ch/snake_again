@@ -7,6 +7,6 @@ enum {
 	key_no = 110
 };
 
-int continue_game_confirmed(void);
+int resuming(void);
 
 #endif
