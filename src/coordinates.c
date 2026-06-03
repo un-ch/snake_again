@@ -31,7 +31,7 @@ set_random_coordinates(struct coordinates *crd)
 }
 
 int
-is_equal_coordinates(const struct coordinates a, const struct coordinates b)
+are_equal_coordinates(const struct coordinates a, const struct coordinates b)
 {
 	return ((a.x == b.x) && (a.y == b.y));
 }
@@ -53,7 +53,7 @@ fill_in_coordinates_random(const int max_iterator,
 
 		do {
 			set_random_coordinates(&temp->coord);
-		} while (is_equal_coordinates(temp->coord, head));
+		} while (are_equal_coordinates(temp->coord, head));
 
 		temp->next = first;
 		first = temp;

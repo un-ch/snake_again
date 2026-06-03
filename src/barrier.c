@@ -10,7 +10,7 @@ is_contact_with_barrier(const struct coordinates head,
 	const struct coordinates_list *temp = barrier;
 
 	while (temp) {
-		rc = is_equal_coordinates(head, temp->coord);
+		rc = are_equal_coordinates(head, temp->coord);
 		if (rc != 0)
 			break;
 

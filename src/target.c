@@ -1,34 +1,33 @@
-#include <stdlib.h>	/* for free() */
-#include <stdbool.h>
+#include <stdlib.h>
 
 #include "target.h"
 #include "coordinates.h"
 #include "objects.h"
 
-bool
-is_contact_with_target(const struct coordinates snake_head,
+int
+is_contact_with_target(const struct coordinates head,
 			struct coordinates_list **target)
 {
 	struct coordinates_list **pp = target;
-	int result = false;
+	int rc = 0;
 
 	while (*pp) {
-		if (is_equal_coordinates(snake_head, (*pp)->coord)) {
+		if (are_equal_coordinates(head, (*pp)->coord)) {
 			struct coordinates_list *temp = *pp;
 			*pp = (*pp)->next;
 			free(temp);
-			result = true;
+			rc = 1;
 			break;
 		}
 		pp = &(*pp)->next;
 	}
 
-	return result;
+	return rc;
 }
 
 void
 display_target_in_fog_of_war(struct coordinates snake,
-			struct coordinates_list *target)
+				struct coordinates_list *target)
 {
 	struct coordinates_list *temp = target;
 	int x_max, x_min, y_max, y_min;
