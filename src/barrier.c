@@ -13,10 +13,8 @@ is_contact_with_barrier(const struct coordinates head,
 
 	while (temp) {
 		rc = is_equal_coordinates(head, temp->coord);
-
-		if (rc != 0) {
+		if (rc != 0)
 			break;
-		}
 
 		temp = temp->next;
 	}
@@ -25,16 +23,16 @@ is_contact_with_barrier(const struct coordinates head,
 }
 
 void
-display_barrier_in_fog_of_war(const struct coordinates snake_head,
+display_barrier_in_fog_of_war(const struct coordinates head,
 				const struct coordinates_list *barrier)
 {
 	const struct coordinates_list *temp = barrier;
 	int x_max, x_min, y_max, y_min;
 
-	x_max = snake_head.x + fog_radius;
-	x_min = snake_head.x - fog_radius;
-	y_max = snake_head.y + fog_radius;
-	y_min = snake_head.y - fog_radius;
+	x_max = head.x + fog_radius;
+	x_min = head.x - fog_radius;
+	y_max = head.y + fog_radius;
+	y_min = head.y - fog_radius;
 
 	while (temp) {
 		if ((temp->coord.x < x_max) &&
