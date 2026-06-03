@@ -5,22 +5,23 @@
 #include "objects.h"
 
 bool
-is_contact_with_barrier(const struct coordinates snake_head,
+is_contact_with_barrier(const struct coordinates head,
 			const struct coordinates_list *barrier)
 {
+	int rc = 0;
 	const struct coordinates_list *temp = barrier;
-	bool result = false;
 
 	while (temp) {
-		if (is_equal_coordinates(snake_head, temp->coord)) {
-			result = true;
+		rc = is_equal_coordinates(head, temp->coord);
+
+		if (rc != 0) {
 			break;
 		}
 
 		temp = temp->next;
 	}
 
-	return result;
+	return rc;
 }
 
 void
