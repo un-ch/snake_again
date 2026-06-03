@@ -1,8 +1,6 @@
 #ifndef COORDINATES_H
 #define COORDINATES_H
 
-#include <stdbool.h>
-
 struct coordinates {
 	int x;
 	int y;

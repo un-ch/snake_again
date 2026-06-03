@@ -1,47 +1,45 @@
 #include <ncurses.h>
-#include <stdbool.h>
 
 #include "borders.h"
-#include "string.h"
 #include "color.h"
+#include "string.h"
 
 void
 display_borders_with_game_title(void)
 {
-	int max_screen_width;
-	int str_length;
-	int cursor_width_coordinate;
-	int cursor_height_coordinate = 0;
+	const char game_title[] = "Snake Again";
+	int max_screen_width, str_length;
+	int height = 0;
+	int width;
 
 	set_color(gray_on_black);
 	box(stdscr, 0, 0);
 
 	max_screen_width = getmaxx(stdscr);
 	str_length = string_length(game_title);
-	cursor_width_coordinate = (max_screen_width - str_length) / 2;
+	width = (max_screen_width - str_length) / 2;
 
-	mvwprintw(stdscr, cursor_height_coordinate, cursor_width_coordinate,
-							" %s ", game_title);
+	mvwprintw(stdscr, height, width, " %s ", game_title);
 }
 
-bool
-is_contact_with_borders(const struct coordinates snake_head)
+int
+is_contact_with_borders(const struct coordinates head)
 {
-	int result = false;
+	int max_x, max_y;
+	int rc = 0;
 	int min_x = 1;
 	int min_y = 1;
-	int max_x, max_y;
 
 	getmaxyx(stdscr, max_y, max_x);
 	max_y -= 2;
 	max_x -= 2;
 
-	if ((snake_head.x < min_x) ||
-	    (snake_head.x > max_x) ||
-	    (snake_head.y < min_y) ||
-	    (snake_head.y > max_y)) {
-		result = true;
+	if ((head.x < min_x) ||
+	    (head.x > max_x) ||
+	    (head.y < min_y) ||
+	    (head.y > max_y)) {
+		rc = 1;
 	}
 
-	return result;
+	return rc;
 }
