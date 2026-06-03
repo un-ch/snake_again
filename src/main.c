@@ -1,16 +1,15 @@
-#include <stdlib.h>	/* for NULL */
-#include <ncurses.h>	/* for getch() */
+#include <ncurses.h>
+#include <stdlib.h>
 
-#include "end_program.h"
-#include "coordinates.h"
 #include "barrier.h"
-#include "target.h"
-#include "snake_object.h"
-#include "round_settings.h"
-#include "handle_direction.h"
-#include "continue_game_request.h"
+#include "coordinates.h"
+#include "end_program.h"
 #include "event.h"
+#include "handle_direction.h"
+#include "round_settings.h"
 #include "screen.h"
+#include "snake_object.h"
+#include "target.h"
 
 int
 main(void)

@@ -4,20 +4,25 @@
 #include "coordinates.h"
 #include "round_settings.h"
 
-void
-handle_event(struct snake_type **snake,
+enum {
+	key_escape = 27,
+	key_yes = 121,
+	key_no = 110
+};
+
+void handle_event(struct snake_type **snake,
 		struct coordinates_list **tar,
 		struct coordinates_list **bar,
 		struct round_settings *cfg,
 		struct coordinates *crd);
 
-void
-cleanup(struct snake_type **snake,
-	struct coordinates_list **tar,
-	struct coordinates_list **bar);
+int resuming(void);
 
-void
-release_mem(struct snake_type **snake,
+void cleanup(struct snake_type **snake,
+		struct coordinates_list **tar,
+		struct coordinates_list **bar);
+
+void release_mem(struct snake_type **snake,
 		struct coordinates_list **tar,
 		struct coordinates_list **bar);
 

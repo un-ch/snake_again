@@ -1,17 +1,20 @@
 #include <stddef.h>
 #include <stdlib.h>
+#include <ncurses.h>
 
 #include "event.h"
+#include "barrier.h"
+#include "borders.h"
 #include "coordinates.h"
+#include "color.h"
+#include "end_program.h"
 #include "handle_direction.h"
 #include "objects.h"
-#include "borders.h"
 #include "round_settings.h"
-#include "end_program.h"
-#include "barrier.h"
-#include "continue_game_request.h"
-#include "target.h"
+#include "screen.h"
 #include "snake_object.h"
+#include "string.h"
+#include "target.h"
 
 void
 handle_event(struct snake_type **snake,
@@ -56,6 +59,48 @@ handle_event(struct snake_type **snake,
 			setup_objects(snake, tar, bar, *cfg, crd);
 		}
 	}
+}
+
+static int
+get_user_input(void)
+{
+	int answer;
+
+	while (answer = getch()) {
+		switch (answer) {
+		case key_yes:
+			return 1;
+		case key_no:
+		case key_escape:
+			return 0;
+		default:
+			break;
+		}
+	}
+}
+
+int
+resuming(void)
+{
+	const char quest[] = "Crash! Would you like to continue the game?";
+	int max_y, max_x, rc, len;
+
+	getmaxyx(stdscr, max_y, max_x);
+	len = string_length(quest);
+
+	clear_screen();
+	move(max_y / 2, (max_x - len - 1) / 2);
+	set_color(gray_on_black);
+	addstr(quest);
+
+	len = string_length("(y) (n)");
+
+	move((max_y / 2) + 2, (max_x - len - 1) / 2);
+	addstr("(y) (n)");
+
+	rc = get_user_input();
+
+	return rc;
 }
 
 void
