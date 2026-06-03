@@ -1,10 +1,9 @@
 #include <ncurses.h>
-#include <stdlib.h>	/* for malloc */
-#include <stdbool.h>
+#include <stdlib.h>
 
 #include "coordinates.h"
-#include "get_random_number.h"
 #include "end_program.h"
+#include "get_random_number.h"
 
 void
 set_random_coordinates(struct coordinates *crd)
@@ -31,24 +30,15 @@ set_random_coordinates(struct coordinates *crd)
 	crd->y = get_random_int_number(min_y, max_y);
 }
 
-bool
-is_equal_coordinates(const struct coordinates c,
-			const struct coordinates p)
+int
+is_equal_coordinates(const struct coordinates a, const struct coordinates b)
 {
-	int result = true;
-
-	if ((c.x != p.x) ||
-	    (c.y != p.y)) {
-
-		result = false;
-	}
-
-	return result;
+	return ((a.x == b.x) && (a.y == b.y));
 }
 
 struct coordinates_list *
 fill_in_coordinates_random(const int max_iterator,
-		const struct coordinates snake_head)
+		const struct coordinates head)
 {
 	struct coordinates_list *first = NULL, *temp;
 	int i;
@@ -63,7 +53,7 @@ fill_in_coordinates_random(const int max_iterator,
 
 		do {
 			set_random_coordinates(&temp->coord);
-		} while (is_equal_coordinates(temp->coord, snake_head));
+		} while (is_equal_coordinates(temp->coord, head));
 
 		temp->next = first;
 		first = temp;

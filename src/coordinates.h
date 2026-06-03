@@ -16,7 +16,7 @@ struct coordinates_list {
 void
 set_random_coordinates(struct coordinates *crd);
 
-bool
+int
 is_equal_coordinates(const struct coordinates a, const struct coordinates b);
 
 struct coordinates_list *
