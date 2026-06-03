@@ -1,8 +1,6 @@
 #ifndef BARRIER_H
 #define BARRIER_H
 
-#include <stdbool.h>
-
 #include "coordinates.h"
 
 int
