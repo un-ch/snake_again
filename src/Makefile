@@ -10,13 +10,13 @@ MODULES	= main.o screen.o string.o display_message.o end_program.o \
 
 DEPS	= $(MODULES:.o=.d)
 
-all: $(MAIN_BIN) tags
+all: tags $(MAIN_BIN)
 
 %.o:	%.c
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(MAIN_BIN): $(MODULES)
-	$(CC) $(CFLAGS) $(MODULES) $(LIBS) -o $@
+	$(CC) $(MODULES) $(LIBS) -o $@
 
 .PHONY: run clean
 
