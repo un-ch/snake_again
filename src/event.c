@@ -8,7 +8,6 @@
 #include "coordinates.h"
 #include "color.h"
 #include "end_program.h"
-#include "handle_direction.h"
 #include "objects.h"
 #include "round_settings.h"
 #include "screen.h"
@@ -17,47 +16,147 @@
 #include "target.h"
 
 void
-handle_event(struct snake_type **snake,
-		struct coordinates_list **tar,
-		struct coordinates_list **bar,
-		struct round_settings *cfg,
-		struct coordinates *crd)
+init(struct event_ctx *ctx)
 {
-	display_in_fog_of_war((*snake)->first->coord, *tar, *bar);
+	init_screen();
+	init_snake_object(&ctx->snk);
+	init_direction(&ctx->dir);
+	init_round_settings(&ctx->cfg);
+}
 
-	if (border_collision((*snake)->first->coord) ||
-	    barrier_collision((*snake)->first->coord, *bar)) {
-		game_settings_decrease(cfg);
+static void
+on_none(struct event_ctx *ctx)
+{
 
-		if (cfg->round_num < 1) {
-			if (resuming()) {
-				reset_settings(cfg);
-				setup_objects(snake, tar, bar, *cfg, crd);
+}
 
-				/* TODO: better solution should be done: */
-				return;
+static void
+on_resuming(struct event_ctx *ctx)
+{
+	reset_settings(&ctx->cfg);
+	setup_objects(ctx);
+}
 
-			} else {
-				cleanup(snake, tar, bar);
-				end(quit);
-			}
-		}
+static void
+on_barrier_collision(struct event_ctx *ctx)
+{
+	game_settings_decrease(ctx->cfg);
 
-		setup_objects(snake, tar, bar, *cfg, crd);
+	if (ctx->cfg->round_num > 0) {
+		setup_objects(ctx);
+		return;
 	}
 
-	if (target_collision((*snake)->first->coord, tar)) {
-		update_after_contact_with_target(snake, cfg);
+	if (resuming()) {
+		on_resuming(ctx);
+		return;
+	}
 
-		if (cfg->current_snake_length > max_snake_length) {
-			game_settings_increase(cfg);
-			
-			if (cfg->round_num > max_round_num) {
-				end(win);
-			}
+	cleanup(ctx);
+	end(quit);
+}
 
-			setup_objects(snake, tar, bar, *cfg, crd);
+static void
+on_target_collision(struct event_ctx *ctx)
+{
+	update_after_contact_with_target(ctx);
+
+	if (ctx->cfg->current_snake_length > target_snake_length) {
+		game_settings_increase(ctx->cfg);
+
+		if (ctx->cfg->round_num > max_round_num) {
+			end(win);
 		}
+
+		setup_objects(ctx);
+	}
+}
+
+static void
+on_ending(struct event_ctx *ctx)
+{
+
+}
+
+static void
+on_win(struct event_ctx *ctx)
+{
+
+}
+
+static enum event_type
+define_event(struct event_ctx *ctx)
+{
+	const struct coordinates *head = &ctx->snk->first->coord;
+	enum event_type rc = none_ev;
+
+	if (border_collision(head) || barrier_collision(head, ctx->bar)) {
+		rc = bar_collision_ev;
+	}
+
+	if (target_collision(head, &ctx->tar)) {
+		rc = tar_collision_ev;
+	}
+
+	return rc;
+}
+
+void
+handle_direction(const int signal,
+		struct event_ctx *ctx)
+{
+	switch (signal) {
+	case key_spacebar:
+		ctx->dir->x = 0;
+		ctx->dir->y = 0;
+		break;
+	case KEY_UP:
+		ctx->dir->x = 0;
+		ctx->dir->y = -1;
+		break;
+	case KEY_DOWN:
+		ctx->dir->x = 0;
+		ctx->dir->y = 1;
+		break;
+	case KEY_LEFT:
+		ctx->dir->x = -1;
+		ctx->dir->y = 0;
+		break;
+	case KEY_RIGHT:
+		ctx->dir->x = 1;
+		ctx->dir->y = 0;
+		break;
+	case ERR:
+		move_snake_object(ctx->snk, ctx->dir);
+		break;
+	}
+}
+
+void
+handle_event(struct event_ctx *ctx)
+{
+	enum event_type event = define_event(ctx);
+
+	display_in_fog_of_war(ctx);
+
+	switch (event) {
+	case none_ev:
+		on_none(ctx);
+		break;
+	case bar_collision_ev:
+		on_barrier_collision(ctx);
+		break;
+	case tar_collision_ev:
+		on_target_collision(ctx);
+		break;
+	case ending_ev:
+		on_ending(ctx);
+		break;
+	case win_ev:
+		on_win(ctx);
+		break;
+	default:
+		break;
 	}
 }
 
@@ -66,7 +165,9 @@ get_user_input(void)
 {
 	int answer;
 
-	while (answer = getch()) {
+	for (;;) {
+		answer = getch();
+
 		switch (answer) {
 		case key_yes:
 			return 1;
@@ -77,6 +178,8 @@ get_user_input(void)
 			break;
 		}
 	}
+
+	return 0;
 }
 
 int
@@ -104,35 +207,36 @@ resuming(void)
 }
 
 void
-cleanup(struct snake_type **snake,
-	struct coordinates_list **tar,
-	struct coordinates_list **bar)
+cleanup(struct event_ctx *ctx)
 {
-	if (*snake) {
-		delete_coordinate_list(&((*snake)->first));
-		(*snake)->last = NULL;
+	if (!ctx) {
+		return;
 	}
 
-	if (*tar) {
-		delete_coordinate_list(tar);
+	if (ctx->snk) {
+		delete_coordinate_list(&ctx->snk->first);
+		ctx->snk->last = NULL;
 	}
 
-	if (*bar) {
-		delete_coordinate_list(bar);
+	if (ctx->tar) {
+		delete_coordinate_list(&ctx->tar);
+	}
+
+	if (ctx->bar) {
+		delete_coordinate_list(&ctx->bar);
 	}
 }
 
 void
-release_mem(struct snake_type **snake,
-		struct coordinates_list **tar,
-		struct coordinates_list **bar)
+release_mem(struct event_ctx *ctx)
 {
-	cleanup(snake, tar, bar);
-
-	if ((*snake) != NULL) {
-		free((*snake)->last_direction);
-		free(*snake);
-		(*snake)->last_direction = NULL;
-		(*snake) = NULL;
+	if ((!ctx) || (!ctx->snk)) {
+		return;
 	}
+
+	cleanup(ctx);
+	free(ctx->snk->last_direction);
+	free(ctx->snk);
+	ctx->snk->last_direction = NULL;
+	ctx->snk = NULL;
 }
