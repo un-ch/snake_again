@@ -5,14 +5,14 @@
 #include "objects.h"
 
 int
-target_collision(const struct coordinates head,
+target_collision(const struct coordinates *head,
 			struct coordinates_list **target)
 {
 	struct coordinates_list **pp = target;
 	int rc = 0;
 
 	while (*pp) {
-		if (are_equal_coordinates(head, (*pp)->coord)) {
+		if (are_equal_coordinates(head, &(*pp)->coord)) {
 			struct coordinates_list *temp = *pp;
 			*pp = (*pp)->next;
 			free(temp);

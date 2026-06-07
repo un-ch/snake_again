@@ -7,15 +7,10 @@ enum {
 	max_target_amount = 100
 };
 
-int
-target_collision(const struct coordinates crd,
-		struct coordinates_list **target);
-
-void
-display_target_in_fog_of_war(struct coordinates snake,
-				struct coordinates_list *target);
-
-void
-display_target(struct coordinates_list *target);
+int target_collision(const struct coordinates *crd,
+			struct coordinates_list **target);
+void display_target_in_fog_of_war(struct coordinates snake,
+					struct coordinates_list *target);
+void display_target(struct coordinates_list *target);
 
 #endif
