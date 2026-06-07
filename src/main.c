@@ -5,7 +5,7 @@
 #include "coordinates.h"
 #include "end_program.h"
 #include "event.h"
-#include "handle_direction.h"
+#include "objects.h"
 #include "round_settings.h"
 #include "screen.h"
 #include "snake_object.h"
@@ -14,23 +14,18 @@
 int
 main(void)
 {
-	struct snake_type *snake = NULL;
-	struct coordinates_list *target = NULL, *barrier = NULL;
-	struct coordinates coordinate;
-	struct round_settings cfg;
-	int direction;
+	int input;
+	struct event_ctx ctx = {0};
 
-	init_screen();
-	init_snake_object(&snake);
-	reset_settings(&cfg);
-	setup_objects(&snake, &target, &barrier, cfg, &coordinate);
+	init(&ctx);
+	setup_objects(&ctx);
 
-	while ((direction = getch()) != key_escape) {
-		handle_direction(direction, &coordinate, snake);
-		handle_event(&snake, &target, &barrier, &cfg, &coordinate);
+	while ((input = getch()) != key_escape) {
+		handle_direction(input, &ctx);
+		handle_event(&ctx);
 	}
 
-	release_mem(&snake, &target, &barrier);
+	release_mem(&ctx);
 	end(quit);
 
 	return exit_success;
