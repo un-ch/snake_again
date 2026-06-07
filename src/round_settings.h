@@ -2,7 +2,6 @@
 #define ROUND_SETTINGS_H
 
 #include "coordinates.h"
-#include "snake_object.h"
 
 enum {
 	max_round_num = 5
@@ -15,25 +14,9 @@ struct round_settings {
 	int max_barrier_amount;
 };
 
-void
-reset_settings(struct round_settings *r);
-
-void
-setup_objects(struct snake_type **s,
-		struct coordinates_list **t,
-		struct coordinates_list **b,
-		const struct round_settings r,
-		struct coordinates *c);
-
-
-void
-game_settings_increase(struct round_settings *r);
-
-void
-game_settings_decrease(struct round_settings *r);
-
-void
-update_after_contact_with_target(struct snake_type **s,
-					struct round_settings *r);
+void init_round_settings(struct round_settings **cfg);
+void reset_settings(struct round_settings **cfg);
+void game_settings_increase(struct round_settings *cfg);
+void game_settings_decrease(struct round_settings *cfg);
 
 #endif
