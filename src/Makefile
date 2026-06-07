@@ -5,8 +5,8 @@ MAIN_BIN= snake_again
 
 MODULES	= main.o screen.o string.o display_message.o end_program.o \
 	objects.o get_random_number.o coordinates.o barrier.o target.o \
-	snake_object.o round_settings.o handle_direction.o borders.o \
-	color.o dot_background.o event.o
+	snake_object.o round_settings.o borders.o color.o dot_background.o \
+	event.o
 
 DEPS	= $(MODULES:.o=.d)
 
