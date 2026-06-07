@@ -2,9 +2,10 @@
 #define SNAKE_OBJECT_H
 
 #include "coordinates.h"
+#include "event.h"
 
 enum {
-	max_snake_length = 15
+	target_snake_length = 5
 };
 
 struct snake_type {
@@ -13,19 +14,12 @@ struct snake_type {
 	struct coordinates *last_direction;
 };
 
-void
-init_snake_object(struct snake_type **s);
-
-void
-move_snake_object(struct snake_type *s, struct coordinates d);
-
-void
-add_new_snake_element(struct snake_type **s, struct coordinates c);
-
-void
-apply_snake_speed(const unsigned int speed);
-
-void
-display_object_list(const struct coordinates_list *list, void (*func)(struct coordinates c));
+void init_snake_object(struct snake_type **snk);
+void move_snake_object(struct snake_type *s, struct coordinates *d);
+void add_new_snake_element(struct snake_type **s, struct coordinates c);
+void apply_snake_speed(const unsigned int speed);
+void display_object_list(const struct coordinates_list *list,
+				void (*func)(struct coordinates c));
+void update_after_contact_with_target(struct event_ctx *ctx);
 
 #endif

@@ -7,29 +7,32 @@
 #include "end_program.h"
 
 void
-init_snake_object(struct snake_type **snake)
+init_snake_object(struct snake_type **snk)
 {
-	(*snake) = malloc(sizeof(struct snake_type));
+	(*snk) = NULL;
+	(*snk) = malloc(sizeof(struct snake_type));
 
-	if (!(*snake))
+	if (!(*snk)) {
 		end(malloc_err);
+	}
 
-	(*snake)->first = NULL;
-	(*snake)->last = NULL;
-	(*snake)->last_direction = NULL;
+	(*snk)->first = NULL;
+	(*snk)->last = NULL;
+	(*snk)->last_direction = NULL;
 
-	(*snake)->last_direction = malloc(sizeof(struct coordinates));
+	(*snk)->last_direction = malloc(sizeof(struct coordinates));
 
-	if (!(*snake)->last_direction)
+	if (!(*snk)->last_direction) {
 		end(malloc_err);
+	}
 	
-	(*snake)->last_direction->x = 0;
-	(*snake)->last_direction->y = 0;
+	(*snk)->last_direction->x = 0;
+	(*snk)->last_direction->y = 0;
 }
 
 void
 move_snake_object(struct snake_type *snake,
-		struct coordinates direction)
+		struct coordinates *direct)
 {
 	struct coordinates_list *temp = snake->first;
 	struct coordinates_list *prev = NULL, *next = NULL;
@@ -37,7 +40,7 @@ move_snake_object(struct snake_type *snake,
 
 
 	/* for pause: */
-	if ((direction.x == 0) && (direction.y == 0)) {
+	if ((direct->x == 0) && (direct->y == 0)) {
 		display_object_list(snake->first, &show_object_snake);
 		return;
 	}
@@ -45,8 +48,8 @@ move_snake_object(struct snake_type *snake,
 	display_object_list(snake->first, &hide_object);
 
 	/* opposite direction case: */
-	if ((direction.x == -snake->last_direction->x) &&
-	    (direction.y == -snake->last_direction->y)) {
+	if ((direct->x == -snake->last_direction->x) &&
+	    (direct->y == -snake->last_direction->y)) {
 
 		snake->last = snake->first;
 
@@ -68,8 +71,8 @@ move_snake_object(struct snake_type *snake,
 	prev_coord.y = snake->first->coord.y;
 
 	/* update the head snake: */
-	snake->first->coord.x += direction.x;
-	snake->first->coord.y += direction.y;
+	snake->first->coord.x += direct->x;
+	snake->first->coord.y += direct->y;
 
 	/* TODO: access the second element, be sure if it is exists */
 	temp = snake->first->next;
@@ -89,13 +92,13 @@ move_snake_object(struct snake_type *snake,
 
 	display_object_list(snake->first, &show_object_snake);
 
-	snake->last_direction->x = direction.x;
-	snake->last_direction->y = direction.y;
+	snake->last_direction->x = direct->x;
+	snake->last_direction->y = direct->y;
 }
 
 void
 add_new_snake_element(struct snake_type **snake,
-			struct coordinates crd)
+			const struct coordinates crd)
 {
 	struct coordinates_list *temp = NULL;
 
@@ -133,4 +136,16 @@ display_object_list(const struct coordinates_list *list,
 		(*func)(temp->coord);
 		temp = temp->next;
 	}
+}
+
+void
+update_after_contact_with_target(struct event_ctx *ctx)
+{
+	struct coordinates crd;
+
+	crd.x = 1;
+	crd.y = 1;
+
+	ctx->cfg->current_snake_length += 1;
+	add_new_snake_element(&ctx->snk, crd);
 }
