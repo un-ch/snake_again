@@ -31,14 +31,15 @@ set_random_coordinates(struct coordinates *crd)
 }
 
 int
-are_equal_coordinates(const struct coordinates a, const struct coordinates b)
+are_equal_coordinates(const struct coordinates *a,
+			const struct coordinates *b)
 {
-	return ((a.x == b.x) && (a.y == b.y));
+	return ((a->x == b->x) && (a->y == b->y));
 }
 
 struct coordinates_list *
 fill_in_coordinates_random(const int max_iterator,
-		const struct coordinates head)
+				const struct coordinates *head)
 {
 	struct coordinates_list *first = NULL, *temp;
 	int i;
@@ -53,7 +54,7 @@ fill_in_coordinates_random(const int max_iterator,
 
 		do {
 			set_random_coordinates(&temp->coord);
-		} while (are_equal_coordinates(temp->coord, head));
+		} while (are_equal_coordinates(&temp->coord, head));
 
 		temp->next = first;
 		first = temp;
@@ -66,10 +67,30 @@ void
 delete_coordinate_list(struct coordinates_list **list)
 {
 	while (*list) {
-		struct coordinates_list *temp = *list;
-		*list = (*list)->next;
+		struct coordinates_list *temp = (*list);
+		(*list) = (*list)->next;
 		free(temp);
 	}
 
 	(*list) = NULL;
+}
+
+void
+reset_direction(struct coordinates **crd)
+{
+	(*crd)->x = 0;
+	(*crd)->y = 0;
+}
+
+void
+init_direction(struct coordinates **crd)
+{
+	(*crd) = NULL;
+	(*crd) = malloc(sizeof(struct coordinates));
+
+	if (!(*crd)) {
+		end(malloc_err);
+	}
+
+	reset_direction(crd);
 }
