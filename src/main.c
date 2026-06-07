@@ -1,15 +1,9 @@
 #include <ncurses.h>
 #include <stdlib.h>
 
-#include "barrier.h"
-#include "coordinates.h"
 #include "end_program.h"
 #include "event.h"
 #include "objects.h"
-#include "round_settings.h"
-#include "screen.h"
-#include "snake_object.h"
-#include "target.h"
 
 int
 main(void)
