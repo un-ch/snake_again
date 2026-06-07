@@ -4,6 +4,26 @@
 #include "coordinates.h"
 #include "color.h"
 #include "dot_background.h"
+#include "display_message.h"
+#include "snake_object.h"
+#include "target.h"
+
+void
+setup_objects(struct event_ctx *ctx)
+{
+	struct coordinates head;
+
+	cleanup(ctx);
+	reset_direction(&ctx->dir);
+
+	display_round_number(ctx->cfg->round_num);
+	set_random_coordinates(&head);
+	add_new_snake_element(&ctx->snk, head);
+	ctx->bar =
+		fill_in_coordinates_random(ctx->cfg->max_barrier_amount, &head);
+	ctx->tar =
+		fill_in_coordinates_random(max_target_amount, &head);
+}
 
 void 
 show_object_target(const struct coordinates crd)
@@ -74,10 +94,10 @@ display_object(enum object obj, const struct coordinates crd)
 	}
 }
 
-void
+static void
 display_object_in_fog_of_war(const struct coordinates sn,
-			const struct coordinates_list *list,
-			void (*func)(struct coordinates))
+				const struct coordinates_list *list,
+				void (*func)(struct coordinates))
 {
 	int dx, dy, dist_squared;
 
@@ -98,9 +118,7 @@ display_object_in_fog_of_war(const struct coordinates sn,
 }
 
 void
-display_in_fog_of_war(const struct coordinates sn,
-		const struct coordinates_list *tar,
-		const struct coordinates_list *bar)
+display_in_fog_of_war(const struct event_ctx *ctx)
 {
 	/*
 	* Temporary solution to resolve conflicts between targets and barriers:
@@ -108,6 +126,10 @@ display_in_fog_of_war(const struct coordinates sn,
 	* - After displaying targets, barriers will overwrite them.
 	*/
 
-	display_object_in_fog_of_war(sn, tar, &show_object_target);
-	display_object_in_fog_of_war(sn, bar, &show_object_barrier);
+	display_object_in_fog_of_war(ctx->snk->first->coord,
+							ctx->tar,
+							&show_object_target);
+	display_object_in_fog_of_war(ctx->snk->first->coord,
+							ctx->bar,
+							&show_object_barrier);
 }
