@@ -3,15 +3,10 @@
 
 #include "coordinates.h"
 
-int
-barrier_collision(const struct coordinates head,
-			const struct coordinates_list *barrier);
-
-void
-display_barrier_in_fog_of_war(const struct coordinates head,
-				const struct coordinates_list *barrier);
-
-void
-display_barrier(const struct coordinates_list *barrier);
+int barrier_collision(const struct coordinates *head,
+			const struct coordinates_list *bar);
+void display_barrier_in_fog_of_war(const struct coordinates head,
+					const struct coordinates_list *bar);
+void display_barrier(const struct coordinates_list *bar);
 
 #endif

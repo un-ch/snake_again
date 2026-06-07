@@ -3,14 +3,14 @@
 #include "objects.h"
 
 int
-barrier_collision(const struct coordinates head,
+barrier_collision(const struct coordinates *head,
 			const struct coordinates_list *barrier)
 {
 	int rc = 0;
 	const struct coordinates_list *temp = barrier;
 
 	while (temp) {
-		rc = are_equal_coordinates(head, temp->coord);
+		rc = are_equal_coordinates(head, &temp->coord);
 		if (rc != 0)
 			break;
 
