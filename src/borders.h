@@ -7,6 +7,6 @@ void
 display_borders_with_game_title(void);
 
 int
-border_collision(const struct coordinates crd);
+border_collision(const struct coordinates *crd);
 
 #endif

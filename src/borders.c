@@ -23,7 +23,7 @@ display_borders_with_game_title(void)
 }
 
 int
-border_collision(const struct coordinates head)
+border_collision(const struct coordinates *head)
 {
 	int max_x, max_y;
 	int rc = 0;
@@ -34,10 +34,10 @@ border_collision(const struct coordinates head)
 	max_y -= 2;
 	max_x -= 2;
 
-	if ((head.x < min_x) ||
-	    (head.x > max_x) ||
-	    (head.y < min_y) ||
-	    (head.y > max_y)) {
+	if ((head->x < min_x) ||
+	    (head->x > max_x) ||
+	    (head->y < min_y) ||
+	    (head->y > max_y)) {
 		rc = 1;
 	}
 
