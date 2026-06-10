@@ -27,7 +27,7 @@ display_message_center(const char *string)
 }
 
 void
-display_round_number(const int number)
+display_round(const int number)
 {
 	int max_y, max_x;
 	int string_len = string_length(message);

@@ -16,7 +16,7 @@ setup_objects(struct event_ctx *ctx)
 	cleanup(ctx);
 	reset_direction(&ctx->dir);
 
-	display_round_number(ctx->cfg->round);
+	display_round(ctx->cfg->round);
 	set_random_coordinates(&head);
 	add_new_snake_element(&ctx->snk, head);
 

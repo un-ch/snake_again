@@ -3,10 +3,7 @@
 
 static const char message[] = "Round";
 
-void
-display_message_center(const char *str);
-
-void
-display_round_number(const int num);
+void display_message_center(const char *str);
+void display_round(const int num);
 
 #endif
