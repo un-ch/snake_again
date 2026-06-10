@@ -14,7 +14,7 @@ struct coordinates_list {
 void set_random_coordinates(struct coordinates *crd);
 int are_equal_coordinates(const struct coordinates *a,
 				const struct coordinates *b);
-struct coordinates_list *fill_in_coordinates_random(const int max_iter,
+struct coordinates_list *generate_random(const int max,
 						const struct coordinates *c);
 void delete_coordinate_list(struct coordinates_list **list);
 void reset_direction(struct coordinates **crd);

@@ -16,13 +16,12 @@ setup_objects(struct event_ctx *ctx)
 	cleanup(ctx);
 	reset_direction(&ctx->dir);
 
-	display_round_number(ctx->cfg->round_num);
+	display_round_number(ctx->cfg->round);
 	set_random_coordinates(&head);
 	add_new_snake_element(&ctx->snk, head);
-	ctx->bar =
-		fill_in_coordinates_random(ctx->cfg->max_barrier_amount, &head);
-	ctx->tar =
-		fill_in_coordinates_random(max_target_amount, &head);
+
+	ctx->bar = generate_random(ctx->cfg->max_barriers, &head);
+	ctx->tar = generate_random(max_targets, &head);
 }
 
 void 

@@ -4,14 +4,14 @@
 #include "coordinates.h"
 
 enum {
-	max_round_num = 5
+	max_rounds = 5
 };
 
 struct round_settings {
-	int round_num;
+	int round;
 	int current_snake_length;
 	int snake_speed;
-	int max_barrier_amount;
+	int max_barriers;
 };
 
 void init_round_settings(struct round_settings **cfg);

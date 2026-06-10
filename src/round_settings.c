@@ -34,10 +34,10 @@ reset_settings(struct round_settings **cfg)
 	getmaxyx(stdscr, max_y, max_x);
 	barrier_amount = (max_y + max_x) * 3;
 
-	(*cfg)->round_num = 1;
+	(*cfg)->round = 1;
 	(*cfg)->current_snake_length = 1;
 	(*cfg)->snake_speed = 200;
-	(*cfg)->max_barrier_amount = barrier_amount;
+	(*cfg)->max_barriers = barrier_amount;
 
 	apply_snake_speed((*cfg)->snake_speed);
 }
@@ -45,10 +45,10 @@ reset_settings(struct round_settings **cfg)
 void
 game_settings_increase(struct round_settings *cfg)
 {
-	cfg->round_num += 1;
+	cfg->round += 1;
 	cfg->current_snake_length = 1;
 	cfg->snake_speed -= 30;
-	cfg->max_barrier_amount += 150;
+	cfg->max_barriers += 150;
 
 	apply_snake_speed(cfg->snake_speed);
 }
@@ -56,10 +56,10 @@ game_settings_increase(struct round_settings *cfg)
 void
 game_settings_decrease(struct round_settings *cfg)
 {
-	cfg->round_num -= 1;
+	cfg->round -= 1;
 	cfg->current_snake_length = 1;
 	cfg->snake_speed += 30;
-	cfg->max_barrier_amount -= 150;
+	cfg->max_barriers -= 150;
 
 	apply_snake_speed(cfg->snake_speed);
 }

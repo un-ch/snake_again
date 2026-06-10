@@ -38,13 +38,13 @@ are_equal_coordinates(const struct coordinates *a,
 }
 
 struct coordinates_list *
-fill_in_coordinates_random(const int max_iterator,
-				const struct coordinates *head)
+generate_random(const int max,
+		const struct coordinates *head)
 {
 	struct coordinates_list *first = NULL, *temp;
 	int i;
 
-	for (i = 0; i < max_iterator; i++) {
+	for (i = 0; i < max; i++) {
 		temp = NULL;
 		temp = malloc(sizeof(struct coordinates_list));
 

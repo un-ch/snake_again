@@ -4,7 +4,7 @@
 #include "coordinates.h"
 
 enum {
-	max_target_amount = 100
+	max_targets = 100
 };
 
 int target_collision(const struct coordinates *crd,

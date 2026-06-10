@@ -42,7 +42,7 @@ on_barrier_collision(struct event_ctx *ctx)
 {
 	game_settings_decrease(ctx->cfg);
 
-	if (ctx->cfg->round_num > 0) {
+	if (ctx->cfg->round > 0) {
 		setup_objects(ctx);
 		return;
 	}
@@ -64,7 +64,7 @@ on_target_collision(struct event_ctx *ctx)
 	if (ctx->cfg->current_snake_length > target_snake_length) {
 		game_settings_increase(ctx->cfg);
 
-		if (ctx->cfg->round_num > max_round_num) {
+		if (ctx->cfg->round > max_rounds) {
 			end(win);
 		}
 
