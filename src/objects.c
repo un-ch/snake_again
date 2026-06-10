@@ -126,10 +126,8 @@ display_in_fog_of_war(const struct event_ctx *ctx)
 	* - After displaying targets, barriers will overwrite them.
 	*/
 
-	display_object_in_fog_of_war(ctx->snk->first->coord,
-							ctx->tar,
-							&show_object_target);
-	display_object_in_fog_of_war(ctx->snk->first->coord,
-							ctx->bar,
-							&show_object_barrier);
+	const struct coordinates head = ctx->snk->first->coord;
+
+	display_object_in_fog_of_war(head, ctx->tar, &show_object_target);
+	display_object_in_fog_of_war(head, ctx->bar, &show_object_barrier);
 }
