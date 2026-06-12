@@ -18,7 +18,7 @@ all: tags $(MAIN_BIN)
 $(MAIN_BIN): $(MODULES)
 	$(CC) $(MODULES) $(LIBS) -o $@
 
-.PHONY: run clean
+.PHONY: run targs valg clean
 
 run:	$(MAIN_BIN)
 	@./$(MAIN_BIN)
