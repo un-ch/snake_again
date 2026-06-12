@@ -61,7 +61,7 @@ on_target_collision(struct event_ctx *ctx)
 {
 	update_after_contact_with_target(ctx);
 
-	if (ctx->cfg->current_snake_length > target_snake_length) {
+	if (ctx->cfg->current_snake_length > max_snake_length) {
 		game_settings_increase(ctx->cfg);
 
 		if (ctx->cfg->round > max_rounds) {

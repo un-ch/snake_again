@@ -5,7 +5,7 @@
 #include "event.h"
 
 enum {
-	target_snake_length = 5
+	max_snake_length = 5
 };
 
 struct snake_type {
