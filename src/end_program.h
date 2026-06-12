@@ -10,7 +10,6 @@ enum end_type {
 	quit, win, malloc_err, monochrome_display
 };
 
-void
-end(enum end_type how);
+void end(enum end_type how);
 
 #endif
