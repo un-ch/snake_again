@@ -3,7 +3,6 @@
 
 #include "end_program.h"
 #include "event.h"
-#include "objects.h"
 
 int
 main(void)
@@ -12,7 +11,6 @@ main(void)
 	struct event_ctx ctx = {0};
 
 	init(&ctx);
-	setup_objects(&ctx);
 
 	while ((input = getch()) != key_escape) {
 		handle_direction(input, &ctx);

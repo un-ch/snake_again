@@ -22,6 +22,7 @@ init(struct event_ctx *ctx)
 	init_snake_object(&ctx->snk);
 	init_direction(&ctx->dir);
 	init_round_settings(&ctx->cfg);
+	setup_objects(ctx);
 }
 
 static void
