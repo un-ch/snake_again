@@ -1,5 +1,4 @@
 #include <ncurses.h>
-#include <stdlib.h>
 
 #include "end_program.h"
 #include "event.h"
